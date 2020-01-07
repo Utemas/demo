@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+    <div th:fragment="loginTips" class="container login-information">
+            <p class="title">登录介绍</p>
+            <p class="article" translate="false">usercode:</p>
+            <p class="article" translate="false">your identity 's abbreviation(two letters) and your id(eight numbers)</p>
+            <p class="article" translate="false">for example: st10000001.</p>
+            <p class="article" translate="false">password:</p>
+            <p class="article" translate="false">the password which you will login</p>
+            <p class="article" translate="false">pay attention! if you forget you passwored.Please send an email to</p>
+            <a th:text="${adminMail}" href="mailto:${adminMail}"></a>
+    </div>
+</html>

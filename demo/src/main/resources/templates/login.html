@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>登录</title>
+		<link rel="stylesheet" href="assets/css/form/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/page/login.css">
+	</head>
+	<body>
+		<div class="u-root">
+			<div class="u-page u-page-home" id="u_layout_header_sidebar_basic">
+				<div class="container-login">
+					<div class="container-left">
+						<div  th:replace="common/loginSection::loginTips"></div>
+					</div>
+					<div class="container-right">
+						<center class="container login-title">
+							<div><h2 class="title" th:text="${programeName}"></h2></div>
+							<div class="m-40">
+								<input type="text" class="form-control" placeholder="usercode" id="usercode" name="usercode"/>
+							</div> 
+							<div class="m-40">
+								<input type="password" class="form-control" placeholder="password" id="password" name="password"/>
+							</div>
+							<div class="m-40">
+								<input type="button" class="btn btn-primary btn-block" value="登录" />
+							</div>
+						</center>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="assets/js/form/jquery-2.2.3.min.js"></script>
+		<script src="assets/js/form/bootstrap.min.js"></script>
+		<script src="assets/js/form/chaos.js"></script>
+		<script src="assets/js/page/login.js"></script>
+	</body>
+</html>
