@@ -10,5 +10,7 @@ public final class Utill {
         birth[2] = id_number.substring(14, 15);
         return birth;
     }
-
+    public static String get(){
+        return null;
+    }
 }
