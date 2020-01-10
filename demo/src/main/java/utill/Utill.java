@@ -1,5 +1,6 @@
 package utill;
 
+import java.util.Calendar;
 
 public final class Utill {
 
@@ -10,7 +11,38 @@ public final class Utill {
         birth[2] = id_number.substring(14, 15);
         return birth;
     }
-    public static String get(){
-        return null;
+    public static int getSysYearToInt(){
+        Calendar date = Calendar.getInstance();
+        String year = String.valueOf(date.get(Calendar.YEAR));
+        int result = Integer.parseInt(year);
+        return result;
     }
+    public static String getSysYearToString(){
+        Calendar date = Calendar.getInstance();
+        String year = String.valueOf(date.get(Calendar.YEAR));
+        return year;
+    }
+    public static int getSysMonthToInt(){
+        Calendar date = Calendar.getInstance();
+        String month = String.valueOf(date.get(Calendar.MONTH));
+        int result = Integer.parseInt(month);
+        return result;
+    }
+    public static String getSysMonthToString(){
+        Calendar date = Calendar.getInstance();
+        String month = String.valueOf(date.get(Calendar.MONTH));
+        return month;
+    }
+    public static int getSysDayToInt(){
+        Calendar date = Calendar.getInstance();
+        String day = String.valueOf(date.get(Calendar.DAY_OF_MONTH));
+        int result = Integer.parseInt(day);
+        return result;
+    }
+    public static String getSysDayToString(){
+        Calendar date = Calendar.getInstance();
+        String day = String.valueOf(date.get(Calendar.DAY_OF_MONTH));
+        return day;
+    }
+
 }
