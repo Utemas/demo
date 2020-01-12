@@ -27,3 +27,18 @@
 .m-20{
 	margin: 20px;
 }
+
+.rightleft{
+	width:100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-justify-content:space-between;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items:center;
+	align-items: center;
+}
