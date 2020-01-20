@@ -3,7 +3,14 @@ spring:
         password: "711418aa"
         url: jdbc:mysql://localhost:3306/project?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
         username: "root"
+    thymeleaf:
+        prefix: classpath:/templates/
+        servlet:
+            content-type: text/html
+        suffix: .html
+        encoding: UTF-8
 springdatasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
     type-aliases-package: com.demo.demo.Mapper
+
