@@ -42,3 +42,41 @@
 	-webkit-align-items:center;
 	align-items: center;
 }
+
+.center{
+	text-align:center !important;
+
+}
+
+.m-20{
+	margin: 20px;
+}
+
+.p-20{
+	padding: 20px;
+}
+
+.scroll_auto_y{
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.first_line{
+	text-indent: 2em;
+}
+
+.h_680{
+	height: 680px !important;
+}
+
+.bold{
+	font-weight: bold;
+}
+
+.hidden{
+	display: none;
+}
+
+.mt-10{
+	margin-top: 10px;
+}

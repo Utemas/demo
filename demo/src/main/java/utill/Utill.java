@@ -1,6 +1,7 @@
 package utill;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import com.demo.demo.po.Customer;
 
@@ -97,5 +98,13 @@ public final class Utill {
     public static String getAddress(Customer customer){
         String address = customer.getAddr_provinve() + " " + customer.getAddr_city() + " " + customer.getAddr_community() + " " + customer.getAddr_street() + " " +customer.getAddr_block() + " " + customer.getAddr_unit() + " " + customer.getAddr_floor() +" " + customer.getAddr_room();
         return address;
+    }
+
+    public static boolean nameIsNull(HashMap<String,Object> map,String identify, String id){
+        if(identify == null || id==null){
+            map.put("name","请登录");
+            return true;
+        }
+        return false;
     }
 }

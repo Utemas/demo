@@ -7,12 +7,6 @@
 		<link href="assets/css/form/bootstrap.min.css" rel="stylesheet" />
 		<link href="assets/css/page/404/style.css" rel="stylesheet" />
 		<link href="assets/css/page/404/add-ons.min.css" rel="stylesheet" />
-		<style>
-			footer {
-				display: none;
-			}
-		</style>
-		
 	</head>
 
 	<body>
@@ -30,7 +24,7 @@
 								<a href="javascript: history.go(-1)">
 									<button type="button" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Go Back</button>
 								</a>
-								<a href="page-login.html">
+								<a th:href="@{/login}">
 									<button type="button" class="btn btn-primary"><i class="fa fa-lock"></i> Login</button>
 								</a>
 							</div>						

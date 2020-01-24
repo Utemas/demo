@@ -21,10 +21,14 @@ public class HomeController {
 
     private String id = null;
     private String identify = null;
+    private Customer customer = new Customer();
 
     @RequestMapping("/information")
     public String helloHtml(HashMap<String, Object> map) {
-        Customer customer = customerMapper.getCustomerById("st","10000001");
+        if(id == null || identify == null){
+            return "redirect:/login";
+        }
+        customer = customerMapper.getCustomerById(identify,id);
         String identity_number = "学号:" + customer.getCustomer_identify()+customer.getCustomer_id();
         map.put("name",customer.getName());
         map.put("age",Utill.caculateAge(customer.getId_number()));
@@ -37,7 +41,6 @@ public class HomeController {
 
     @RequestMapping("/login")
     public String login(HashMap<String, Object> map) {
-
         String adminMail = "2562817565@qq.com";
         map.put("programeName", Contant.ProgrameName);
         map.put("adminMail",adminMail);
@@ -60,23 +63,29 @@ public class HomeController {
 
     @RequestMapping("/index")
     public String index(HashMap<String, Object> map){
-        if(identify == null && id==null){
-            map.put("name","请登录");
+        if(Utill.nameIsNull(map, identify, id)){
             return "index";
         }
-        Customer customer = customerMapper.getCustomerById(identify,id);
+        customer = customerMapper.getCustomerById(identify,id);
         map.put("name",customer.getName());
         return "index";
     }
 
-    @RequestMapping("/lost")
-    public String lost(){
-        return "redirect:/404";
+    @RequestMapping("/logout")
+    public String logout(HashMap<String, Object> map){
+        customer = null;
+        map.put("name","请登录");
+        id = null;
+        identify = null;
+        return "index";
     }
 
-    @RequestMapping("/404")
-    public String togo(){
-        return "404";
+    @RequestMapping("/writing")
+    public String writing(HashMap<String, Object> map){
+        map.put("programeName", Contant.ProgrameName);
+        if(Utill.nameIsNull(map, identify, id)){
+            return "writing";
+        }
+        return "writing";
     }
-    
 }
