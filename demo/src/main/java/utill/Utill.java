@@ -1,9 +1,16 @@
 package utill;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 
 import com.demo.demo.po.Customer;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public final class Utill {
 
@@ -107,4 +114,21 @@ public final class Utill {
         }
         return false;
     }
+/*
+    public static void PDFCreate(String filename,String title) throws IOException{
+        Document document = new Document();
+        try{
+            PdfWriter.getInstance(document, new FileOutputStream(filename));
+            document.addTitle(title); //题目
+            document.open();
+            document.add(new Paragraph("Hello World!"));
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(DocumentException e){
+            e.printStackTrace();
+        }finally{
+            document.close();
+        }
+    }
+*/
 }

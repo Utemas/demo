@@ -1,5 +1,6 @@
 package com.demo.demo.Controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import com.demo.demo.Mapper.CustomerMapper;
@@ -15,7 +16,7 @@ import utill.Utill;
 
 @Controller
 public class HomeController {
-    
+
     @Autowired
     private CustomerMapper customerMapper;
 
@@ -25,22 +26,22 @@ public class HomeController {
 
     @RequestMapping("/information")
     public String helloHtml(HashMap<String, Object> map) {
-        if(id == null || identify == null){
+        if (id == null || identify == null) {
             return "redirect:/login";
         }
-        customer = customerMapper.getCustomerById(identify,id);
-        String identity_number = "学号:" + customer.getCustomer_identify()+customer.getCustomer_id();
-        map.put("name",customer.getName());
-        map.put("age",Utill.caculateAge(customer.getId_number()));
-        map.put("identity_number",identity_number);
-        map.put("id_number",customer.getId_number());
+        customer = customerMapper.getCustomerById(identify, id);
+        String identity_number = "学号:" + customer.getCustomer_identify() + customer.getCustomer_id();
+        map.put("name", customer.getName());
+        map.put("age", Utill.caculateAge(customer.getId_number()));
+        map.put("identity_number", identity_number);
+        map.put("id_number", customer.getId_number());
         map.put("programeName", Contant.ProgrameName);
         map.put("address", Utill.getAddress(customer));
         return "information";
     }
 
     @RequestMapping("/login")
-    public String login(HashMap<String, Object> map) {
+    public String login(HashMap<String, Object> map) throws IOException {
         String adminMail = "2562817565@qq.com";
         map.put("programeName", Contant.ProgrameName);
         map.put("adminMail",adminMail);
@@ -88,4 +89,5 @@ public class HomeController {
         }
         return "writing";
     }
+
 }

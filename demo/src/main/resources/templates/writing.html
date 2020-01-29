@@ -6,8 +6,8 @@
   <title>AdminLTE 2 | Compose Message</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="assets/css/form/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/writing/fullcalendar.min.css">
-  <link rel="stylesheet" href="assets/css/writing/fullcalendar.print.css" media="print">
+  <link rel="stylesheet" href="assets/css/page/writing/fullcalendar.min.css">
+  <link rel="stylesheet" href="assets/css/page/writing/fullcalendar.print.css" media="print">
   <link rel="stylesheet" href="assets/css/form/AdminLTE.min.css">
   <link rel="stylesheet" href="assets/css/form/_all-skins.min.css">
   <link rel="stylesheet" href="assets/css/form/blue.css">
@@ -135,8 +135,8 @@
             <!-- /.box-body -->
             <div class="box-footer">
               <div class="pull-right">
-                <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+                <button type="button" class="btn btn-default" id="saveDraft"><i class="fa fa-pencil"></i> Draft</button>
+                <button type="button" class="btn btn-primary"><i class="fa fa-envelope-o"></i>Save</button>
               </div>
               <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
             </div>
@@ -160,7 +160,7 @@
 <script src="assets/js/form/demo.js"></script>
 <script src="assets/js/form/icheck.min.js"></script>
 <script src="assets/js/form/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- Page Script -->
+<script src="assets/js/page/writing.js"></script>
 <script>
   $(function () {
     //Add text editor

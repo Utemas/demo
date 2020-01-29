@@ -13,4 +13,7 @@ public interface CustomerMapper {
 
     @Select("select count(*) from v_customer where customer_identify = #{identify} and customer_id=#{id} and customer_password=#{password}")
     public int getCustomerToCheckLogin(@Param("identify") String customer_identify, @Param("id") String customer_id, @Param("password") String customer_password);
+
+    //@Update("update customer_email")
+    //public int updateCustomer();
 }
