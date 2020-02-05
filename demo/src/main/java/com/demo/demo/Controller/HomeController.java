@@ -6,6 +6,12 @@ import java.util.HashMap;
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.Customer;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +43,7 @@ public class HomeController {
         map.put("id_number", customer.getId_number());
         map.put("programeName", Contant.ProgrameName);
         map.put("address", Utill.getAddress(customer));
-        return "information";
+        return "user/information";
     }
 
     @RequestMapping("/login")
@@ -51,19 +57,28 @@ public class HomeController {
     @RequestMapping("/checklogin")
     public boolean checklogin(HashMap<String,Object> map,String userCode,String password){
         
-        String customer_identify = userCode.substring(0,2);
-        String customer_id = userCode.substring(2);
-        int result = customerMapper.getCustomerToCheckLogin(customer_identify, customer_id, password);
-        if(result == 1){
-            id = customer_id;
-            identify = customer_identify;
+        // 获取subject
+        Subject subject = SecurityUtils.getSubject();
+        // 2.封装用户数据
+        UsernamePasswordToken token = new UsernamePasswordToken(userCode, password);
+        // 3.执行登录方法
+        try {
+            subject.login(token);
             return true;
+            // 登录成功
+        } catch (UnknownAccountException e) {
+            e.printStackTrace();
+            // 用户名不存在
+            return false;
+        } catch(IncorrectCredentialsException e){
+            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     @RequestMapping("/index")
     public String index(HashMap<String, Object> map){
+        map.put("programeName", Contant.ProgrameName);
         if(Utill.nameIsNull(map, identify, id)){
             return "index";
         }
@@ -81,13 +96,37 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("/add")
+    public String add(){
+        return "user/add";
+    }
+
+    @RequestMapping("/update")
+    public String update(){
+        return "user/update";
+    }
+
     @RequestMapping("/writing")
     public String writing(HashMap<String, Object> map){
         map.put("programeName", Contant.ProgrameName);
-        if(Utill.nameIsNull(map, identify, id)){
-            return "writing";
-        }
-        return "writing";
+        return "/user/writing";
     }
+
+    @ResponseBody
+    @RequestMapping("/draft")
+    public boolean draft(String article,String title,String author){
+        int result = 0;
+        result = customerMapper.addDraft(title, article, author);
+        if(result == 1){
+            return true;
+        }
+        return false;
+    }
+
+    @RequestMapping("/introduction")
+    public String introduction(){
+        return "introduction";
+    }
+
 
 }

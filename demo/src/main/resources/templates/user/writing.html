@@ -5,13 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Compose Message</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="assets/css/form/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/page/writing/fullcalendar.min.css">
-  <link rel="stylesheet" href="assets/css/page/writing/fullcalendar.print.css" media="print">
-  <link rel="stylesheet" href="assets/css/form/AdminLTE.min.css">
-  <link rel="stylesheet" href="assets/css/form/_all-skins.min.css">
-  <link rel="stylesheet" href="assets/css/form/blue.css">
-  <link rel="stylesheet" href="assets/css/form/bootstrap3-wysihtml5.min.css">
+  <link rel="stylesheet" href="../assets/css/form/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/page/writing/fullcalendar.min.css">
+  <link rel="stylesheet" href="../assets/css/page/writing/fullcalendar.print.css" media="print">
+  <link rel="stylesheet" href="../assets/css/form/AdminLTE.min.css">
+  <link rel="stylesheet" href="../assets/css/form/_all-skins.min.css">
+  <link rel="stylesheet" href="../assets/css/form/blue.css">
+  <link rel="stylesheet" href="../assets/css/form/bootstrap3-wysihtml5.min.css">
 </head>
 <body>
 <div class="wrapper">
@@ -32,17 +32,14 @@
         <li class="active">Mailbox</li>
       </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-md-3">
           <a href="mailbox.html" class="btn btn-primary btn-block margin-bottom">Back to Inbox</a>
-
           <div class="box box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Folders</h3>
-
               <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -65,7 +62,6 @@
           <div class="box box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Labels</h3>
-
               <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -92,10 +88,10 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="form-group">
-                <input class="form-control" placeholder="To:">
+                <input class="form-control" placeholder="title:" id="title">
               </div>
               <div class="form-group">
-                <input class="form-control" placeholder="Subject:">
+                <input class="form-control" readonly="true" th:value="${name}" id="author">
               </div>
               <div class="form-group">
                     <textarea id="compose-textarea" class="form-control" style="height: 300px">
@@ -142,6 +138,7 @@
             </div>
             <!-- /.box-footer -->
           </div>
+          
           <!-- /. box -->
         </div>
         <!-- /.col -->
@@ -152,15 +149,15 @@
   </div>
   <div class="control-sidebar-bg"></div>
 </div>
-<script src="assets/js/form/jquery-2.2.3.min.js"></script>
-<script src="assets/js/form/bootstrap.min.js"></script>
-<script src="assets/js/form/jquery.slimscroll.min.js"></script>
-<script src="assets/js/form/fastclick/fastclick.js"></script>
-<script src="assets/js/form/app.min.js"></script>
-<script src="assets/js/form/demo.js"></script>
-<script src="assets/js/form/icheck.min.js"></script>
-<script src="assets/js/form/bootstrap3-wysihtml5.all.min.js"></script>
-<script src="assets/js/page/writing.js"></script>
+<script src="../assets/js/form/jquery-2.2.3.min.js"></script>
+<script src="../assets/js/form/bootstrap.min.js"></script>
+<script src="../assets/js/form/jquery.slimscroll.min.js"></script>
+<script src="../assets/js/form/fastclick/fastclick.js"></script>
+<script src="../assets/js/form/app.min.js"></script>
+<script src="../assets/js/form/demo.js"></script>
+<script src="../assets/js/form/icheck.min.js"></script>
+<script src="../assets/js/form/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="../assets/js/page/writing.js"></script>
 <script>
   $(function () {
     //Add text editor

@@ -14,7 +14,7 @@ public class ErrorPageConfig {
     public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
         //第二种写法：java8 lambda写法
         return (factory -> {
-            ErrorPage errorPage404 = new ErrorPage(HttpStatus.NOT_FOUND, "/error/pageLost");
+            ErrorPage errorPage404 = new ErrorPage(HttpStatus.NOT_FOUND, "/lostpage");
             factory.addErrorPages(errorPage404);
         });
     }

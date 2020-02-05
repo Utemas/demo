@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="UTF-8" />
+		<title>401 Error | Fire - Admin Template</title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link href="assets/css/form/bootstrap.min.css" rel="stylesheet" />
+		<link href="assets/css/page/404/style.css" rel="stylesheet" />
+		<link href="assets/css/page/404/add-ons.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!-- Start: Content -->
+		<div class="container-fluid content">
+			<div class="row">
+				<!-- Main Page -->
+				<div id="content" class="col-sm-12 full">				
+					<div class="row box-error">					
+						<div class="col-lg-12 col-md-12 col-xs-12">
+							<div class="text-center">
+								<h1>404</h1>
+								<h2>Oops! You is NoAuth</h2>
+								<p>The request is No Auth.</p>
+								<a href="javascript: history.go(-1)">
+									<button type="button" class="btn btn-primary"><i class="fa fa-chevron-left"></i> Go Back</button>
+								</a>
+								<a th:href="@{/login}">
+									<button type="button" class="btn btn-primary"><i class="fa fa-lock"></i> Login</button>
+								</a>
+							</div>						
+						</div>					
+					</div>			
+				</div>				
+			</div>
+        </div>
+        <script src="assets/js/page/page_404.js"></script>
+	</body>	
+</html>

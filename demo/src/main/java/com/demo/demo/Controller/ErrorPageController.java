@@ -4,12 +4,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/error")
 public class ErrorPageController{
     
 
-    @RequestMapping("/pageLost")
+    @RequestMapping("/lostpage")
     public String PageLost(){
         return "404";
+    }
+
+    @RequestMapping("/NoAuth")
+    public String NoAuth(){
+        return "401";
     }
 }

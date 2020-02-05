@@ -2,9 +2,11 @@ package com.demo.demo.Mapper;
 
 import com.demo.demo.po.Customer;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+// import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface CustomerMapper {
@@ -16,4 +18,7 @@ public interface CustomerMapper {
 
     //@Update("update customer_email")
     //public int updateCustomer();
+
+    @Insert("insert into project1_draft(draft_title,draft_article,customer) values(#{title},#{article},#{author})")
+    public int addDraft(@Param("title") String title, @Param("article") String article, @Param("author") String author);
 }

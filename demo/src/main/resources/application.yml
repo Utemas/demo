@@ -12,5 +12,7 @@ spring:
 springdatasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
-    type-aliases-package: com.demo.demo.Mapper
-
+    type-aliases-package: com.demo.demo
+springboot:
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataScource
