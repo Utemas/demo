@@ -9,6 +9,21 @@ spring:
             content-type: text/html
         suffix: .html
         encoding: UTF-8
+    mail:
+        # 163
+        host: smtp.163.com
+        port: 
+        username: w2569893@163.com
+        password: 711418aa*
+        protocol: smtp
+        default-encoding: UTF-8
+        properties:
+            mail.smtp.auth: true
+            mail.smtp.starttls.enable: true
+            mail.smtp.starttls.required: true
+            mail.smtp.socketFactory.port: 465
+            mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+            mail.smtp.socketFactory.fallback: false
 springdatasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:

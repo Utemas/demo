@@ -4,14 +4,17 @@ package com.demo.demo.shiro;
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.Customer;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -22,11 +25,25 @@ public class UserRealm extends AuthorizingRealm{
 
 	@Autowired
 	private CustomerMapper customerMapper;
+	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         // TODO Auto-generated method stub
-        System.out.println("执行认证逻辑 1");
-		return null;
+		System.out.println("执行授权逻辑");
+		
+		//给资源进行授权
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		//获取当前登录用户
+		Subject subject = SecurityUtils.getSubject();
+		
+
+		Customer customer = (Customer)subject.getPrincipal();
+
+		//添加资源的授权字符串
+		info.addStringPermission(customer.getCustomer_identify());
+		
+
+		return info;
 	}
 
 	@Override
@@ -46,7 +63,7 @@ public class UserRealm extends AuthorizingRealm{
 			return null;//Shiro底层会抛出UnknownAccountException
 		}
 		//2.判断密码
-		return new SimpleAuthenticationInfo("",customer.getCustomer_password(),"");
+		return new SimpleAuthenticationInfo(customer,customer.getCustomer_password(),"");
 	}
 
 }

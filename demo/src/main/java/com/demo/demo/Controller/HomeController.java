@@ -7,7 +7,6 @@ import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.Customer;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -25,17 +24,10 @@ public class HomeController {
 
     @Autowired
     private CustomerMapper customerMapper;
-
-    private String id = null;
-    private String identify = null;
     private Customer customer = new Customer();
 
     @RequestMapping("/information")
     public String helloHtml(HashMap<String, Object> map) {
-        if (id == null || identify == null) {
-            return "redirect:/login";
-        }
-        customer = customerMapper.getCustomerById(identify, id);
         String identity_number = "学号:" + customer.getCustomer_identify() + customer.getCustomer_id();
         map.put("name", customer.getName());
         map.put("age", Utill.caculateAge(customer.getId_number()));
@@ -43,7 +35,7 @@ public class HomeController {
         map.put("id_number", customer.getId_number());
         map.put("programeName", Contant.ProgrameName);
         map.put("address", Utill.getAddress(customer));
-        return "user/information";
+        return "/customer/information";
     }
 
     @RequestMapping("/login")
@@ -55,7 +47,7 @@ public class HomeController {
     }
     @ResponseBody
     @RequestMapping("/checklogin")
-    public boolean checklogin(HashMap<String,Object> map,String userCode,String password){
+    public String checklogin(HashMap<String,Object> map,String userCode,String password){
         
         // 获取subject
         Subject subject = SecurityUtils.getSubject();
@@ -64,26 +56,24 @@ public class HomeController {
         // 3.执行登录方法
         try {
             subject.login(token);
-            return true;
+            customer = (Customer) SecurityUtils.getSubject().getPrincipal();
+            map.put("name",customer.getName());
+            return "";
             // 登录成功
         } catch (UnknownAccountException e) {
             e.printStackTrace();
             // 用户名不存在
-            return false;
+            return "用户不存在";
         } catch(IncorrectCredentialsException e){
             e.printStackTrace();
-            return false;
+            return "用户密码不正确";
         }
     }
 
     @RequestMapping("/index")
     public String index(HashMap<String, Object> map){
         map.put("programeName", Contant.ProgrameName);
-        if(Utill.nameIsNull(map, identify, id)){
-            return "index";
-        }
-        customer = customerMapper.getCustomerById(identify,id);
-        map.put("name",customer.getName());
+        
         return "index";
     }
 
@@ -91,25 +81,12 @@ public class HomeController {
     public String logout(HashMap<String, Object> map){
         customer = null;
         map.put("name","请登录");
-        id = null;
-        identify = null;
         return "index";
     }
-
-    @RequestMapping("/add")
-    public String add(){
-        return "user/add";
-    }
-
-    @RequestMapping("/update")
-    public String update(){
-        return "user/update";
-    }
-
     @RequestMapping("/writing")
     public String writing(HashMap<String, Object> map){
         map.put("programeName", Contant.ProgrameName);
-        return "/user/writing";
+        return "/customer/writing";
     }
 
     @ResponseBody
@@ -127,6 +104,8 @@ public class HomeController {
     public String introduction(){
         return "introduction";
     }
+
+    
 
 
 }
