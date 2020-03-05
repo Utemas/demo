@@ -28,17 +28,13 @@ public class UserRealm extends AuthorizingRealm{
 	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        // TODO Auto-generated method stub
 		System.out.println("执行授权逻辑");
 		
 		//给资源进行授权
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		//获取当前登录用户
 		Subject subject = SecurityUtils.getSubject();
-		
-
 		Customer customer = (Customer)subject.getPrincipal();
-
 		//添加资源的授权字符串
 		info.addStringPermission(customer.getCustomer_identify());
 		
@@ -48,7 +44,6 @@ public class UserRealm extends AuthorizingRealm{
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
-        // TODO Auto-generated method stub
 		//假设数据库的用户和密码
 		
 		//编写shiro判断逻辑，判断用户名和密码。

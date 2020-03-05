@@ -79,8 +79,13 @@
                 </div>
               </div>
               <div class="nav-tabs-custom hidden" id="updatePage">
-                <div class="m-20" >
-                  <input type="text" class="form-control"/>
+                <div>
+                  <p>Email:</p>
+                  <input type="text" class="form-control" id="updatetelEmail" name="updatetelEmail" placeholder="new Email Adress"/>
+                  <p>tel:</p>
+                  <input type="text" class="form-control" id="updatetelphone" name="updatetelphone" placeholder="new telephone number"/>
+                  <p style="color: red;">* 如果身份信息（例如：姓名 性别 身份证号码 家庭住址（身份证件上））有误，请联系管理员进行修改</p>
+                  <p>管理员联系方式<span th:text="${programeEmail}"></span></p>
                   <div class="center m-10">
                     <input type="button" class="btn btn-primary btn-primary-lg" value="更新" id="update"/>
                     <input type="button" class="btn btn-danger  btn-primary-lg"  value="返回" id="back"/>

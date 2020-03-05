@@ -12,7 +12,7 @@ spring:
     mail:
         # 163
         host: smtp.163.com
-        port: 
+        port: 3307 
         username: w2569893@163.com
         password: 711418aa*
         protocol: smtp

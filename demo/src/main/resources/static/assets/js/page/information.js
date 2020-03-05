@@ -5,7 +5,22 @@ $(function(){
     });
 
     $("#update").click(function(){
-        
+        var tel;
+        var email;
+        var emailZhengze = '[a-zA-Z0-9_-]+';
+        if(emailZhengze.exec(email)){
+            
+        }
+        $.ajax({
+            type:"POST",
+            url:"/updateInformation",
+            data:{
+                "telphone": tel
+            },
+            success:function(message){
+
+			},
+        })
     });
 
     $("#back").click(function(){

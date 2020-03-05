@@ -1,10 +1,12 @@
 package com.demo.demo.Controller;
 
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.Customer;
+import com.demo.demo.po.Draft;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -24,10 +26,13 @@ public class HomeController {
 
     @Autowired
     private CustomerMapper customerMapper;
-    private Customer customer = new Customer();
+    //private Customer customer = new Customer();
+    private Customer administrator = new Customer();
 
+    //个人信息查询和显示
     @RequestMapping("/information")
     public String helloHtml(HashMap<String, Object> map) {
+        Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
         String identity_number = "学号:" + customer.getCustomer_identify() + customer.getCustomer_id();
         map.put("name", customer.getName());
         map.put("age", Utill.caculateAge(customer.getId_number()));
@@ -35,20 +40,30 @@ public class HomeController {
         map.put("id_number", customer.getId_number());
         map.put("programeName", Contant.ProgrameName);
         map.put("address", Utill.getAddress(customer));
+        map.put("programeEmail", administrator.getCustomer_email());
         return "/customer/information";
     }
 
+    //个人信息的更改
+    @ResponseBody
+    @RequestMapping("/updateInformation")
+    public boolean updateInformation() {
+        //传递过来最好是json数据，之后进行解析
+        return true;
+    }
+
+
     @RequestMapping("/login")
-    public String login(HashMap<String, Object> map) throws IOException {
-        String adminMail = "2562817565@qq.com";
+    public String login(HashMap<String, Object> map){
+        administrator = customerMapper.getAdministrator();
         map.put("programeName", Contant.ProgrameName);
-        map.put("adminMail",adminMail);
+        map.put("adminMail",administrator.getCustomer_email());
         return "login";
     }
     @ResponseBody
     @RequestMapping("/checklogin")
     public String checklogin(HashMap<String,Object> map,String userCode,String password){
-        
+        Customer customer = new Customer();
         // 获取subject
         Subject subject = SecurityUtils.getSubject();
         // 2.封装用户数据
@@ -79,14 +94,27 @@ public class HomeController {
 
     @RequestMapping("/logout")
     public String logout(HashMap<String, Object> map){
-        customer = null;
         map.put("name","请登录");
         return "index";
     }
     @RequestMapping("/writing")
     public String writing(HashMap<String, Object> map){
+        Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
         map.put("programeName", Contant.ProgrameName);
-        return "/customer/writing";
+        map.put("name", customer.getName());
+        map.put("count",customerMapper.countDraft(customer.getCustomer_identify()+customer.getCustomer_id()));
+        List<Draft> DraftList = customerMapper.findDraftByID(customer.getCustomer_identify()+customer.getCustomer_id());
+        map.put("resultlist",DraftList);
+        return "customer/writing";
+    }
+
+
+    //
+    @ResponseBody
+    @RequestMapping("/DisplayDaft")
+    public void DisplayDraft() {
+        Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
+        
     }
 
     @ResponseBody
