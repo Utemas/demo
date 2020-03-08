@@ -24,7 +24,6 @@ $(function(){
             type:"POST",
             url:"/DisplayDaft",
             success: function(resultlist){
-                
                 $("#writing_an_article").addClass("hidden");
                 $("#draft").removeClass("hidden");
 

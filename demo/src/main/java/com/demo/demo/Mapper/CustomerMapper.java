@@ -34,7 +34,7 @@ public interface CustomerMapper {
     @Select("select * from project1_draft where customer_id=#{id}")
     public List<Draft> findDraftByID(@Param("id") String customer_id);
     //等待修改
-    @Update("update project1_customer where ")
+    @Update("update project1_customer where customer_id=#{id} and customer_identify=#{identify}")
     public int updateTelphone();
 
 

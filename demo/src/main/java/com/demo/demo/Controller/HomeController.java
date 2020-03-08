@@ -2,7 +2,6 @@ package com.demo.demo.Controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.Customer;
@@ -94,6 +93,8 @@ public class HomeController {
 
     @RequestMapping("/logout")
     public String logout(HashMap<String, Object> map){
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
         map.put("name","请登录");
         return "index";
     }

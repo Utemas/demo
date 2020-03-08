@@ -88,3 +88,7 @@
 .display{
 	display: display;
 }
+
+.bold{
+	font-weight: bold;
+}
