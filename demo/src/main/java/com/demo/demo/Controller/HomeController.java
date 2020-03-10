@@ -43,14 +43,6 @@ public class HomeController {
         return "/customer/information";
     }
 
-    //个人信息的更改
-    @ResponseBody
-    @RequestMapping("/updateInformation")
-    public boolean updateInformation() {
-        //传递过来最好是json数据，之后进行解析
-        return true;
-    }
-
 
     @RequestMapping("/login")
     public String login(HashMap<String, Object> map){
@@ -114,8 +106,6 @@ public class HomeController {
     @ResponseBody
     @RequestMapping("/DisplayDaft")
     public void DisplayDraft() {
-        Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
-        
     }
 
     @ResponseBody
