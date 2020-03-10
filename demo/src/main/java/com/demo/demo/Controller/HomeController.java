@@ -134,6 +134,10 @@ public class HomeController {
         return "introduction";
     }
 
+    @RequestMapping("/text")
+    public String text(){
+        return "text";
+    }
     
 
 
