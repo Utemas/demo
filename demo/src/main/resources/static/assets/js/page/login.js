@@ -5,13 +5,13 @@ $(function(){
 		var identity = usercode.substring(0,2);
 		console.log(identity);
 		//对用户代码的初步验证
-		if(isNaN(usercode.substring(2)) || !isNaN(usercode.substring(0,2)) || usercode.length != 10){
+		if(isNaN(usercode.substring(2)) || !isNaN(usercode.substring(0,2)) || usercode.length != 12){
 			alert("用户不存在");
 			$("#usercode").val("");
 			return false;
 		}
 		//对密码的初步验证
-		if(password.length > 18 || password < 6){
+		if(password.length > 18 || password < 5){
 			alert("密码错误");
 			$("#password").val("");
 			return false;

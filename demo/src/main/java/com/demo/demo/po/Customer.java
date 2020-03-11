@@ -5,20 +5,22 @@ import lombok.Setter;
 
 @Getter@Setter
 public class Customer{
-    private String customer_id;
-    private String customer_identify;
-    private String name;
-    private String id_number;
-    private String addr_provinve;
-    private String addr_city;
-    private String addr_community;
-    private String addr_street;
-    private String addr_block;
-    private String addr_unit;
-    private String addr_floor;
-    private String addr_room;
+    private String st_id;
+    private String st_zhuanye;
+    private String st_nianji;
+    private String st_class;
+    private String st_type;
+    private String st_leave_date;
+    private String st_peiyangfangshi;
+    private String st_leave_to;
+    private String st_entertime;
     private String customer_email;
-    private String customer_password;
     private String customer_tel;
-
+    private String customer_english_name;
+    private String customer_youzheng;
+    private String customer_start_station;
+    private String customer_end_station;
+    private String customer_identify;
+    private String customer_password;
+    private String id_number;
 }

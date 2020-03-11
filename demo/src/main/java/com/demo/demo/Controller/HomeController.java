@@ -26,27 +26,25 @@ public class HomeController {
     @Autowired
     private CustomerMapper customerMapper;
     //private Customer customer = new Customer();
-    private Customer administrator = new Customer();
 
     //个人信息查询和显示
     @RequestMapping("/information")
     public String helloHtml(HashMap<String, Object> map) {
         Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
-        String identity_number = "学号:" + customer.getCustomer_identify() + customer.getCustomer_id();
-        map.put("name", customer.getName());
+        String identity_number = "学号:" + customer.getCustomer_identify() + "customer.getCustomer_id()";
+        map.put("name", "hhh");
         map.put("age", Utill.caculateAge(customer.getId_number()));
         map.put("identity_number", identity_number);
         map.put("id_number", customer.getId_number());
         map.put("programeName", Contant.ProgrameName);
         map.put("address", Utill.getAddress(customer));
-        map.put("programeEmail", administrator.getCustomer_email());
         return "/customer/information";
     }
 
 
     @RequestMapping("/login")
     public String login(HashMap<String, Object> map){
-        administrator = customerMapper.getAdministrator();
+        Customer administrator = customerMapper.getAdministrator();
         map.put("programeName", Contant.ProgrameName);
         map.put("adminMail",administrator.getCustomer_email());
         return "login";
@@ -63,7 +61,7 @@ public class HomeController {
         try {
             subject.login(token);
             customer = (Customer) SecurityUtils.getSubject().getPrincipal();
-            map.put("name",customer.getName());
+            map.put("name","customer.getName()");
             return "";
             // 登录成功
         } catch (UnknownAccountException e) {
@@ -94,9 +92,9 @@ public class HomeController {
     public String writing(HashMap<String, Object> map){
         Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
         map.put("programeName", Contant.ProgrameName);
-        map.put("name", customer.getName());
-        map.put("count",customerMapper.countDraft(customer.getCustomer_identify()+customer.getCustomer_id()));
-        List<Draft> DraftList = customerMapper.findDraftByID(customer.getCustomer_identify()+customer.getCustomer_id());
+        map.put("name", "customer.getName()");
+        map.put("count",customerMapper.countDraft(customer.getCustomer_identify()+"customer.getCustomer_id()"));
+        List<Draft> DraftList = customerMapper.findDraftByID(customer.getCustomer_identify()+"customer.getCustomer_id()");
         map.put("resultlist",DraftList);
         return "customer/writing";
     }
@@ -129,6 +127,10 @@ public class HomeController {
         return "text";
     }
     
+    @RequestMapping("/student")
+    public String student(){
+        return "student/total";
+    }
 
 
 }

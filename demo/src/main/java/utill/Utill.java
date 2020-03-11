@@ -104,7 +104,7 @@ public final class Utill {
     }
     
     public static String getAddress(Customer customer){
-        String address = customer.getAddr_provinve() + " " + customer.getAddr_city() + " " + customer.getAddr_community() + " " + customer.getAddr_street() + " " +customer.getAddr_block() + " " + customer.getAddr_unit() + " " + customer.getAddr_floor() +" " + customer.getAddr_room();
+        String address = "customer.getAddr_provinve()" + " " + "customer.getAddr_city()" + " " + "customer.getAddr_community()" + " " + "customer.getAddr_street()" + " " +"customer.getAddr_block()" + " " + "customer.getAddr_unit()" + " " + "customer.getAddr_floor()" +" " + "scustomer.getAddr_room()";
         return address;
     }
 

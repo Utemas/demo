@@ -52,7 +52,7 @@ public class UserRealm extends AuthorizingRealm{
 		String customer_identify = token.getUsername().substring(0, 2);// 用户身份代码
         String customer_id = token.getUsername().substring(2);// 用户id
 		
-		Customer customer = customerMapper.getCustomerById(customer_identify,customer_id);
+		Customer customer = customerMapper.getCustomerByStid(customer_identify, customer_id);
 		if(customer == null){
 			//用户名不存在
 			return null;//Shiro底层会抛出UnknownAccountException

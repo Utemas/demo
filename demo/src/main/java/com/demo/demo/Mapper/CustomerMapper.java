@@ -15,8 +15,17 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface CustomerMapper {
 
-    @Select("select * from v_customer where customer_identify = 'ad'")
+    //查找用户个人信息
+    @Select("select * from v_cu where st_id=#{id} and customer_identify=#{identify}")
+    public Customer getCustomerByStid(@Param("identify") String identfy, @Param("id") String st_id);
+
+    //查找管理员信息
+    @Select("select * from v_cu where customer_identify = 'ad'")
     public Customer getAdministrator();
+
+
+
+    
     @Select("select * from v_customer where customer_identify = #{identify} and customer_id=#{id}")
     public Customer getCustomerById(@Param("identify") String customer_identify, @Param("id") String customer_id);
 
