@@ -1,11 +1,9 @@
 package com.demo.demo.Controller;
 
 import java.util.HashMap;
-import java.util.List;
 
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.Customer;
-import com.demo.demo.po.Draft;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import utill.Contant;
-import utill.Utill;
 
 @Controller
 public class HomeController {
@@ -28,20 +25,8 @@ public class HomeController {
     //private Customer customer = new Customer();
 
     //个人信息查询和显示
-    @RequestMapping("/information")
-    public String helloHtml(HashMap<String, Object> map) {
-        Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
-        String identity_number = "学号:" + customer.getCustomer_identify() + "customer.getCustomer_id()";
-        map.put("name", "hhh");
-        map.put("age", Utill.caculateAge(customer.getId_number()));
-        map.put("identity_number", identity_number);
-        map.put("id_number", customer.getId_number());
-        map.put("programeName", Contant.ProgrameName);
-        map.put("address", Utill.getAddress(customer));
-        return "/customer/information";
-    }
-
-
+    
+    //初始界面
     @RequestMapping("/login")
     public String login(HashMap<String, Object> map){
         Customer administrator = customerMapper.getAdministrator();
@@ -49,6 +34,8 @@ public class HomeController {
         map.put("adminMail",administrator.getCustomer_email());
         return "login";
     }
+
+    //登录验证
     @ResponseBody
     @RequestMapping("/checklogin")
     public String checklogin(HashMap<String,Object> map,String userCode,String password){
@@ -74,13 +61,8 @@ public class HomeController {
         }
     }
 
-    @RequestMapping("/index")
-    public String index(HashMap<String, Object> map){
-        map.put("programeName", Contant.ProgrameName);
-        
-        return "index";
-    }
 
+    //注销登录状态
     @RequestMapping("/logout")
     public String logout(HashMap<String, Object> map){
         Subject subject = SecurityUtils.getSubject();
@@ -88,45 +70,15 @@ public class HomeController {
         map.put("name","请登录");
         return "index";
     }
-    @RequestMapping("/writing")
-    public String writing(HashMap<String, Object> map){
-        Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
-        map.put("programeName", Contant.ProgrameName);
-        map.put("name", "customer.getName()");
-        map.put("count",customerMapper.countDraft(customer.getCustomer_identify()+"customer.getCustomer_id()"));
-        List<Draft> DraftList = customerMapper.findDraftByID(customer.getCustomer_identify()+"customer.getCustomer_id()");
-        map.put("resultlist",DraftList);
-        return "customer/writing";
-    }
 
 
-    //
-    @ResponseBody
-    @RequestMapping("/DisplayDaft")
-    public void DisplayDraft() {
-    }
-
-    @ResponseBody
-    @RequestMapping("/draft")
-    public boolean draft(String article,String title,String author){
-        int result = 0;
-        result = customerMapper.addDraft(title, article, author);
-        if(result == 1){
-            return true;
-        }
-        return false;
-    }
-
+    //连接系统注册页面
     @RequestMapping("/introduction")
     public String introduction(){
         return "introduction";
     }
 
-    @RequestMapping("/text")
-    public String text(){
-        return "text";
-    }
-    
+    //调转到学生的总页面
     @RequestMapping("/student")
     public String student(){
         return "student/total";

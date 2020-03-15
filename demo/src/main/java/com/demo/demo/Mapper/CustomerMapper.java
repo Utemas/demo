@@ -3,7 +3,6 @@ package com.demo.demo.Mapper;
 import java.util.List;
 
 import com.demo.demo.po.Customer;
-import com.demo.demo.po.Draft;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -31,17 +30,7 @@ public interface CustomerMapper {
 
     @Select("select count(*) from v_customer where customer_identify = #{identify} and customer_id=#{id} and customer_password=#{password}")
     public int getCustomerToCheckLogin(@Param("identify") String customer_identify, @Param("id") String customer_id, @Param("password") String customer_password);
-
-    @Insert("insert into project1_draft(draft_title,draft_article,customer) values(#{title},#{article},#{author})")
-    public int addDraft(@Param("title") String title, @Param("article") String article, @Param("author") String author);
-
-    //查询draft 的数量
-    @Select("select count(*) from project1_draft where customer_id=#{id}")
-    public int countDraft(@Param("id") String customer_id);
-
-    //查询草稿信息
-    @Select("select * from project1_draft where customer_id=#{id}")
-    public List<Draft> findDraftByID(@Param("id") String customer_id);
+    
     //等待修改
     @Update("update project1_customer where customer_id=#{id} and customer_identify=#{identify}")
     public int updateTelphone();

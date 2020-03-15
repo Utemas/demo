@@ -29,4 +29,8 @@ public class AdminController {
     public String mp(){
         return null;
     }
+    @RequestMapping("/test")
+    public String test() {
+        return "test";
+    }
 }
