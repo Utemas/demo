@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.Customer;
+import com.demo.demo.po.Person;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -22,9 +23,6 @@ public class HomeController {
 
     @Autowired
     private CustomerMapper customerMapper;
-    //private Customer customer = new Customer();
-
-    //个人信息查询和显示
     
     //初始界面
     @RequestMapping("/login")
@@ -39,7 +37,7 @@ public class HomeController {
     @ResponseBody
     @RequestMapping("/checklogin")
     public String checklogin(HashMap<String,Object> map,String userCode,String password){
-        Customer customer = new Customer();
+    
         // 获取subject
         Subject subject = SecurityUtils.getSubject();
         // 2.封装用户数据
@@ -47,8 +45,8 @@ public class HomeController {
         // 3.执行登录方法
         try {
             subject.login(token);
-            customer = (Customer) SecurityUtils.getSubject().getPrincipal();
-            map.put("name","customer.getName()");
+            //
+            map.put("name","f");
             return "";
             // 登录成功
         } catch (UnknownAccountException e) {
@@ -80,7 +78,11 @@ public class HomeController {
 
     //调转到学生的总页面
     @RequestMapping("/student")
-    public String student(){
+    public String student(HashMap<String, Object> map){
+        Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
+        Person personInformation = customerMapper.getStudentPeronInformation(customer.getId_number());
+        map.put("student", customer);
+        map.put("baseinformation",personInformation);
         return "student/total";
     }
 

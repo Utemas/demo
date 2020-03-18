@@ -23,7 +23,7 @@ $(function(){
 			success: function(message){
 				if(message == ""){
 					if(identity=="st"){
-						window.location.href="/index";
+						window.location.href="/student";
 					}else{
 						window.location.href="/admin";
 					}

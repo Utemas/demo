@@ -2,19 +2,21 @@ package com.demo.demo.po;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter@Setter
 public class Person{
-    @Getter @Setter private String id;
-    @Getter @Setter private String name;
-    @Getter @Setter private String id_number;
-    @Getter @Setter private String addr_province;
-    @Getter @Setter private String addr_city;
-    @Getter @Setter private String addr_community;
-    @Getter @Setter private String addr_street;
-    @Getter @Setter private String addr_block;
-    @Getter @Setter private String addr_unit;
-    @Getter @Setter private String addr_floor;
-    @Getter @Setter private String addr_room;
-    @Override public String toString(){
-        return String.format("(id: %d)",id);
-    }
+    private String id;
+    private String id_number;
+    private String name;
+    private String addr_province;
+    private String addr_city;
+    private String addr_community;
+    private String addr_street;
+    private String addr_block;
+    private String addr_unit;
+    private String addr_floor;
+    private String addr_room;
+    private String sex;
+    private String country;
+    private String nation;
+    private String card_type;
 }
