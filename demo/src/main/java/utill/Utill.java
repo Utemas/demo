@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import com.demo.demo.po.Customer;
+import com.demo.demo.po.Person;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
@@ -103,8 +103,10 @@ public final class Utill {
         return String.valueOf(result);
     }
     
-    public static String getAddress(Customer customer){
-        String address = "customer.getAddr_provinve()" + " " + "customer.getAddr_city()" + " " + "customer.getAddr_community()" + " " + "customer.getAddr_street()" + " " +"customer.getAddr_block()" + " " + "customer.getAddr_unit()" + " " + "customer.getAddr_floor()" +" " + "scustomer.getAddr_room()";
+    public static String getAddress(Person customer){
+        String address = customer.getAddr_province() +" "+ customer.getAddr_city() + " " + customer.getAddr_community()
+                + " " +customer.getAddr_street() + " " + customer.getAddr_block() +"栋 "+ customer.getAddr_unit()+"单元 "+
+                customer.getAddr_floor()+"楼 " + customer.getAddr_room()+"号";
         return address;
     }
 

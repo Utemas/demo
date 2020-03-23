@@ -1,0 +1,18 @@
+table tr td{
+    width:300px;
+    text-align:center;
+    padding-top: 5px;
+}
+
+tr .title p{
+    font-weight: bold;
+    
+}
+
+tr .title{
+    background-color: white;
+}
+
+table{
+    margin-top: 30px;
+}

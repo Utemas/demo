@@ -25,7 +25,6 @@ public interface CustomerMapper {
 
 
 
-
     @Select("select * from v_customer where customer_identify = #{identify} and customer_id=#{id}")
     public Customer getCustomerById(@Param("identify") String customer_identify, @Param("id") String customer_id);
 

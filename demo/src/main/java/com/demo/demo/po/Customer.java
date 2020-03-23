@@ -17,10 +17,12 @@ public class Customer{
     private String customer_email;
     private String customer_tel;
     private String customer_english_name;
+    private String customer_jiguan;
     private String customer_youzheng;
     private String customer_start_station;
     private String customer_end_station;
     private String customer_identify;
     private String customer_password;
     private String id_number;
+    private String customer_face;
 }
