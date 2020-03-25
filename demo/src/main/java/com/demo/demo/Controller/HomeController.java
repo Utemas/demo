@@ -1,10 +1,10 @@
 package com.demo.demo.Controller;
 
 import java.util.HashMap;
-
-
+import java.util.List;
 
 import com.demo.demo.Mapper.CustomerMapper;
+import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Person;
 
@@ -87,6 +87,8 @@ public class HomeController {
         map.put("adminMail", administrator.getCustomer_email());
         //
         // 查询学生成绩数量
+        int result = customerMapper.theNumberOfClass(customer.getSt_id());
+        map.put("class_count",result);
         //
         map.put("student", customer);
         map.put("baseinformation", personInformation);
@@ -94,15 +96,29 @@ public class HomeController {
         String birth = birthday[0] + "-" + birthday[1] + "-" + birthday[2];
         map.put("birthday", birth);
         map.put("address", Utill.getAddress(personInformation));
+        //
+        //查询学生成绩信息
+        List<ClassInfo> clist = customerMapper.getClassInformation(customer.getSt_id());
+        map.put("clist",clist);
+        //
+        
+        //计算这个同学的总学分是多少
+        int xueFenTotal = 0;
+        for(ClassInfo stu : clist){
+            xueFenTotal += stu.getClass_xuefen();
+        }
+        map.put("xueFenTotal",xueFenTotal);
+        //
+        System.out.println(xueFenTotal);
         return "student/total";
     }
 
     @RequestMapping("/writing")
     public String d(HashMap<String, Object> map){
         map.put("programeName",Contant.ProgrameName);
-        
         return "customer/writing";
     }
+
 
 
 }

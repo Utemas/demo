@@ -69,7 +69,7 @@
           </div>
           <div class="pull-left info">
             <p>Alexander Pierce</p>
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            <a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> Online</a>
           </div>
         </div>
         <!-- search form -->
@@ -95,25 +95,25 @@
             </a>
             <ul class="treeview-menu">
               <li class="active" id="baseinformation"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>个人基本信息</a></li>
-              <li id="studentinformation"><a href="javascript:void(0)"><i class="fa fa-circle-o"></i>个人联系信息</a></li>
+              <li id="studentinformation"><a href="javascript:void(0)"><i class="fa fa-circle-o"></i>个人联系名片</a></li>
               <li id=""><a href="javascript:void(0)"><i class="fa fa-circle-o"></i>个人学籍信息</a></li>
             </ul>
           </li>
           <li class="treeview">
-            <a href="#">
+            <a href="javascript:void(0);">
               <i class="fa fa-files-o"></i>
               <span>查询成绩信息</span>
               <span class="pull-right-container">
-                <span class="label label-primary pull-right">4</span>
+                <span class="label label-primary pull-right" th:text="${class_count}"></span>
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="top-nav.html"><i class="fa fa-circle-o"></i>成绩信息</a></li>
-              <li><a href="boxed.html"><i class="fa fa-circle-o"></i>成绩统计</a></li>
+              <li><a href="javascript:void(0);" id="classinformation"><i class="fa fa-circle-o"></i>成绩信息</a></li>
+              <li><a href="javascript:void(0);" id="classTotal"><i class="fa fa-circle-o"></i>成绩统计</a></li>
             </ul>
           </li>
           <li class="treeview">
-            <a href="#">
+            <a href="javascript:void(0);">
               <i class="fa fa-files-o"></i>
               <span>活动信息</span>
               <span class="pull-right-container">
@@ -121,12 +121,12 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="top-nav.html"><i class="fa fa-circle-o"></i>活动信息</a></li>
-              <li><a href="boxed.html"><i class="fa fa-circle-o"></i>活动提交</a></li>
+              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>活动信息</a></li>
+              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>活动提交</a></li>
             </ul>
           </li>
           <li class="treeview">
-            <a href="#">
+            <a href="javascript:void(0);">
               <i class="fa fa-files-o"></i>
               <span>账号信息维护</span>
             </a>
@@ -148,12 +148,12 @@
       </section>
       <section class="content-header hidden" id="xj">
         <h1>
-          个人学籍信息
-          <small>此信息来自学籍信息</small>
+          个人联系名片
+          <small>此信息主要为学校提供联系方式</small>
         </h1>
         <ol class="breadcrumb">
           <li><a href="/login">登录</a></li>
-          <li><a href="#"><i class="fa fa-dashboard"></i>个人学籍信息</a></li>
+          <li><a href="#"><i class="fa fa-dashboard"></i>个人联系名片</a></li>
         </ol>
       </section>
       <div class="content">
@@ -164,7 +164,7 @@
           </tr>
           <!-- row  1-->
           <tr>
-            <td class="title"><p>乘车区间</p></td>
+            <td class="title"><p>性别</p></td>
             <td><p th:text="${baseinformation.sex}"></td>
             <td class="title"><p>国籍</p></td>
             <td>
@@ -210,7 +210,7 @@
           </tr>
           <!-- row  1-->
           <tr>
-            <td class="title"><p>性别</p></td>
+            <td class="title"><p></p></td>
             <td><p th:text="${baseinformation.sex}"></td>
             <td class="title"><p>国籍</p></td>
             <td>
@@ -236,6 +236,33 @@
             <td colspan="3" th:text="${address}"></td>
           </tr>
         </table>
+        <table border="1" cellspacing="0" cellpadding="0" id="class_info" class="hidden">
+          <thead>
+            <tr>
+              <th>课程号</th><th>课程名称</th><th>讲授教师</th><th>成绩</th><th>学分</th>
+            </tr>
+          </thead>
+          <tbody>
+             <tr th:each="classinfo:${clist}">
+               <td th:text="${classinfo.class_id}"></td>
+               <td th:text="${classinfo.class_name}"></td>
+               <td th:text="${classinfo.class_teacher}"></td>
+               <td th:text="${classinfo.class_score}"></td>
+               <td th:text="${classinfo.class_xuefen}"></td>
+             </tr>
+          </tbody>
+        </table>
+        <table border="1" cellspacing="0" cellpadding="0" id="class_total" class="hidden">
+          <tr>
+            <td>总学分</td><td><p th:text="xueFenTotal"></p></td>
+          </tr>
+        </table>
+        <table border="1" cellspacing="0" cellpadding="0" id="activity_information" class="hidden">
+        </table>
+        <table border="1" cellspacing="0" cellpadding="0" id="activity_up" class="hidden">
+        </table>
+        <table border="1" cellspacing="0" cellpadding="0" id="account" class="hidden">
+        </table>
       </div>
       <!-- /.content -->
     </div>
@@ -243,6 +270,9 @@
   
     <footer class="main-footer">
       <strong>若"个人基本信息"有问题，可以通过邮箱联系管理人员<a style="margin-left: 3px;" th:text="${adminMail}" th:href="@{/writing}"></a></strong>
+    </footer>
+    <footer class="main-footer hidden">
+
     </footer>
   </div>
 <!-- ./wrapper -->

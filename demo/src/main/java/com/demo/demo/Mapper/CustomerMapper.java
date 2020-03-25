@@ -1,6 +1,8 @@
 package com.demo.demo.Mapper;
 
+import java.util.List;
 
+import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Person;
 
@@ -23,8 +25,15 @@ public interface CustomerMapper {
     @Select("select * from v_cu where customer_identify = 'ad'")
     public Customer getAdministrator();
 
+    //查询学生成绩数量
+    @Select("select count(*) from project1_class where st_id=#{st_id}")
+    public int theNumberOfClass(@Param("st_id") String st_id);
+    //
 
-
+    //查询课程信息
+    @Select("select * from project1_class where st_id=#{st_id}")
+    public List<ClassInfo> getClassInformation(@Param("st_id") String st_id);
+    //
     @Select("select * from v_customer where customer_identify = #{identify} and customer_id=#{id}")
     public Customer getCustomerById(@Param("identify") String customer_identify, @Param("id") String customer_id);
 
