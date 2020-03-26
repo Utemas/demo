@@ -252,11 +252,17 @@
              </tr>
           </tbody>
         </table>
-        <table border="1" cellspacing="0" cellpadding="0" id="class_total" class="hidden">
-          <tr>
-            <td>总学分</td><td><p th:text="xueFenTotal"></p></td>
-          </tr>
-        </table>
+        <div class="hidden">
+          <table border="1" cellspacing="0" cellpadding="0" id="class_total">
+            <tr>
+              <td>总学分</td><td><p th:text="${xueFenTotal}"></p></td>
+            </tr>
+          </table>
+          <div class="box-body">
+            <canvas width="200" height="50" id="pieChart" ></canvas>
+          </div>
+        </div>
+        
         <table border="1" cellspacing="0" cellpadding="0" id="activity_information" class="hidden">
         </table>
         <table border="1" cellspacing="0" cellpadding="0" id="activity_up" class="hidden">
@@ -269,7 +275,7 @@
     <!-- /.content-wrapper -->
   
     <footer class="main-footer">
-      <strong>若"个人基本信息"有问题，可以通过邮箱联系管理人员<a style="margin-left: 3px;" th:text="${adminMail}" th:href="@{/writing}"></a></strong>
+      <strong>若"个人基本信息"有问题，可以通过<a style="margin-left: 3px;"th:href="@{/writing}">联系管理人员</a>进行修改</strong>
     </footer>
     <footer class="main-footer hidden">
 
@@ -279,11 +285,12 @@
 
 <script src="../assets/js/form/jquery-2.2.3.min.js"></script>
 <script src="../assets/js/form/bootstrap.min.js"></script>
-<script src="../assets/js/page/total.js"></script>
+<script src="../assets/js/form/Chart.min.js"></script>
 <script src="../assets/js/form/jquery.slimscroll.min.js"></script>
 <script src="../assets/js/form/fastclick/fastclick.js"></script>
 <script src="../assets/js/form/app.min.js"></script>
 <script src="../assets/js/form/demo.js"></script>
+<script src="../assets/js/page/total.js"></script>
 <script src="../assets/js/form/chaos.js"></script>
 </body>
 </html>

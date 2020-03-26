@@ -101,7 +101,6 @@ public class HomeController {
         List<ClassInfo> clist = customerMapper.getClassInformation(customer.getSt_id());
         map.put("clist",clist);
         //
-        
         //计算这个同学的总学分是多少
         int xueFenTotal = 0;
         for(ClassInfo stu : clist){
@@ -114,11 +113,9 @@ public class HomeController {
     }
 
     @RequestMapping("/writing")
-    public String d(HashMap<String, Object> map){
+    public String writing(HashMap<String, Object> map){
         map.put("programeName",Contant.ProgrameName);
         return "customer/writing";
     }
-
-
 
 }
