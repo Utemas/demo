@@ -6,12 +6,12 @@
 </head>
     <div th:fragment="loginTips" class="container login-information">
             <p class="title">登录介绍</p>
-            <p class="article" translate="false">usercode:</p>
-            <p class="article" translate="false">your identity 's abbreviation(two letters) and your id(eight numbers)</p>
-            <p class="article" translate="false">for example: st10000001.</p>
-            <p class="article" translate="false">password:</p>
-            <p class="article" translate="false">the password which you will login</p>
-            <p class="article" translate="false">pay attention! if you forget you passwored.Please send an email to</p>
-            <a th:text="${adminMail}" href="mailto:${adminMail}"></a>
+            <p class="article" translate="false">用户账号:</p>
+            <p class="article" translate="false">您的身份代称(两个字母)和您的学号/工号(10位)</p>
+            <p class="article" translate="false">例如: st1620010518。</p>
+            <p class="article" translate="false">密码:</p>
+            <p class="article" translate="false">输入您的密码即可，默认密码为身份证的后六位</p>
+            <p class="article" translate="false">注意:如果登录遇到什么问题可以联系学校管理人员.请用以下链接发送信息。</p>
+            <a th:text="登录问题请点击这里" href="/trouble?type=1"></a>
     </div>
 </html>

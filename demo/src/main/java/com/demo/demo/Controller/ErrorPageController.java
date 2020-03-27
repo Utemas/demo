@@ -16,4 +16,9 @@ public class ErrorPageController{
     public String NoAuth(){
         return "401";
     }
+
+    @RequestMapping("/500")
+    public String ServiceWrong(){
+        return "401";
+    }
 }

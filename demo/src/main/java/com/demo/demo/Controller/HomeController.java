@@ -15,7 +15,9 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import utill.Contant;
@@ -87,8 +89,8 @@ public class HomeController {
         map.put("adminMail", administrator.getCustomer_email());
         //
         // 查询学生成绩数量
-        int result = customerMapper.theNumberOfClass(customer.getSt_id());
-        map.put("class_count",result);
+        int class_count = customerMapper.theNumberOfClass(customer.getSt_id());
+        map.put("class_count",class_count);
         //
         map.put("student", customer);
         map.put("baseinformation", personInformation);
@@ -108,14 +110,51 @@ public class HomeController {
         }
         map.put("xueFenTotal",xueFenTotal);
         //
+
+        //计算优秀率85分以上占比
+        String youxiulv;
+        double youxiubi;
+
+        int youxiuNumber = customerMapper.youxiuNumber(customer.getSt_id());
+        youxiubi = (double)youxiuNumber/(double)class_count;
+        youxiubi = youxiubi * 100;
+        youxiulv =Double.toString(youxiubi) + "%";
+        map.put("youxiulv",youxiulv);
+        //
         System.out.println(xueFenTotal);
         return "student/total";
     }
 
-    @RequestMapping("/writing")
-    public String writing(HashMap<String, Object> map){
+    @RequestMapping("/trouble")
+    public String writing(@RequestParam(value = "type", required = false, defaultValue = "1") int type,HashMap<String, Object> map){
         map.put("programeName",Contant.ProgrameName);
-        return "customer/writing";
+        if(type == 1){
+            map.put("reason","登录问题");
+            map.put("lastPage","登录");
+        }else if(type == 2){
+            map.put("reason","个人基本信息问题");
+            map.put("lastPage","个人详情页");
+        }
+        return "/trouble";
+    }
+
+    //反馈提交方法
+    @ResponseBody
+    @RequestMapping("/saveTrouble")
+    public String saveTrouble(String title,String text){
+        Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
+        String message = "反馈失败，请重新提交"; 
+        int result = 0;
+        if(customer == null){
+            result = customerMapper.addTrouble(title, text, "出现登录问题者");    
+        }else{
+            result = customerMapper.addTrouble(title, text, customer.getSt_id());    
+        }
+        
+        if(result == 1){
+            message = "反馈成功，反馈信息请等待管理员进行处理";
+        }
+        return message;
     }
 
 }
