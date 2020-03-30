@@ -42,5 +42,11 @@ public interface CustomerMapper {
     @Insert("insert into project1_trouble(trouble_title,trouble_text,st_id, trouble_stat) values(#{trouble_title},#{trouble_text},#{st_id},'yes') ")
     public int addTrouble(@Param("trouble_title") String title, @Param("trouble_text") String text, @Param("st_id") String st_id);
 
+    //查询所有学籍学生
+    @Select("select * from v_cu where customer_identify = 'st'")
+    public List<Customer> findAllStudent();
 
+    //按照学号查询学生
+    @Select("select * from v_cu where customer_identify='st' and st_id=#{st_id}")
+    public List<Customer> finStudentById(@Param("st_id") String st_id);
 }

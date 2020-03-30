@@ -1,6 +1,4 @@
 $(function () {
-    var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
-    var pieChart = new Chart(pieChartCanvas);
     $("#baseinformation").click(function(){
         $("#informationTable").removeClass("hidden");
         $("#baseinformation").addClass("active");
@@ -23,6 +21,16 @@ $(function () {
     $("#classinformation").click(function(){
         $("#class_info").removeClass("hidden");
         $("#informationTable").addClass("hidden");
+    });
+
+    $("#initialPage").click(function(){
+        alert("别点击爷了");
+        $("#initialPage").addClass("active");
+        $("#xuejiInput").removeClass("active");
+    });
+
+    $("#xuejiInput").click(function(){
+        $("#xuejiInput").addClass("active");
     });
 
     

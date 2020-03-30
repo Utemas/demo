@@ -42,6 +42,10 @@ public class ShiroConfig{
 
         filterMap.put("/user/information","authc");
         filterMap.put("/updateInformation","authc");
+
+        filterMap.put("/admin","perms[ad]");
+        filterMap.put("/admin/*","perms[ad]");
+        //
         filterMap.put("/student/*","perms[st]");
         filterMap.put("/student","perms[st]");
 

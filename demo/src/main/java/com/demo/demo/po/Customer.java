@@ -25,4 +25,7 @@ public class Customer{
     private String customer_password;
     private String id_number;
     private String customer_face;
+    private String customer_name;
+    private String st_status;
+    private String st_status_stiker;
 }

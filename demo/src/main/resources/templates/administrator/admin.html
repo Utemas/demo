@@ -1,11 +1,227 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>管理员界面</title>
-        
-    </head>
-    <body>
-        
-    </body>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>欢迎登录学籍管理系统</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="../assets/css/form/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="../assets/css/form/AdminLTE.min.css">
+  <link rel="stylesheet" href="../assets/css/form/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="../assets/css/form/_all-skins.min.css">
+  <link rel="stylesheet" href="../assets/css/form/blue.css">
+  <link rel="stylesheet" href="../assets/css/page/total.css">
+  <link rel="stylesheet" href="../assets/css/page/admin.css">
+</head>
+<body class="hold-transition skin-blue layout-boxed sidebar-mini">
+  <div class="wrapper">
+    <header class="main-header">
+      <!-- Logo -->
+      <a href="/introduction" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>学籍管理系统</b></span>
+      </a>
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="../assets/img/customer/1620010518.jpg" class="user-image" alt="User Image">
+                <span class="hidden-xs">Alexander Pierce</span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img src="../assets/img/customer/1620010518.jpg" class="img-circle" alt="User Image">
+                  <p>
+                    Alexander Pierce
+                  </p>
+                  <small>Member since Nov. 2012</small>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  </div>
+                  <div class="pull-right">
+                    <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <aside class="main-sidebar">
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <img src="../assets/img/customer/1620010518.jpg" class="img-circle" alt="User Image">
+          </div>
+          <div class="pull-left info">
+            <p>Alexander Pierce</p>
+            <a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> Online</a>
+          </div>
+        </div>
+        <!-- search form -->
+        <div class="sidebar-form">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                  <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                  </button>
+                </span>
+          </div>
+        </div>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+          <li class="header">MAIN NAVIGATION</li>
+          <li class="treeview active">
+            <a href="javascript:void(0);">
+              <i class="fa fa-dashboard"></i> <span>学籍信息管理</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+              <ul class="treeview-menu">
+                <li id="initialPage" class="active"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>学籍信息导入</a></li>
+                <li id="xuejiInput"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>学籍信息导入</a></li>
+                <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>学籍信息统计</a></li>
+              </ul>
+            </a>
+          </li>
+          <li class="treeview">
+            <a href="javascript:void(0);">
+              <i class="fa fa-files-o"></i>
+              <span>成绩信息管理</span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>成绩信息导入</a></li>
+              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>成绩信息管理</a></li>
+            </ul>
+          </li>
+          <li class="treeview">
+            <a href="javascript:void(0);">
+              <i class="fa fa-files-o"></i>
+              <span>活动信息审核</span>
+              <span class="pull-right-container">
+                <span class="label label-primary pull-right">4</span>
+              </span>
+            </a>
+          </li>
+          <li class="treeview">
+            <a href="javascript:void(0);">
+              <i class="fa fa-files-o"></i>
+              <span>账号信息维护</span>
+            </a>
+          </li>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header" id="ba">
+        <h1>
+          <span id="ei">学籍信息管理</span>
+          <small>管理与查看学生学籍信息</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="/login">登录</a></li>
+          <li><a href="#"><i class="fa fa-dashboard"></i>学籍信息管理</a></li>
+        </ol>
+      </section>
+      <section class="content-header hidden" id="xj">
+        <h1>
+          个人联系名片
+          <small>此信息主要为学校提供联系方式</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="/login">登录</a></li>
+          <li><a href="#"><i class="fa fa-dashboard"></i>个人联系名片</a></li>
+        </ol>
+      </section>
+      <div class="content">
+        <!--     往这里添加 主要内容-->
+        <div id="xuejiSearch">
+          <form class="input-group" action="/findStudentById" method="Get">
+            <input type="text" name="st_id" class="form-control" placeholder="请输入学生学号，点击搜索按钮" id="Search_student">
+                <span class="input-group-btn">
+                  <button type="submit" id="search_btn2" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                </span>
+          </form>
+          <!--这里想添加一下分页组件-->
+          <div class="box-body" id="main1">
+            <table id="example2" class="table table-bordered table-hover">
+              <thead>
+              <tr>
+                <th>学生学号</th>
+                <th>学生姓名</th>
+                <th>学生入学时间</th>
+                <th>学籍状态</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr th:each="student:${clist}">
+                  <td th:text="${student.st_id}" class="center"></td>
+                  <td th:text="${student.customer_name}"></td>
+                  <td th:text="${student.st_entertime}"></td>
+                  <td th:text="${student.st_status}"  th:style="'color:' + ${student.st_status_stiker}"></td>
+                  <td>
+                    <a th:href="@{'/update?st_id='+${student.st_id}}" class="btn btn-primary">更改</a>
+                    <a th:href="@{'/delete?st_id='+${student.st_id}}" class="btn btn-danger">删除</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+  
+    <footer class="main-footer">
+      <strong><span th:text="${footerinformation}"></span></strong>
+    </footer>
+  </div>
+<!-- ./wrapper -->
+
+<script src="../assets/js/form/jquery-2.2.3.min.js"></script>
+<script src="../assets/js/form/bootstrap.min.js"></script>
+<script src="../assets/js/page/adminT.js"></script>
+<script src="../assets/js/form/jquery.slimscroll.min.js"></script>
+<script src="../assets/js/form/app.min.js"></script>
+<script src="../assets/js/form/datatables/jquery.dataTables.min.js"></script>
+<script src="../assets/js/form/datatables/dataTables.bootstrap.min.js"></script>
+<script src="../assets/js/form/fastclick/fastclick.js"></script>
+<script src="../assets/js/form/demo.js"></script>
+
+<script src="../assets/js/form/chaos.js"></script>
+
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+</body>
 </html>
