@@ -115,6 +115,10 @@ public class HomeController {
         double youxiubi;
 
         int youxiuNumber = customerMapper.youxiuNumber(customer.getSt_id());
+        if(class_count == 0){
+            map.put("youxiulv","0");
+            return "student.total";
+        }
         youxiubi = (double)youxiuNumber/(double)class_count;
         youxiubi = youxiubi * 100;
         youxiulv =Double.toString(youxiubi) + "%";

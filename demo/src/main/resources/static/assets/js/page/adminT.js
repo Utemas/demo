@@ -6,17 +6,34 @@ $(function () {
         $("#initialPage").addClass("active");
         $("#xuejiInput").removeClass("active");
         //页面切换
+        $("#xuejiSearch").removeClass("hidden");
+        $("#xuejiInputPage").addClass("hidden");
 
     });
 
     $("#xuejiInput").click(function(){
+        $("#initialPage").removeClass("active");
         $("#xuejiInput").addClass("active");
+
+        //页面切换
+        $("#xuejiInputPage").removeClass("hidden");
+        $("#xuejiSearch").addClass("hidden");
     });
 
-    // $("#search_btn2").click(function(){
-    //     var st_id = $("#Search_student").val();
-        
-    // });
-
-    
+    $("#example2").on("click","#deleteStudent",function () {
+        if (confirm("要删除数据吗?")) {
+            $.ajax({
+                url: "/delete",
+                type: "post",
+                data: {
+                    st_id:$(this).val()
+                },
+                success: function (msg) {
+                    window.location = "/admin";
+                }
+            });
+        } else {
+            return false;
+        }
+    });
 })

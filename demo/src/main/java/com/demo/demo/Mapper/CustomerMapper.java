@@ -6,6 +6,7 @@ import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Person;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -49,4 +50,30 @@ public interface CustomerMapper {
     //按照学号查询学生
     @Select("select * from v_cu where customer_identify='st' and st_id=#{st_id}")
     public List<Customer> finStudentById(@Param("st_id") String st_id);
+
+    //删除这个学生上过的课程
+    @Delete("delete from project1_class where st_id=#{st_id}")
+    public int deleteClassById(@Param("st_id")String st_id);
+
+    //删除这个学生在系统中的个人信息
+    @Delete("delete from project1_person where id_number=#{id_number}")
+    public int deletePersonById(@Param("id_number")String id_number);
+
+    //删除这个学生的毕业信息
+    @Delete("delete from project1_from where id_number=#{id_number}")
+    public int deleteFromById(@Param("id_number") String id_number);
+
+    //删除这个学生的活动信息
+    @Delete("delete from project1_from where st_id=#{st_id}")
+    public int deleteActivityById(@Param("st_id") String st_id);
+
+    //删除掉这个生的customer表
+    @Delete("delete from project1_customer where id_number=#{id_number}")
+    public int deleteCustomerById(@Param("id_number") String id_numbere);
+
+    @Delete("delete from project1_st where st_id = #{st_id}")
+	public int deleteStudentById(@Param("st_id") String st_id);
+
+    @Delete("delete from project1_trouble where st_id = #{st_id}")
+	public int delteeTrouble(String st_id);
 }
