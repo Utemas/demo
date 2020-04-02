@@ -56,6 +56,10 @@ public interface CustomerMapper {
     @Select("select * from project1_urgent where st_id=#{st_id}")
     public List<Urgent> getUrgents(@Param("st_id") String st_id);
 
+    //查询这个学生所有的课程信息
+    @Select("select * from project1_class where st_id=#{st_id}")
+	public List<ClassInfo> getALLClass(String st_id);
+
     //插入Section
     //插入问题反馈信息
     @Insert("insert into project1_trouble(trouble_title,trouble_text,st_id, trouble_stat) values(#{trouble_title},#{trouble_text},#{st_id},'yes') ")
@@ -87,4 +91,5 @@ public interface CustomerMapper {
 
     @Delete("delete from project1_trouble where st_id = #{st_id}")
 	public int delteeTrouble(String st_id);
+
 }

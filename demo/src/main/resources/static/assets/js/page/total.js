@@ -19,10 +19,29 @@ $(function () {
     });
 
     $("#classinformation").click(function(){
-        $("#class_info").removeClass("hidden");
-        $("#informationTable").addClass("hidden");
-        $("#studentTable").addClass("hidden");
-        $("#classinformation").addClass("active");
+        var chaxunYear = $("#selectYear option:selected").val();
+
+        $("#classes").html("");
+        $.ajax({
+            url: "/changeYear",
+            type: "post",
+            dataType: "json",
+            data:{
+                year: chaxunYear
+            },
+　　　　　　 success: function(clist){
+                $("#class_info").removeClass("hidden");
+                $("#informationTable").addClass("hidden");
+                $("#studentTable").addClass("hidden");
+                $("#classinformation").addClass("active");
+                if($.isEmptyObject(clist) ){
+                    $("#classes").html("");
+                    return false;
+                }
+                print(clist);
+            }
+        });
+        
     });
 
     $("#xuejiInput").click(function(){
@@ -34,6 +53,7 @@ $(function () {
     });
 
     $("#selectYear").change(function(){
+        $("#classes").html("");
         var year = $(this).children('option:selected').val();
         $.ajax({
             url: "/changeYear",

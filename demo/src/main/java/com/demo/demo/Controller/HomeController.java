@@ -1,6 +1,5 @@
 package com.demo.demo.Controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import utill.Contant;
 import utill.Utill;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 
 @Controller
 public class HomeController {
@@ -106,14 +107,14 @@ public class HomeController {
         List<String> enterYears = Utill.yearsInSchool(enterYear);
         map.put("enterYears",enterYears);
         //
-        //查询学生成绩信息
-        List<ClassInfo> clist = customerMapper.getClassInformation(customer.getSt_id(),customer.getSt_entertime().substring(0, 4));
-        map.put("clist",clist);
-
+    
         //查询学生的紧急联系人
         List<Urgent> uList = customerMapper.getUrgents(customer.getSt_id());
         map.put("ulist", uList);
         //
+
+        //查询这个学生的所有课程
+        List<ClassInfo> clist = customerMapper.getALLClass(customer.getSt_id());
         //计算这个同学的总学分是多少
         int xueFenTotal = 0;
         for(ClassInfo stu : clist){
@@ -171,7 +172,7 @@ public class HomeController {
         }
         
         if(result == 1){
-            message = "反馈成功，反馈信息请等待管理员进行处理";
+            message = "反馈成功，反馈信息请等待管理员进行处理...";
         }
         return message;
     }
