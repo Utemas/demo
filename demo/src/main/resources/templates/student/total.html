@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../assets/css/form/_all-skins.min.css">
   <link rel="stylesheet" href="../assets/css/form/blue.css">
   <link rel="stylesheet" href="../assets/css/page/total.css">
+  <link rel="stylesheet" href="../assets/css/comon.css">
 </head>
 <body class="hold-transition skin-blue layout-boxed sidebar-mini">
   <div class="wrapper">
@@ -95,7 +96,7 @@
             </a>
             <ul class="treeview-menu">
               <li class="active" id="baseinformation"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>个人基本信息</a></li>
-              <li id="studentinformation"><a href="javascript:void(0)"><i class="fa fa-circle-o"></i>个人联系名片</a></li>
+              <li id="studentinformation"><a href="javascript:void(0)"><i class="fa fa-circle-o"></i>个人名片</a></li>
               <li id=""><a href="javascript:void(0)"><i class="fa fa-circle-o"></i>个人学籍信息</a></li>
             </ul>
           </li>
@@ -108,7 +109,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="javascript:void(0);" id="classinformation"><i class="fa fa-circle-o"></i>成绩信息</a></li>
+              <li id="classinformation"><a href="javascript:void(0);" ><i class="fa fa-circle-o"></i>成绩信息</a></li>
               <li><a href="javascript:void(0);" id="classTotal"><i class="fa fa-circle-o"></i>成绩统计</a></li>
             </ul>
           </li>
@@ -148,12 +149,12 @@
       </section>
       <section class="content-header hidden" id="xj">
         <h1>
-          个人联系名片
+          个人名片
           <small>此信息主要为学校提供联系方式</small>
         </h1>
         <ol class="breadcrumb">
           <li><a href="/login">登录</a></li>
-          <li><a href="#"><i class="fa fa-dashboard"></i>个人联系名片</a></li>
+          <li><a href="#"><i class="fa fa-dashboard"></i>个人名片</a></li>
         </ol>
       </section>
       <div class="content">
@@ -204,55 +205,72 @@
             <td colspan="3" th:text="${address}"></td>
           </tr>
         </table>
-        <table border="1" cellspacing="0" cellpadding="0" id="studentTable" class="hidden">
-          <tr style="color:white;background-color: #3c8dbc; height: 10px;">
-            <td colspan="4" th:text="个人联系信息表"></td>
-          </tr>
-          <!-- row  1-->
-          <tr>
-            <td class="title"><p></p></td>
-            <td><p th:text="${baseinformation.sex}"></td>
-            <td class="title"><p>国籍</p></td>
-            <td>
-              <p th:text="${baseinformation.country}"></p>
-            </td>
-          </tr>
-          <!-- row 4-->
-          <tr>
-            <td class="title"><p>证件类型</p></td>
-            <td><p th:text="${baseinformation.card_type}"></td>
-            <td class="title"><p>联系电话</p></td>
-            <td th:text="${baseinformation.nation}"></td>
-          </tr>
-          <tr>
-            <td class="title"><p>电子邮箱</p></td>
-            <td><p th:text="${baseinformation.id_number}"></p></td>
-            <td class="title"><p>邮政编码</p></td>
-            <td><p th:text="${birthday}"></td>
-          </tr>
-          <!--row 5-->
-          <tr style="height:40px">
-            <td class="title"><p>乘车区间</p></td>
-            <td colspan="3" th:text="${address}"></td>
-          </tr>
-        </table>
-        <table border="1" cellspacing="0" cellpadding="0" id="class_info" class="hidden">
-          <thead>
-            <tr>
-              <th>课程号</th><th>课程名称</th><th>讲授教师</th><th>成绩</th><th>学分</th>
+        <div id="studentTable" class="hidden">
+          <table border="1" cellspacing="0" cellpadding="0">
+            <tr style="color:white;background-color: #3c8dbc; height: 10px;">
+              <td colspan="4">个人联系信息表<button style="margin-left: 20px;" id="changeTheContact" class="btn btn-warning">更改</button></td>
             </tr>
-          </thead>
-          <tbody>
-             <tr th:each="classinfo:${clist}">
-               <td th:text="${classinfo.class_id}"></td>
-               <td th:text="${classinfo.class_name}"></td>
-               <td th:text="${classinfo.class_teacher}"></td>
-               <td th:text="${classinfo.class_score}"></td>
-               <td th:text="${classinfo.class_xuefen}"></td>
-             </tr>
-          </tbody>
-        </table>
-        <table border="1" cellspacing="0" cellpadding="0" id="class_total">
+            <!-- row  1-->
+            <tr>
+              <td class="title"><p>籍贯</p></td>
+              <td><p th:text="${student.customer_jiguan}"></td>
+              <td class="title"><p>联系电话</p></td>
+              <td th:text="${student.customer_tel}"></td>
+            </tr>
+            <tr>
+              <td class="title"><p>电子邮箱</p></td>
+              <td><p th:text="${student.customer_email}"></p></td>
+              <td class="title"><p>邮政编码</p></td>
+              <td><p th:text="${student.customer_youzheng}"></td>
+            </tr>
+            <!--row 5-->
+            <tr style="height:40px">
+              <td class="title"><p>乘车区间</p></td>
+              <td colspan="3" th:text="${qujian}"></td>
+            </tr>
+          </table>
+          <table border="1" cellspacing="0" cellpadding="0">
+            <tr style="color:white;background-color: #3c8dbc; height: 10px;">
+              <td colspan="4" th:text="监护人紧急联系表"></td>
+            </tr>
+            <tr>
+              <td>姓名</td><td>与本人关系</td><td>联系电话</td><td>操作</td>
+            </tr>
+            <tr th:each="urgent:${ulist}">
+              <td th:text="${urgent.urgent_name}"></td><td th:text="${urgent.urgent_guanxi}"></td><td th:text="${urgent.urgent_tel}"></td>
+              <td>
+                <button class="btn btn-primary">更新</button>
+                <button class="btn btn-danger">删除</button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" style="padding: 0px;"><button class="btn btn-primary" style="width:100%;">+</button></td>
+            </tr>
+            <!-- row 4-->
+          </table>
+        </div>
+        <div id="class_info" class="hidden">
+          <div class="rightleft">
+            <div></div>
+            <div>年份:
+              <select style="width: 100px;margin-left: 10px;" id="selectYear">
+                <option th:each="year:${enterYears}" th:text="${year}" th:value="${year}"></option>
+              </select>
+            </div>
+          </div>
+          <table border="1" cellspacing="0" cellpadding="0" id="ClassInfo">
+            <thead>
+              <tr>
+                <th>课程号</th><th>课程名称</th><th>讲授教师</th><th>成绩</th><th>学分</th>
+              </tr>
+            </thead>
+            <tbody id="classes">
+               
+            </tbody>
+          </table>
+        </div>
+        
+        <table border="1" cellspacing="0" cellpadding="0" id="class_total" class="hidden">
           <tr>
             <td>总学分</td><td><p th:text="${xueFenTotal}"></p></td>
             <td>优秀率</td><td><p th:text="${youxiulv}"></p></td>
@@ -261,7 +279,7 @@
         <table border="1" cellspacing="0" cellpadding="0" id="activity_information" class="hidden">
 
         </table>
-        <table border="1" cellspacing="0" cellpadding="0" id="activity_up" class="hidden">
+        <table border="1" cellspacing="0" cellpadding="0" id="activity_add" class="hidden">
         </table>
         <table border="1" cellspacing="0" cellpadding="0" id="account" class="hidden">
         </table>
@@ -275,13 +293,71 @@
     </footer>
   </div>
 <!-- ./wrapper -->
-
+<div class="modal fade" id="ContactFormModal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title">更改联系方式</h4>
+          </div>
+          <form id="form1" class="form-horizontal" method="post" enctype="multipart/form-data">
+              <div class="modal-body">
+                  <div class="form-group">
+                      <label for="newJiguan" class="col-sm-2 control-label">籍贯</label>
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" id="newJiguan" th:value="${student.customer_jiguan}"/>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="newTel" class="col-sm-2 control-label">联系电话</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="newTel" th:value="${student.customer_tel}"/>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="newEmail" class="col-sm-2 control-label">电子邮箱</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="newEmail" th:value="${student.customer_email}"/>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="newYouzheng" class="col-sm-2 control-label">邮政编码</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="newYouzheng" th:value="${student.customer_youzheng}"/>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="start_station" class="col-sm-2 control-label">乘车区间<br/>(初始地)</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="start_station" th:value="${student.customer_start_station}"/>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="end_station" class="col-sm-2 control-label">乘车区间<br/>(终点地)</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="end_station" th:value="${student.customer_end_station}"/>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <input type="hidden" id="PPid" name="PPid"/>
+                  <button class="btn btn-primary">更改</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              </div>
+          </form>
+      </div>
+      <!-- /.modal-content -->
+  </div>
+</div>
 <script src="../assets/js/form/jquery-2.2.3.min.js"></script>
 <script src="../assets/js/form/bootstrap.min.js"></script>
 <script src="../assets/js/form/Chart.min.js"></script>
 <script src="../assets/js/form/jquery.slimscroll.min.js"></script>
 <script src="../assets/js/form/app.min.js"></script>
 <script src="../assets/js/form/demo.js"></script>
+<script src="../assets/js/common.js"></script>
 <script src="../assets/js/page/total.js"></script>
 <script src="../assets/js/form/chaos.js"></script>
 </body>

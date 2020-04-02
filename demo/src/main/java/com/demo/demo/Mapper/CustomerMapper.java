@@ -5,6 +5,7 @@ import java.util.List;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Person;
+import com.demo.demo.po.Urgent;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -15,6 +16,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface CustomerMapper {
 
+    //查询Section
     //查找用户个人信息
     @Select("select * from v_cu where st_id=#{id} and customer_identify=#{identify}")
     public Customer getCustomerByStid(@Param("identify") String identfy, @Param("id") String st_id);
@@ -32,16 +34,15 @@ public interface CustomerMapper {
     //
 
     //查询课程信息
-    @Select("select * from project1_class where st_id=#{st_id}")
-    public List<ClassInfo> getClassInformation(@Param("st_id") String st_id);
+    @Select("select * from project1_class where st_id=#{st_id} and class_year=#{class_year}")
+    public List<ClassInfo> getClassInformation(@Param("st_id") String st_id,@Param("class_year") String class_year);
     
     //查询大于85分的成绩数量
     @Select("select count(*) from project1_class where class_score >= 80 and st_id = #{st_id}")
     public int youxiuNumber(@Param("st_id") String st_id);
 
-    //插入问题反馈信息
-    @Insert("insert into project1_trouble(trouble_title,trouble_text,st_id, trouble_stat) values(#{trouble_title},#{trouble_text},#{st_id},'yes') ")
-    public int addTrouble(@Param("trouble_title") String title, @Param("trouble_text") String text, @Param("st_id") String st_id);
+    
+    
 
     //查询所有学籍学生
     @Select("select * from v_cu where customer_identify = 'st'")
@@ -51,6 +52,16 @@ public interface CustomerMapper {
     @Select("select * from v_cu where customer_identify='st' and st_id=#{st_id}")
     public List<Customer> finStudentById(@Param("st_id") String st_id);
 
+    //查询这个学生的紧急联系人
+    @Select("select * from project1_urgent where st_id=#{st_id}")
+    public List<Urgent> getUrgents(@Param("st_id") String st_id);
+
+    //插入Section
+    //插入问题反馈信息
+    @Insert("insert into project1_trouble(trouble_title,trouble_text,st_id, trouble_stat) values(#{trouble_title},#{trouble_text},#{st_id},'yes') ")
+    public int addTrouble(@Param("trouble_title") String title, @Param("trouble_text") String text, @Param("st_id") String st_id);
+
+    //删除Section
     //删除这个学生上过的课程
     @Delete("delete from project1_class where st_id=#{st_id}")
     public int deleteClassById(@Param("st_id")String st_id);

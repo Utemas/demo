@@ -3,8 +3,10 @@ package utill;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 import com.demo.demo.po.Person;
 import com.itextpdf.text.Document;
@@ -131,5 +133,22 @@ public final class Utill {
         } finally {
             document.close();
         }
+    }
+
+    //获取学生在学校的年份
+    public static List<String> yearsInSchool(int enterYear){
+        String[] arr = new String[5];
+        arr[0] = String.valueOf(enterYear);
+        arr[1] = String.valueOf(enterYear + 1);
+        arr[2] = String.valueOf(enterYear + 2);
+        arr[3] = String.valueOf(enterYear + 3);
+        arr[4] = String.valueOf(enterYear + 4);
+        List<String> enterYears =new ArrayList<>();
+        enterYears.add(arr[0]);
+        enterYears.add(arr[1]);
+        enterYears.add(arr[2]);
+        enterYears.add(arr[3]);
+        enterYears.add(arr[4]);
+        return enterYears;
     }
 }

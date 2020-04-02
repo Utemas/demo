@@ -38,7 +38,7 @@ public class AdminController {
     }
 
     @RequestMapping("/update")
-    public String updateStudent(@RequestParam(value = "st_id", required = false, defaultValue = "1") String st_id,HashMap<String, Object> map){
+    public String updateStudentPage(@RequestParam(value = "st_id", required = false, defaultValue = "1") String st_id,HashMap<String, Object> map){
         
         return "administrator/student";
     }
@@ -70,9 +70,5 @@ public class AdminController {
         map.put("footerinformation","高级搜索可以更精确地搜索到学生");
         return "administrator/admin";
     }
-
-    @RequestMapping("/upload")
-    public String upload(){
-        return null;
-    }
+    
 }

@@ -1,5 +1,6 @@
 package com.demo.demo.Controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Person;
+import com.demo.demo.po.Urgent;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -98,9 +100,19 @@ public class HomeController {
         map.put("birthday", birth);
         map.put("address", Utill.getAddress(personInformation));
         //
+
+        //获取学生的在学校的年份
+        int enterYear = Integer.parseInt(customer.getSt_entertime().substring(0, 4));
+        List<String> enterYears = Utill.yearsInSchool(enterYear);
+        map.put("enterYears",enterYears);
+        //
         //查询学生成绩信息
-        List<ClassInfo> clist = customerMapper.getClassInformation(customer.getSt_id());
+        List<ClassInfo> clist = customerMapper.getClassInformation(customer.getSt_id(),customer.getSt_entertime().substring(0, 4));
         map.put("clist",clist);
+
+        //查询学生的紧急联系人
+        List<Urgent> uList = customerMapper.getUrgents(customer.getSt_id());
+        map.put("ulist", uList);
         //
         //计算这个同学的总学分是多少
         int xueFenTotal = 0;
@@ -117,14 +129,18 @@ public class HomeController {
         int youxiuNumber = customerMapper.youxiuNumber(customer.getSt_id());
         if(class_count == 0){
             map.put("youxiulv","0");
-            return "student.total";
+            return "student/total";
         }
         youxiubi = (double)youxiuNumber/(double)class_count;
         youxiubi = youxiubi * 100;
         youxiulv =Double.toString(youxiubi) + "%";
         map.put("youxiulv",youxiulv);
-        //
-        System.out.println(xueFenTotal);
+
+        //乘车区间拼接结果
+        String re = customer.getCustomer_start_station() + " " + "至" + " "+customer.getCustomer_end_station();
+        map.put("qujian",re);
+
+        map.put("nclist",null);
         return "student/total";
     }
 
@@ -158,6 +174,14 @@ public class HomeController {
             message = "反馈成功，反馈信息请等待管理员进行处理";
         }
         return message;
+    }
+
+    @ResponseBody
+    @RequestMapping("/changeYear")
+    public List<ClassInfo> changeYear(String year) {
+        Customer student = (Customer) SecurityUtils.getSubject().getPrincipal();
+        List<ClassInfo> clist = customerMapper.getClassInformation(student.getSt_id(), year);
+        return clist;
     }
 
 }
