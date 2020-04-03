@@ -16,11 +16,19 @@ $(function () {
         $("#class_info").addClass("hidden");
         $("#ba").addClass("hidden");
         $("#xj").removeClass("hidden");
+        $.ajax({
+            url: "/selectContextInfo",
+            type: "post",
+            success:function(cinfo){
+                $("#jg").text(cinfo['customer_jiguan']);
+                $("#customer_jiguan").val(cinfo['customer_jiguan'])
+                $("#studentTable").removeClass("hidden");
+            }
+        });
     });
 
     $("#classinformation").click(function(){
         var chaxunYear = $("#selectYear option:selected").val();
-
         $("#classes").html("");
         $.ajax({
             url: "/changeYear",
@@ -73,6 +81,24 @@ $(function () {
         });
 
     });
+
+    //更新个人联系名片
+    $("#updateContext").click(function(){
+        var jg = $("#customer_jiguan").val();
+        $.ajax({
+            url:"/updateContextInfo",
+            type:"POST",
+            data:{
+                ji_guan : jg
+            },
+            dataType: "json",
+            success:function(cinfo){
+                $("#jg").text(cinfo['customer_jiguan']);
+                $('#myModal').modal("hide");
+            }
+        })
+    });
+
 
     
 })

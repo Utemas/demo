@@ -211,9 +211,9 @@
               <td colspan="4">个人联系信息表<button style="margin-left: 20px;" id="changeTheContact" class="btn btn-warning">更改</button></td>
             </tr>
             <!-- row  1-->
-            <tr>
+            <tr id="contextInfo">
               <td class="title"><p>籍贯</p></td>
-              <td><p th:text="${student.customer_jiguan}"></td>
+              <td><p id="jg"></td>
               <td class="title"><p>联系电话</p></td>
               <td th:text="${student.customer_tel}"></td>
             </tr>
@@ -302,51 +302,50 @@
               </button>
               <h4 class="modal-title">更改联系方式</h4>
           </div>
-          <form id="form1" class="form-horizontal" method="post" enctype="multipart/form-data">
+          <div id="form1" class="form-horizontal">
               <div class="modal-body">
                   <div class="form-group">
                       <label for="newJiguan" class="col-sm-2 control-label">籍贯</label>
                       <div class="col-sm-9">
-                          <input type="text" class="form-control" id="newJiguan" th:value="${student.customer_jiguan}"/>
+                          <input type="text" class="form-control" id="customer_jiguan"/>
                       </div>
                   </div>
                   <div class="form-group">
                       <label for="newTel" class="col-sm-2 control-label">联系电话</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="newTel" th:value="${student.customer_tel}"/>
+                        <input type="text" class="form-control" id="customer_tel" th:value="${student.customer_tel}"/>
                       </div>
                   </div>
                   <div class="form-group">
                       <label for="newEmail" class="col-sm-2 control-label">电子邮箱</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="newEmail" th:value="${student.customer_email}"/>
+                        <input type="text" class="form-control" id="customer_email" th:value="${student.customer_email}"/>
                       </div>
                   </div>
                   <div class="form-group">
                       <label for="newYouzheng" class="col-sm-2 control-label">邮政编码</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="newYouzheng" th:value="${student.customer_youzheng}"/>
+                        <input type="text" class="form-control" id="customer_youzheng" th:value="${student.customer_youzheng}"/>
                       </div>
                   </div>
                   <div class="form-group">
                       <label for="start_station" class="col-sm-2 control-label">乘车区间<br/>(初始地)</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="start_station" th:value="${student.customer_start_station}"/>
+                        <input type="text" class="form-control" id="customer_start_station" th:value="${student.customer_start_station}"/>
                       </div>
                   </div>
                   <div class="form-group">
                       <label for="end_station" class="col-sm-2 control-label">乘车区间<br/>(终点地)</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="end_station" th:value="${student.customer_end_station}"/>
+                        <input type="text" class="form-control" id="customer_end_station" th:value="${student.customer_end_station}"/>
                       </div>
                   </div>
               </div>
               <div class="modal-footer">
-                  <input type="hidden" id="PPid" name="PPid"/>
-                  <button class="btn btn-primary">更改</button>
+                  <button class="btn btn-primary" id="updateContext">更改</a>
                   <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
               </div>
-          </form>
+            </div>
       </div>
       <!-- /.modal-content -->
   </div>

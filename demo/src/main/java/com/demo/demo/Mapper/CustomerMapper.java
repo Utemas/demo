@@ -3,6 +3,7 @@ package com.demo.demo.Mapper;
 import java.util.List;
 
 import com.demo.demo.po.ClassInfo;
+import com.demo.demo.po.ContextInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Person;
 import com.demo.demo.po.Urgent;
@@ -12,6 +13,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface CustomerMapper {
@@ -58,7 +60,11 @@ public interface CustomerMapper {
 
     //查询这个学生所有的课程信息
     @Select("select * from project1_class where st_id=#{st_id}")
-	public List<ClassInfo> getALLClass(String st_id);
+    public List<ClassInfo> getALLClass(String st_id);
+    
+    //查询学生的个人名片
+    @Select("select customer_jiguan, customer_tel,customer_email,customer_youzheng,customer_start_station,customer_end_station from v_cu where id_number=#{id_number}")
+    public ContextInfo selectContextInfo(@Param("id_number")String id_number);
 
     //插入Section
     //插入问题反馈信息
@@ -90,6 +96,11 @@ public interface CustomerMapper {
 	public int deleteStudentById(@Param("st_id") String st_id);
 
     @Delete("delete from project1_trouble where st_id = #{st_id}")
-	public int delteeTrouble(String st_id);
+    public int delteeTrouble(String st_id);
+    
+
+    //@Update 部分
+    @Update("update project1_customer set customer_jiguan=#{customer_jiguan} where id_number=#{id_number}")
+    public int updateContextInfo(@Param("customer_jiguan") String customer_jiguan,@Param("id_number")String id_number);
 
 }

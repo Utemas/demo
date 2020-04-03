@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import utill.Contant;
 import utill.Utill;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
@@ -175,14 +174,6 @@ public class HomeController {
             message = "反馈成功，反馈信息请等待管理员进行处理...";
         }
         return message;
-    }
-
-    @ResponseBody
-    @RequestMapping("/changeYear")
-    public List<ClassInfo> changeYear(String year) {
-        Customer student = (Customer) SecurityUtils.getSubject().getPrincipal();
-        List<ClassInfo> clist = customerMapper.getClassInformation(student.getSt_id(), year);
-        return clist;
     }
 
 }

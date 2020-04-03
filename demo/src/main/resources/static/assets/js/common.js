@@ -8,4 +8,5 @@ function print(result){
         $("#classes").append("<tr><td>"+obj['class_id']+"</td><td>"+obj['class_name']+"</td><td>"+obj['class_teacher']+"</td><td>"+obj['class_score']+"</td><td>"+obj['class_xuefen']+"</td>/tr>");
     })
 }
+
     
