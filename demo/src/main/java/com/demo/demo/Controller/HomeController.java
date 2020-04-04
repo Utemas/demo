@@ -1,6 +1,5 @@
 package com.demo.demo.Controller;
 
-import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,7 +44,6 @@ public class HomeController {
     @RequestMapping("/checklogin")
     public String checklogin(HashMap<String, Object> map, String userCode, String password) {
         // 获取subject
-        System.out.println(userCode + password);
         Subject subject = SecurityUtils.getSubject();
         // 2.封装用户数据
         UsernamePasswordToken token = new UsernamePasswordToken(userCode, password);

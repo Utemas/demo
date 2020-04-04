@@ -47,12 +47,12 @@ public interface CustomerMapper {
     @Select("select count(*) from project1_class where class_score >= 80 and st_id = #{st_id}")
     public int youxiuNumber(@Param("st_id") String st_id);
     //查询所有学籍学生
-    @Select("select * from v_cu where customer_identify = 'st'")
-    public List<Customer> findAllStudent();
+    @Select("select * from project1_login where login_identify = 'st'")
+    public List<Loginer> findAllStudent();
 
     //按照学号查询学生
-    @Select("select * from v_cu where customer_identify='st' and st_id=#{st_id}")
-    public List<Customer> finStudentById(@Param("st_id") String st_id);
+    @Select("select * from project1_login where login_identify='st' and st_id=#{st_id}")
+    public List<Loginer> finStudentById(@Param("st_id") String st_id);
 
     //查询这个学生的紧急联系人
     @Select("select * from project1_urgent where st_id=#{st_id}")
@@ -99,6 +99,7 @@ public interface CustomerMapper {
     public int delteeTrouble(String st_id);
     
 
+
     //@Update 部分
     //更新籍贯
     @Update("update project1_customer set customer_jiguan=#{customer_jiguan} where id_number=#{id_number}")
@@ -122,6 +123,7 @@ public interface CustomerMapper {
 
     @Update("update project1_customer set customer_end_station = #{end} where id_number=#{id_number}")
 	public int updateEndStation(@Param("end")String customer_end_station, @Param("id_number")String id_number);
+	
 	
     
 

@@ -175,9 +175,9 @@
               <tbody>
                 <tr th:each="student:${clist}">
                   <td th:text="${student.st_id}" class="center"></td>
-                  <td th:text="${student.customer_name}"></td>
-                  <td th:text="${student.st_entertime}"></td>
-                  <td th:text="${student.st_status}"  th:style="'color:' + ${student.st_status_stiker}"></td>
+                  <td th:text="${student.st_id}"></td>
+                  <td th:text="${student.st_id}"></td>
+                  <td th:text="${student.st_id}"></td>
                   <td>
                     <a th:href="@{'/update?st_id='+${student.st_id}}" class="btn btn-primary">更改</a>
                     <button class="btn btn-danger" id="deleteStudent" th:value="${student.st_id}">删除</button>

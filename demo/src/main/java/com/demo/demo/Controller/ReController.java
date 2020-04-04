@@ -7,7 +7,6 @@ import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.ContextInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Loginer;
-import com.demo.demo.po.Student;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//@RequestMapping("/student")
  public class ReController {
     
     @Autowired

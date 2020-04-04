@@ -2,7 +2,6 @@
 package com.demo.demo.shiro;
 
 import com.demo.demo.Mapper.CustomerMapper;
-import com.demo.demo.po.Customer;
 import com.demo.demo.po.Loginer;
 
 import org.apache.shiro.SecurityUtils;
