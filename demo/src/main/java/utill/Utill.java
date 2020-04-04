@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -150,5 +151,10 @@ public final class Utill {
         enterYears.add(arr[3]);
         enterYears.add(arr[4]);
         return enterYears;
+    }
+
+    public static String formatTime(String date) {
+        String result = date.substring(0, 11);
+        return result;
     }
 }

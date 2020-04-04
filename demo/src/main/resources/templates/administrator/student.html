@@ -14,8 +14,9 @@
   <link rel="stylesheet" href="../assets/css/form/blue.css">
   <link rel="stylesheet" href="../assets/css/page/total.css">
   <link rel="stylesheet" href="../assets/css/page/admin.css">
+  <script src="../assets/js/common.js"></script>
 </head>
-<body class="hold-transition skin-blue layout-boxed sidebar-mini">
+<body class="hold-transition skin-blue layout-boxed sidebar-mini" onload="hed('个人信息','大晒吧');">
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
@@ -74,77 +75,14 @@
             <a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> Online</a>
           </div>
         </div>
-        <!-- search form -->
-        <div class="sidebar-form">
-          <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                  <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                  </button>
-                </span>
-          </div>
-        </div>
-        <!-- /.search form -->
-        <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu">
-          <li class="header">MAIN NAVIGATION</li>
-          <li class="treeview active">
-            <a href="javascript:void(0);">
-              <i class="fa fa-dashboard"></i> <span>学籍信息管理</span>
-            </a>
-          </li>
-          <li class="treeview">
-            <a href="javascript:void(0);">
-              <i class="fa fa-files-o"></i>
-              <span>成绩信息管理</span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>成绩信息导入</a></li>
-              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>成绩信息统计</a></li>
-            </ul>
-          </li>
-          <li class="treeview">
-            <a href="javascript:void(0);">
-              <i class="fa fa-files-o"></i>
-              <span>活动信息审核</span>
-              <span class="pull-right-container">
-                <span class="label label-primary pull-right">4</span>
-              </span>
-            </a>
-          </li>
-          <li class="treeview">
-            <a href="javascript:void(0);">
-              <i class="fa fa-files-o"></i>
-              <span>账号信息维护</span>
-            </a>
-          </li>
       </section>
       <!-- /.sidebar -->
     </aside>
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
-      <section class="content-header" id="ba">
-        <h1>
-          <span id="ei">学籍信息管理</span>
-          <small>管理与查看学生学籍信息</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="/login">登录</a></li>
-          <li><a href="#"><i class="fa fa-dashboard"></i>学籍信息管理</a></li>
-        </ol>
-      </section>
-      <section class="content-header hidden" id="xj">
-        <h1>
-          个人联系名片
-          <small>此信息主要为学校提供联系方式</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="/login">登录</a></li>
-          <li><a href="#"><i class="fa fa-dashboard"></i>个人联系名片</a></li>
-        </ol>
+      <section class="content-header" id="sec">
       </section>
       <div class="content">
-        <!--     往这里添加 主要内容-->
         <div id="xuejiSearch">
           
         </div>

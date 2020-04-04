@@ -9,4 +9,9 @@ function print(result){
     })
 }
 
+function hed(str1,str2){
+    $("#sec").empty();
+    $("#sec").html("<h1>"+str1+"<small>"+str2+"</small></h1><ol class='breadcrumb'><li><a href='/login'>登录</a></li><li><a href='#'><i class='fa fa-dashboard'></i>"+str1+"</a></li></ol>");
+}
+
     

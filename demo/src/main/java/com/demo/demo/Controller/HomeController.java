@@ -1,12 +1,15 @@
 package com.demo.demo.Controller;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
+import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
+import com.demo.demo.po.Student;
 import com.demo.demo.po.Urgent;
 
 import org.apache.shiro.SecurityUtils;
@@ -33,9 +36,7 @@ public class HomeController {
     // 初始界面
     @RequestMapping("/login")
     public String login(HashMap<String, Object> map) {
-        Customer administrator = customerMapper.getAdministrator();
         map.put("programeName", Contant.ProgrameName);
-        map.put("adminMail", administrator.getCustomer_email());
         return "login";
     }
 
@@ -43,16 +44,14 @@ public class HomeController {
     @ResponseBody
     @RequestMapping("/checklogin")
     public String checklogin(HashMap<String, Object> map, String userCode, String password) {
-
         // 获取subject
+        System.out.println(userCode + password);
         Subject subject = SecurityUtils.getSubject();
         // 2.封装用户数据
         UsernamePasswordToken token = new UsernamePasswordToken(userCode, password);
         // 3.执行登录方法
         try {
             subject.login(token);
-            //
-            map.put("name", "f");
             return "";
             // 登录成功
         } catch (UnknownAccountException e) {
@@ -74,7 +73,7 @@ public class HomeController {
         return "login";
     }
 
-    // 连接系统注册页面
+    // 连接系统介绍页面
     @RequestMapping("/introduction")
     public String introduction() {
         return "introduction";
@@ -83,26 +82,35 @@ public class HomeController {
     // 调转到学生的总页面
     @RequestMapping("/student")
     public String student(HashMap<String, Object> map) {
-        Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
-        Person personInformation = customerMapper.getStudentPeronInformation(customer.getId_number());
-        // 查询学校管理人员的电子邮箱
-        Customer administrator = customerMapper.getAdministrator();
-        map.put("adminMail", administrator.getCustomer_email());
-        //
+        //获取登录对象
+        Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
+        //获取中间连接类
+        Customer customer = customerMapper.getCustomerByStid(loginer.getSt_id());
+        //获取学生学籍信息
+        Student student = customerMapper.getStudentInfo(loginer.getSt_id());
+
+        Person person = customerMapper.getStudentPeronInformation(customer.getId_number());
+        map.put("person",person);
+
+
+       
         // 查询学生成绩数量
-        int class_count = customerMapper.theNumberOfClass(customer.getSt_id());
+        int class_count = customerMapper.theNumberOfClass(loginer.getSt_id());
         map.put("class_count",class_count);
+        map.put("english_name", customer.getCustomer_english_name());
         //
-        map.put("student", customer);
-        map.put("baseinformation", personInformation);
-        String[] birthday = Utill.getBirth(personInformation.getId_number());
+        map.put("student", student);
+
+        //生成生日
+        String[] birthday = Utill.getBirth(customer.getId_number());
         String birth = birthday[0] + "-" + birthday[1] + "-" + birthday[2];
         map.put("birthday", birth);
-        map.put("address", Utill.getAddress(personInformation));
-        //
+        map.put("address", Utill.getAddress(person));
+        
 
         //获取学生的在学校的年份
-        int enterYear = Integer.parseInt(customer.getSt_entertime().substring(0, 4));
+        student.setSt_entertime(Utill.formatTime(student.getSt_entertime()));
+        int enterYear = Integer.parseInt(student.getSt_entertime().substring(0, 4));
         List<String> enterYears = Utill.yearsInSchool(enterYear);
         map.put("enterYears",enterYears);
         //
@@ -135,11 +143,6 @@ public class HomeController {
         youxiubi = youxiubi * 100;
         youxiulv =Double.toString(youxiubi) + "%";
         map.put("youxiulv",youxiulv);
-
-        //乘车区间拼接结果
-        String re = customer.getCustomer_start_station() + " " + "至" + " "+customer.getCustomer_end_station();
-        map.put("qujian",re);
-
         map.put("nclist",null);
         return "student/total";
     }
@@ -155,25 +158,6 @@ public class HomeController {
             map.put("lastPage","个人详情页");
         }
         return "/trouble";
-    }
-
-    //反馈提交方法
-    @ResponseBody
-    @RequestMapping("/saveTrouble")
-    public String saveTrouble(String title,String text){
-        Customer customer = (Customer) SecurityUtils.getSubject().getPrincipal();
-        String message = "反馈失败，请重新提交"; 
-        int result = 0;
-        if(customer == null){
-            result = customerMapper.addTrouble(title, text, "出现登录问题者");    
-        }else{
-            result = customerMapper.addTrouble(title, text, customer.getSt_id());    
-        }
-        
-        if(result == 1){
-            message = "反馈成功，反馈信息请等待管理员进行处理...";
-        }
-        return message;
     }
 
 }

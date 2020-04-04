@@ -5,10 +5,10 @@ import lombok.Setter;
 
 @Getter@Setter
 public class ContextInfo {
-    String customer_jiguan;
-    String customer_tel;
-    String customer_email;
-    String customer_youzheng;
-    String customer_start_station;
-    String customer_end_station;
+    private String customer_jiguan;
+    private String customer_tel;
+    private String customer_email;
+    private String customer_youzheng;
+    private String customer_start_station;
+    private String customer_end_station;
 }

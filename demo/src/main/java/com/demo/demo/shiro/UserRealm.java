@@ -3,6 +3,7 @@ package com.demo.demo.shiro;
 
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.Customer;
+import com.demo.demo.po.Loginer;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -28,15 +29,13 @@ public class UserRealm extends AuthorizingRealm{
 	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		System.out.println("执行授权逻辑");
-		
 		//给资源进行授权
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		//获取当前登录用户
 		Subject subject = SecurityUtils.getSubject();
-		Customer customer = (Customer)subject.getPrincipal();
+		Loginer customer = (Loginer)subject.getPrincipal();
 		//添加资源的授权字符串
-		info.addStringPermission(customer.getCustomer_identify());
+		info.addStringPermission(customer.getLogin_identify());
 		
 
 		return info;
@@ -52,13 +51,13 @@ public class UserRealm extends AuthorizingRealm{
 		String customer_identify = token.getUsername().substring(0, 2);// 用户身份代码
         String customer_id = token.getUsername().substring(2);// 用户id
 		
-		Customer customer = customerMapper.getCustomerByStid(customer_identify, customer_id);
+		Loginer customer = customerMapper.toLogin(customer_identify,customer_id);
 		if(customer == null){
 			//用户名不存在
 			return null;//Shiro底层会抛出UnknownAccountException
 		}
 		//2.判断密码
-		return new SimpleAuthenticationInfo(customer,customer.getCustomer_password(),"");
+		return new SimpleAuthenticationInfo(customer,customer.getPassword(),"");
 	}
 
 }
