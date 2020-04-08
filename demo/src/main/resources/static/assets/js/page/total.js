@@ -1,24 +1,35 @@
 $(function () {
+
+
     $("#baseinformation").click(function(){
         hed("个人信息","此信息为身份证件上的信息");
         $("#informationTable").removeClass("hidden");
         $("#baseinformation").addClass("active");
         $("#studentinformation").removeClass("active");
         $("#xue_jiSearch").removeClass("active");
+
+        $("#class_total").addClass("hidden");
         $("#studentTable").addClass("hidden");
         $("#class_info").addClass("hidden");
         $("#xue_j").addClass("hidden");
+
+        $("#account").addClass("hidden");
     });
     $("#studentinformation").click(function(){
         hed("个人联系信息","此信息做为学校联系的重要参照");
         //显示切换部分
         $("#baseinformation").removeClass("active");
         $("#studentinformation").addClass("active");
+        $("#updateAccount").removeClass("active");
         $("#xue_jiSearch").removeClass("active");
-        $("#informationTable").addClass("hidden")
+        
+        $("#informationTable").addClass("hidden");
         $("#studentTable").removeClass("hidden");
+        $("#class_total").addClass("hidden");
         $("#class_info").addClass("hidden");
         $("#xue_j").addClass("hidden");
+
+        $("#account").addClass("hidden");
         $.ajax({
             url: "/selectContextInfo",
             type: "post",
@@ -55,6 +66,10 @@ $(function () {
 
     $("#classinformation").click(function(){
         hed("成绩信息","该信息为在校期间的各科成绩");
+
+        $("#classTotal").removeClass("active");
+        $("#updateAccount").removeClass("active");
+        $("#account").addClass("hidden");
         var chaxunYear = $("#selectYear option:selected").val();
         $("#classes").html("");
         $.ajax({
@@ -70,6 +85,8 @@ $(function () {
                 $("#informationTable").addClass("hidden");
                 $("#studentTable").addClass("hidden");
                 $("#classinformation").addClass("active");
+
+                $("#class_total").addClass("hidden");
                 if($.isEmptyObject(clist) ){
                     $("#classes").html("");
                     return false;
@@ -82,16 +99,18 @@ $(function () {
 
     //学籍信息表显示
     $("#xue_jiSearch").click(function(){
-
+        hed("学籍信息","此为入学之前的学籍信息");
         $("#xue_j").removeClass("hidden");
 
         $("#xue_jiSearch").addClass("active");
         $("#studentinformation").removeClass("active");
         $("#baseinformation").removeClass("active");
 
+        $("#class_total").addClass("hidden");
         $("#class_info").addClass("hidden");
         $("#informationTable").addClass("hidden");
         $("#studentTable").addClass("hidden");
+        $("#account").addClass("hidden")
     });
 
     $("#changeTheContact").click(function(){
@@ -120,6 +139,38 @@ $(function () {
 
     });
 
+    //
+    $("#classTotal").click(function(){
+        hed("成绩统计","该信息为在校期间的各科成绩的统计");
+        //把那个显示出来
+        $("#class_total").removeClass("hidden");
+
+        $("#classTotal").addClass("active");
+        $("#classinformation").removeClass("active");
+
+        $("#informationTable").addClass("hidden");
+        $("#studentTable").addClass("hidden");
+        $("#class_info").addClass("hidden");
+        $("#xue_j").addClass("hidden");
+        $("#account").addClass("hidden");
+    });
+
+    $("#updateAccount").click(function(){
+        
+        $("#account").removeClass("hidden");
+        $("#informationTable").addClass("hidden");
+        $("#informationTable").addClass("hidden");
+        $("#studentTable").addClass("hidden");
+        $("#class_info").addClass("hidden");
+        $("#xue_j").addClass("hidden");
+        $("#class_total").addClass("hidden");
+        
+        $("#xue_jiSearch").removeClass("active");
+        $("#classinformation").removeClass("active");
+        $("#classTotal").removeClass("active");
+        $("#baseinformation").removeClass("active");
+        $("#studentinformation").removeClass("active");
+    });
     //更新个人联系名片
     $("#updateContext").click(function(){
         //获取值部分
@@ -159,6 +210,21 @@ $(function () {
         })
     });
 
+    $("#submit").click(function(){
+        var newPassword = $("#newPassword").val();
+        var surePassword = $("#surePassword").val();
+        $.ajax({
+            url: "/updatePassword",
+            type: "POST",
+            data:{
+                newPassword : newPassword,
+                surePassword : surePassword
+            },
+            success : function(msg){
+                alert(msg);
+            }
+        })
+    });
 
     
 })

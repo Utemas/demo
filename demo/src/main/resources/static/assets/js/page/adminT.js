@@ -36,4 +36,21 @@ $(function () {
             return false;
         }
     });
-})
+
+    $("#uploadFile").click(function(){
+        var file = $("#file")[0].files[0];
+        var formData = new FormData();
+        formData.append("file",file);
+        $.ajax({
+            type:'post',
+            url:'/upload',
+            processData: false,
+            contentType:false,
+            data:formData,
+            success:function (msg) {
+                alert(msg);
+            }
+        })
+    });
+});
+

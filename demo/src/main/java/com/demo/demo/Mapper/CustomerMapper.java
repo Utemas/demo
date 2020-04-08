@@ -11,7 +11,6 @@ import com.demo.demo.po.Student;
 import com.demo.demo.po.Urgent;
 
 import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -66,11 +65,6 @@ public interface CustomerMapper {
     @Select("select customer_jiguan, customer_tel,customer_email,customer_youzheng,customer_start_station,customer_end_station from project1_customer where id_number=#{id_number}")
     public ContextInfo selectContextInfo(@Param("id_number")String id_number);
 
-    //插入Section
-    //插入问题反馈信息
-    @Insert("insert into project1_trouble(trouble_title,trouble_text,st_id, trouble_stat) values(#{trouble_title},#{trouble_text},#{st_id},'yes') ")
-    public int addTrouble(@Param("trouble_title") String title, @Param("trouble_text") String text, @Param("st_id") String st_id);
-
     //删除Section
     //删除这个学生上过的课程
     @Delete("delete from project1_class where st_id=#{st_id}")
@@ -102,27 +96,7 @@ public interface CustomerMapper {
 
     //@Update 部分
     //更新籍贯
-    @Update("update project1_customer set customer_jiguan=#{customer_jiguan} where id_number=#{id_number}")
-    public int updateContextInfo(@Param("customer_jiguan") String customer_jiguan,@Param("id_number")String id_number);
-
-    //更新电话
-    @Update("update project1_customer set customer_tel=#{customer_tel} where id_number=#{id_number}")
-	public int updateTel(@Param("customer_tel")String customer_tel,@Param("id_number") String id_number);
-
-    //更新Email
-    @Update("update project1_customer set customer_email=#{customer_email} where id_number=#{id_number}")
-	public int updateEmail(String customer_email, String id_number);
-
-    //更新邮政编码
-    @Update("update project1_customer set customer_youzheng=#{cyb} where id_number=#{id_number}")
-    public int updateYouBian(@Param("cyb")String customer_youzheng, @Param("id_number")String id_number);
-
-    //更新起始地
-    @Update("update project1_customer set customer_start_station=#{css} where id_number=#{id_number}")
-    public int updateStartStation(@Param("css")String customer_start_station, @Param("id_number") String id_number);
-
-    @Update("update project1_customer set customer_end_station = #{end} where id_number=#{id_number}")
-	public int updateEndStation(@Param("end")String customer_end_station, @Param("id_number")String id_number);
+    
 	
 	
     

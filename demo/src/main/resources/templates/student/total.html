@@ -110,7 +110,7 @@
             </a>
             <ul class="treeview-menu">
               <li id="classinformation"><a href="javascript:void(0);" ><i class="fa fa-circle-o"></i>成绩信息</a></li>
-              <li><a href="javascript:void(0);" id="classTotal"><i class="fa fa-circle-o"></i>成绩统计</a></li>
+              <li id="classTotal"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>成绩统计</a></li>
             </ul>
           </li>
           <li class="treeview">
@@ -126,7 +126,7 @@
               <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>活动提交</a></li>
             </ul>
           </li>
-          <li class="treeview">
+          <li class="treeview" id="updateAccount">
             <a href="javascript:void(0);">
               <i class="fa fa-files-o"></i>
               <span>账号信息维护</span>
@@ -312,7 +312,28 @@
         </table>
         <table border="1" cellspacing="0" cellpadding="0" id="activity_add" class="hidden">
         </table>
-        <table border="1" cellspacing="0" cellpadding="0" id="account" class="hidden">
+        <table cellspacing="0" cellpadding="0" id="account" class="hidden" style="width:80%">
+          <tr>
+            <td style="width:30%">新密码</td>
+            <td>
+              <input type="password" class="form-control" id="newPassword"/>
+            </td>
+            <td style="text-align: left;">
+              <span style="color:red;margin-left: 5px;" class="hidden">密码位数在六位和十八位(含十八位)之间</span>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:30%">确认密码</td>
+            <td>
+              <input type="password" class="form-control" id="surePassword"/>
+            </td>
+            <td style="text-align: left;" class="hidden">
+              <span style="color:red;margin-left: 5px;" class="hidden">请认真确认您的密码</span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" class="center" style="text-align:center"><button class="btn btn-primary" id="submit" style="width:550px">更改</button></td>
+          </tr>
         </table>
       </div>
       <!-- /.content -->
@@ -320,7 +341,7 @@
     <!-- /.content-wrapper -->
   
     <footer class="main-footer">
-      <strong>若"个人基本信息"有问题，可以通过<a style="margin-left: 3px;"th:href="@{/trouble?type=2}">联系管理人员</a>进行修改</strong>
+      <strong>若"个人信息"有问题，可以通过<a style="margin-left: 3px;"th:href="@{/trouble?type=2}">联系管理人员</a>进行修改</strong>
     </footer>
   </div>
 <!-- ./wrapper -->

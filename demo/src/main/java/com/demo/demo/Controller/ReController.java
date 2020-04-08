@@ -2,7 +2,9 @@ package com.demo.demo.Controller;
 
 import java.util.List;
 
+import com.demo.demo.Mapper.AddMapper;
 import com.demo.demo.Mapper.CustomerMapper;
+import com.demo.demo.Mapper.UpdateMapper;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.ContextInfo;
 import com.demo.demo.po.Customer;
@@ -12,12 +14,21 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
  public class ReController {
     
     @Autowired
     CustomerMapper customerMapper;
+    
+    @Autowired
+    AddMapper addMapper;
+
+    @Autowired
+    UpdateMapper updateMapper;
 
     @RequestMapping("/updateContextInfo")
     public ContextInfo changeContextInfo(String ji_guan,String customer_tel, String customer_email, String customer_youzheng, String customer_start_station, String customer_end_station) {
@@ -33,17 +44,17 @@ import org.springframework.web.bind.annotation.RestController;
         cinfo.setCustomer_start_station(customer_start_station);
         cinfo.setCustomer_end_station(customer_end_station);
         //更新籍贯
-        int result = customerMapper.updateContextInfo(ji_guan,customer.getId_number());
+        int result = updateMapper.updateContextInfo(ji_guan,customer.getId_number());
         //更新电话
-        result = customerMapper.updateTel(customer_tel,customer.getId_number());
+        result = updateMapper.updateTel(customer_tel,customer.getId_number());
         //更新电子邮箱
-        result = customerMapper.updateEmail(customer_email,customer.getId_number());
+        result = updateMapper.updateEmail(customer_email,customer.getId_number());
         //更新邮政编码
-        result = customerMapper.updateYouBian(customer_youzheng,customer.getId_number());
+        result = updateMapper.updateYouBian(customer_youzheng,customer.getId_number());
         //更新起始站
-        result = customerMapper.updateStartStation(customer_start_station, customer.getId_number());
+        result = updateMapper.updateStartStation(customer_start_station, customer.getId_number());
 
-        result = customerMapper.updateEndStation(customer_end_station, customer.getId_number());
+        result = updateMapper.updateEndStation(customer_end_station, customer.getId_number());
         return cinfo;
     }
 
@@ -71,9 +82,9 @@ import org.springframework.web.bind.annotation.RestController;
         String message = "反馈失败，请重新提交"; 
         int result = 0;
         if(customer == null){
-            result = customerMapper.addTrouble(title, text, "出现登录问题者");    
+            result = addMapper.addTrouble(title, text, "出现登录问题者");    
         }else{
-            result = customerMapper.addTrouble(title, text, customer.getSt_id());    
+            result = addMapper.addTrouble(title, text, customer.getSt_id());    
         }
         
         if(result == 1){
@@ -81,5 +92,19 @@ import org.springframework.web.bind.annotation.RestController;
         }
         return message;
     }
+
+    @RequestMapping("/updatePassword")
+    public String updatePassword(String newPassword,String surePassword) {
+        String msg = "修改失败";
+        Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
+        if(newPassword.equals(surePassword)){
+            updateMapper.updatePassword(newPassword, loginer.getSt_id());
+            msg = "修改成功";
+        }else{
+            msg = "新密码与确认密码不一致";
+        }
+        return msg;
+    }
+    
     
  }

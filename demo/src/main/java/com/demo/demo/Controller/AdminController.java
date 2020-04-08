@@ -8,7 +8,6 @@ import java.util.Map;
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.Loginer;
 
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,6 @@ public class AdminController {
 
     @RequestMapping("/admin")
     public String adminLog(Map<String,Object> map){
-        Loginer adminCustomer = (Loginer) SecurityUtils.getSubject().getPrincipal();
 
         //将所有学生的学籍信息List返回给前台
         List<Loginer> clist = customerMapper.findAllStudent();
@@ -62,7 +60,8 @@ public class AdminController {
 
 
     @RequestMapping("/findStudentById")
-    public String findStudentById(@RequestParam(value = "st_id", required = false, defaultValue = "1") String st_id,HashMap<String,Object> map){
+    public String findStudentById(String st_id,HashMap<String,Object> map){
+        System.out.println("学号是"+st_id);
         List<Loginer> clist = customerMapper.finStudentById(st_id);
         map.put("clist",clist);
         map.put("footerinformation","高级搜索可以更精确地搜索到学生");

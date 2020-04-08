@@ -120,7 +120,7 @@
               </span>
             </a>
           </li>
-          <li class="treeview">
+          <li class="treeview" id="updateAccount">
             <a href="javascript:void(0);">
               <i class="fa fa-files-o"></i>
               <span>账号信息维护</span>
@@ -154,13 +154,12 @@
       <div class="content">
         <!--     往这里添加 主要内容-->
         <div id="xuejiSearch">
-          <form class="input-group" action="/findStudentById" method="Get">
+          <form class="input-group" action="/findStudentById">
             <input type="text" name="st_id" class="form-control" placeholder="请输入学生学号，点击搜索按钮" id="Search_student">
             <span class="input-group-btn">
-              <button type="button" id="search_btn2" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              <button id="search_btn2" class="btn btn-flat"/><i class="fa fa-search"></i></button>
             </span>
           </form>
-          <!--这里想添加一下分页组件-->
           <div class="box-body" id="main1">
             <table id="example2" class="table table-bordered table-hover">
               <thead>
@@ -188,10 +187,10 @@
           </div>
         </div>
         <div id="xuejiInputPage" style="margin-top: 50px;" class="hidden" align="center">
-          <form  id="saveAgent" action="/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" />
-            <input type="submit" value="提交" id="submitBnt"/>
-        </form>
+          <div  id="saveAgent">
+            <input type="file" name="file" id="file" />
+            <input type="button" value="导入" id="uploadFile"/>
+          </div>
         </div>
       </div>
       <!-- /.content -->

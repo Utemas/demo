@@ -1,8 +1,9 @@
 package com.demo.demo.po;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter@Setter
+@Getter@Setter@ToString
 public class Person{
     private String id;
     private String id_number;
