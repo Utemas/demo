@@ -11,6 +11,8 @@ import utill.ReadExcel;
 import javax.servlet.http.HttpServletRequest;
 
 import com.demo.demo.Mapper.AddMapper;
+import com.demo.demo.po.ClassInfo;
+import com.demo.demo.po.Enter;
 import com.demo.demo.po.Person;
 
 import java.io.File;
@@ -42,8 +44,49 @@ public class FileUploadController {
 
             for(Person person : plist){
                 addMapper.addPersonInfo(person.getId_number(), person.getName(), person.getAddr_province(), person.getAddr_city(), person.getAddr_community(), person.getAddr_street(), person.getAddr_block(), person.getAddr_unit(), person.getAddr_floor(), person.getAddr_room(), person.getSex(), person.getCountry(), person.getNation(), person.getCard_type());
-            }
+            }    
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "导入成功";
+    }
 
+    @PostMapping("/uploadScore")
+    public String uploadScore(MultipartFile file, HttpServletRequest request) throws Exception{
+        List<ClassInfo> clist = new ArrayList<>();
+        ReadExcel re = new ReadExcel();
+        String path = Contant.uploadPath;
+        File folder = new File(path);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        String fileName = file.getOriginalFilename();
+        try {
+            file.transferTo(new File(folder, fileName));
+            clist = re.ReadScore(path+"\\"+fileName);
+
+            for(ClassInfo classInfo : clist){
+                addMapper.addClassInfo(classInfo.getClass_id(), classInfo.getClass_name(), classInfo.getClass_score(), classInfo.getClass_xuefen(), classInfo.getClass_teacher(), classInfo.getSt_id(), classInfo.getClass_year(), classInfo.getClass_xueqi());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "导入成功";
+    }
+
+    @PostMapping("/uploadXueJiInfo")
+    public String uploadXueJiInfo(MultipartFile file, HttpServletRequest request) throws Exception{
+        List<Enter> elist = new ArrayList<>();
+        ReadExcel re = new ReadExcel();
+        String path = Contant.uploadPath;
+        File folder = new File(path);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        String fileName = file.getOriginalFilename();
+        try {
+            file.transferTo(new File(folder, fileName));
+             elist = re.ReadEnterInfo(path+"\\"+fileName);
             
         } catch (IOException e) {
             e.printStackTrace();

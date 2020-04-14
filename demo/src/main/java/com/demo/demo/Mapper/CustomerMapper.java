@@ -8,13 +8,13 @@ import com.demo.demo.po.Customer;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
 import com.demo.demo.po.Student;
+import com.demo.demo.po.Trouble;
 import com.demo.demo.po.Urgent;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface CustomerMapper {
@@ -59,12 +59,18 @@ public interface CustomerMapper {
 
     //查询这个学生所有的课程信息
     @Select("select * from project1_class where st_id=#{st_id}")
-    public List<ClassInfo> getALLClass(String st_id);
-    
+    public List<ClassInfo> getALLClass(@Param("st_id")String st_id);
+
+    @Select("select sum(class_xuefen) from project1_class where st_id=#{st_id}")
+    public int getTotalXueFen(@Param("st_id") String st_id);
     //查询学生的个人名片
     @Select("select customer_jiguan, customer_tel,customer_email,customer_youzheng,customer_start_station,customer_end_station from project1_customer where id_number=#{id_number}")
     public ContextInfo selectContextInfo(@Param("id_number")String id_number);
 
+
+    //
+    @Select("select * from project1_trouble")
+    public List<Trouble> getTrouble();
     //删除Section
     //删除这个学生上过的课程
     @Delete("delete from project1_class where st_id=#{st_id}")
@@ -92,13 +98,6 @@ public interface CustomerMapper {
     @Delete("delete from project1_trouble where st_id = #{st_id}")
     public int delteeTrouble(String st_id);
     
-
-
-    //@Update 部分
-    //更新籍贯
-    
-	
-	
     
 
 }

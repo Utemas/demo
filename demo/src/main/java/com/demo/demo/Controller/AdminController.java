@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.Loginer;
+import com.demo.demo.po.Trouble;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,10 @@ public class AdminController {
         map.put("clist", clist);
         //默认的底部信息:  
         map.put("footerinformation","高级搜索可以更精确地搜索到学生");
+        
+        List<Trouble> tlist = customerMapper.getTrouble();
+        
+        map.put("tlist",tlist);
         return "administrator/admin";
 
     }

@@ -1,3 +1,14 @@
 .tuixue{
     color:red;
 }
+
+
+.upload{
+    margin-bottom: 10px; 
+    font-weight: bold;
+    background-color: #3C8DBC; 
+    color: white;
+    height: 30px;
+    border-radius: 2px;
+    font-size: 18px;
+}

@@ -52,5 +52,22 @@ $(function () {
             }
         })
     });
+
+
+    $("#uploadClassFile").click(function(){
+        var file = $("#classFile")[0].files[0];
+        var formData = new FormData();
+        formData.append("file",file);
+        $.ajax({
+            type:'POST',
+            url:'/uploadScore',
+            processData: false,
+            contentType:false,
+            data:formData,
+            success:function (msg) {
+                alert(msg);
+            }
+        })
+    })
 });
 

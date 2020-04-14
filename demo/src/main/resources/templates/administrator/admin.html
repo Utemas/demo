@@ -33,6 +33,33 @@
         </a>
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
+            <li class="dropdown messages-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-envelope-o"></i>
+                <span class="label label-success">4</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="header">You have 4 messages</li>
+                <li>
+                  <!-- inner menu: contains the actual data -->
+                  <ul class="menu">
+                    <li th:each="trouble,troubleStat:${tlist}" th:if="${troubleStat.index} lt 4" th:object="${trouble}">
+                      <a href="#">
+                        <div class="pull-left">
+                          <span th:text="${trouble.trouble_title}">hhhhh</span>
+                        </div>
+                        <h4>
+                          Reviewers
+                          <small><i class="fa fa-clock-o"></i> 2 days</small>
+                        </h4>
+                        <p>Why not buy a new awesome theme?</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="footer"><a href="#">See All Messages</a></li>
+              </ul>
+            </li>
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="../assets/img/customer/1620010518.jpg" class="user-image" alt="User Image">
@@ -187,9 +214,17 @@
           </div>
         </div>
         <div id="xuejiInputPage" style="margin-top: 50px;" class="hidden" align="center">
-          <div  id="saveAgent">
-            <input type="file" name="file" id="file" />
-            <input type="button" value="导入" id="uploadFile"/>
+          <div style="background-color: white;width: 80%; height: 150px;">
+            <p class="upload">导入身份证件信息：</p>
+            <input type="file" name="file" id="file" style="margin-top: 20px;"/>
+            <input type="button" value="导入" id="uploadFile" class="btn btn-primary" style="margin-top: 20px;"/>
+          </div>
+        </div>
+        <div id="classInfoPage" style="margin-top: 50px;" class="hidden" align="center">
+          <div style="background-color: white;width: 80%; height: 150px;">
+            <p class="upload">导入成绩信息</p>
+            <input type="file" name="classFile" id="classFile" style="margin-top: 20px;"/>
+            <input type="button" value="导入" id="uploadClassFile" style="margin-top: 20px;" class="btn btn-primary"/>
           </div>
         </div>
       </div>

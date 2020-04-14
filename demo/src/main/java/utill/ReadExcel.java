@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.demo.demo.Mapper.CustomerMapper;
+import com.demo.demo.po.ClassInfo;
+import com.demo.demo.po.Enter;
 import com.demo.demo.po.Person;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -84,6 +86,65 @@ public class ReadExcel {
                 plist.add(person);
             }
             return plist;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<ClassInfo> ReadScore(String filePath){
+        List<ClassInfo> clist = new ArrayList<>();
+        XSSFSheet sheet = null;
+        try{
+            sheet = this.getExcel(filePath).getSheetAt(0);
+            //先将获取的单元格设置为String类型，下面使用getStringCellValue获取单元格内容
+            //如果不设置为String类型，如果单元格是数字，则报如下异常
+            //java.lang.IllegalStateException: Cannot get a STRING value from a NUMERIC cell
+            int rowNum = sheet.getLastRowNum();
+            for(int i = 1; i <= rowNum; i++){
+                ClassInfo classInfo = new ClassInfo();
+                sheet.getRow(i).getCell(0).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(1).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(2).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(3).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(4).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(5).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(6).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(7).setCellType(HSSFCell.CELL_TYPE_STRING);
+                classInfo.setClass_id(sheet.getRow(i).getCell(0).getStringCellValue());
+                classInfo.setClass_name(sheet.getRow(i).getCell(1).getStringCellValue());
+                classInfo.setClass_score(sheet.getRow(i).getCell(2).getStringCellValue());
+                classInfo.setClass_xuefen(Double.valueOf(sheet.getRow(i).getCell(3).getStringCellValue()));
+                classInfo.setClass_teacher(sheet.getRow(i).getCell(4).getStringCellValue());
+                classInfo.setSt_id(sheet.getRow(i).getCell(5).getStringCellValue());
+                classInfo.setClass_year(sheet.getRow(i).getCell(6).getStringCellValue());
+                classInfo.setClass_xueqi(sheet.getRow(i).getCell(7).getStringCellValue());
+                clist.add(classInfo);
+            }
+            return clist;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Enter> ReadEnterInfo(String filePath){
+        List<Enter> elist = new ArrayList<>();
+        XSSFSheet sheet = null;
+        try{
+            sheet = this.getExcel(filePath).getSheetAt(0);
+            //先将获取的单元格设置为String类型，下面使用getStringCellValue获取单元格内容
+            //如果不设置为String类型，如果单元格是数字，则报如下异常
+            //java.lang.IllegalStateException: Cannot get a STRING value from a NUMERIC cell
+            int rowNum = sheet.getLastRowNum();
+            for(int i = 1; i <= rowNum; i++){
+                Enter enterInfo = new Enter();
+                
+                
+            }
+            return elist;
         }
         catch (Exception e){
             e.printStackTrace();

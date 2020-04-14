@@ -14,4 +14,7 @@ public interface AddMapper {
     //提交问题
     @Insert("insert into project1_trouble(trouble_title,trouble_text,st_id, trouble_stat) values(#{trouble_title},#{trouble_text},#{st_id},'yes') ")
     public int addTrouble(@Param("trouble_title") String title, @Param("trouble_text") String text, @Param("st_id") String st_id);
+
+    @Insert("insert into project1_class(class_id,class_name,class_score,class_xuefen,class_teacher,st_id,class_year,class_xueqi) values(#{class_id},#{class_name},#{class_score},#{class_xuefen},#{class_teacher},#{st_id},#{class_year},#{class_xueqi})")
+	public void addClassInfo(@Param("class_id") String class_id, @Param("class_name") String class_name, @Param("class_score") String class_score, @Param("class_xuefen") double class_xuefen, @Param("class_teacher") String class_teacher, @Param("st_id") String st_id, @Param("class_year") String class_year,@Param("class_xueqi") String class_xueqi);
 }

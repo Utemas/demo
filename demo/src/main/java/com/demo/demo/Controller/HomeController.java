@@ -3,6 +3,7 @@ package com.demo.demo.Controller;
 import java.util.HashMap;
 import java.util.List;
 
+import com.demo.demo.Mapper.AddMapper;
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
@@ -31,6 +32,9 @@ public class HomeController {
 
     @Autowired
     private CustomerMapper customerMapper;
+
+    @Autowired
+    private AddMapper addMapper;
 
     // 初始界面
     @RequestMapping("/login")
@@ -90,8 +94,6 @@ public class HomeController {
         Person person = customerMapper.getStudentPeronInformation(customer.getId_number());
         map.put("person",person);
 
-
-       
         // 查询学生成绩数量
         int class_count = customerMapper.theNumberOfClass(loginer.getSt_id());
         map.put("class_count",class_count);
@@ -121,10 +123,8 @@ public class HomeController {
         //查询这个学生的所有课程
         List<ClassInfo> clist = customerMapper.getALLClass(customer.getSt_id());
         //计算这个同学的总学分是多少
-        int xueFenTotal = 0;
-        for(ClassInfo stu : clist){
-            xueFenTotal += stu.getClass_xuefen();
-        }
+        int xueFenTotal = customerMapper.getTotalXueFen(loginer.getSt_id());
+        
         map.put("xueFenTotal",xueFenTotal);
         //
 
