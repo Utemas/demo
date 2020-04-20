@@ -86,7 +86,10 @@ public class FileUploadController {
         String fileName = file.getOriginalFilename();
         try {
             file.transferTo(new File(folder, fileName));
-             elist = re.ReadEnterInfo(path+"\\"+fileName);
+            elist = re.ReadEnterInfo(path+"\\"+fileName);
+            for(Enter enterInfo : elist){
+                
+            }
             
         } catch (IOException e) {
             e.printStackTrace();

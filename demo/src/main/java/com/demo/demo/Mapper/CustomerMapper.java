@@ -5,6 +5,7 @@ import java.util.List;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.ContextInfo;
 import com.demo.demo.po.Customer;
+import com.demo.demo.po.Enter;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
 import com.demo.demo.po.Student;
@@ -41,10 +42,16 @@ public interface CustomerMapper {
     //查询课程信息
     @Select("select * from project1_class where st_id=#{st_id} and class_year=#{class_year}")
     public List<ClassInfo> getClassInformation(@Param("st_id") String st_id,@Param("class_year") String class_year);
+
     
     //查询大于85分的成绩数量
     @Select("select count(*) from project1_class where class_score >= 80 and st_id = #{st_id}")
     public int youxiuNumber(@Param("st_id") String st_id);
+
+    //查询小于60分的成绩数量
+    @Select("select count(*) from project1_class where class_score < 60 and st_id =#{st_id}")
+    public int getBujigeNumber(@Param("st_id") String st_id);
+
     //查询所有学籍学生
     @Select("select * from project1_login where login_identify = 'st'")
     public List<Loginer> findAllStudent();
@@ -68,6 +75,8 @@ public interface CustomerMapper {
     public ContextInfo selectContextInfo(@Param("id_number")String id_number);
 
 
+    @Select("select * from project1_from where id_number = #{id_number}")
+    public Enter getEnterInfo(@Param("id_number") String id_number);
     //
     @Select("select * from project1_trouble")
     public List<Trouble> getTrouble();

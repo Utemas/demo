@@ -1,10 +1,12 @@
 package com.demo.demo.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.demo.demo.Mapper.AddMapper;
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.Mapper.UpdateMapper;
+import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.ContextInfo;
 import com.demo.demo.po.Customer;
@@ -14,6 +16,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 
 @RestController
@@ -102,6 +105,13 @@ import org.springframework.web.bind.annotation.RestController;
             msg = "新密码与确认密码不一致";
         }
         return msg;
+    }
+    
+    @RequestMapping("/selectAwardInfo")
+    public List<Award> selectAwardInfo() {
+        List<Award> awlist = new ArrayList<Award>();
+        
+        return awlist;
     }
     
     

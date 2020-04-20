@@ -15,4 +15,5 @@ public class Enter{
     private String enter_score;
     private String enter_kaoqu;
     private String id_number;
+    private String enter_source;
 }

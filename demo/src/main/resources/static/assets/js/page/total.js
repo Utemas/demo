@@ -226,5 +226,21 @@ $(function () {
         })
     });
 
-    
+    $("#AwardInfo").click(function(){
+        $("#AwardInfo").addClass("active");
+        $("#PunishInfo").removeClass("active");
+        $.ajax({
+            url: "/selectAwardInfo",
+            type: "POST",
+            success:function(data){
+                
+            }
+        });
+        
+    });
+
+    $("#PunishInfo").click(function(){
+        $("#PunishInfo").addClass("active");
+        $("#AwardInfo").removeClass("active");
+    });
 })

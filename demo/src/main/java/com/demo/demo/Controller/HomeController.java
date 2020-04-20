@@ -3,10 +3,9 @@ package com.demo.demo.Controller;
 import java.util.HashMap;
 import java.util.List;
 
-import com.demo.demo.Mapper.AddMapper;
 import com.demo.demo.Mapper.CustomerMapper;
-import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
+import com.demo.demo.po.Enter;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
 import com.demo.demo.po.Student;
@@ -32,9 +31,6 @@ public class HomeController {
 
     @Autowired
     private CustomerMapper customerMapper;
-
-    @Autowired
-    private AddMapper addMapper;
 
     // 初始界面
     @RequestMapping("/login")
@@ -119,9 +115,6 @@ public class HomeController {
         List<Urgent> uList = customerMapper.getUrgents(customer.getSt_id());
         map.put("ulist", uList);
         //
-
-        //查询这个学生的所有课程
-        List<ClassInfo> clist = customerMapper.getALLClass(customer.getSt_id());
         //计算这个同学的总学分是多少
         int xueFenTotal = customerMapper.getTotalXueFen(loginer.getSt_id());
         
@@ -134,14 +127,35 @@ public class HomeController {
 
         int youxiuNumber = customerMapper.youxiuNumber(customer.getSt_id());
         if(class_count == 0){
-            map.put("youxiulv","0");
+            map.put("youxiulv","0.0%");
             return "student/total";
         }
         youxiubi = (double)youxiuNumber/(double)class_count;
         youxiubi = youxiubi * 100;
         youxiulv =Double.toString(youxiubi) + "%";
         map.put("youxiulv",youxiulv);
-        map.put("nclist",null);
+
+        //计算学生不及格的科目数量
+        String bujigelv;
+        double bujigebi;
+
+        int bujigeNumber = customerMapper.getBujigeNumber(customer.getSt_id());
+        map.put("bujigeNumber", bujigeNumber);
+        if(class_count == 0){
+            map.put("bujuigelv","0-.0%");
+            return "student/total";
+        }
+        bujigebi = (double)bujigeNumber/(double)class_count;
+        bujigebi = bujigebi * 100;
+        bujigelv = Double.toString(bujigebi) + "%";
+        map.put("bujuigelv",bujigelv);
+
+
+
+
+        //查询学生的入学信息
+        Enter enterInfo = customerMapper.getEnterInfo(customer.getId_number());
+        map.put("enter",enterInfo);
         return "student/total";
     }
 

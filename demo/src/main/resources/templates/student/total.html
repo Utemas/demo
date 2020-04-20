@@ -34,17 +34,17 @@
           <ul class="nav navbar-nav">
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../assets/img/customer/1620010518.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs">Alexander Pierce</span>
+                <img th:src="@{../assets/img/customer/{filename}.jpg(filename=${student.st_id})}" class="user-image" alt="User Image">
+                <span class="hidden-xs" th:text="'您好！'+${person.name}"></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <img src="../assets/img/customer/1620010518.jpg" class="img-circle" alt="User Image">
-                  <p>
+                  <img th:src="@{../assets/img/customer/{filename}.jpg(filename=${student.st_id})}" class="img-circle" alt="User Image">
+                  <p th:text="${person.name}">
                     Alexander Pierce
                   </p>
-                  <small>Member since Nov. 2012</small>
+                  <small th:text="'Enter in '+${student.st_entertime}" style="color:aliceblue"></small>
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
@@ -66,10 +66,10 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="../assets/img/customer/1620010518.jpg" class="img-circle" alt="User Image">
+            <img th:src="@{../assets/img/customer/{filename}.jpg(filename=${student.st_id})}" class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
-            <p>Alexander Pierce</p>
+            <p th:text="${person.name}">Alexander Pierce</p>
             <a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> Online</a>
           </div>
         </div>
@@ -122,8 +122,8 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>奖励情况</a></li>
-              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>惩罚情况</a></li>
+              <li id="AwardInfo"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>奖励情况</a></li>
+              <li id="PunishInfo"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>惩罚情况</a></li>
             </ul>
           </li>
           <li class="treeview" id="updateAccount">
@@ -250,8 +250,15 @@
         </div>
         <table border="1" cellspacing="0" cellpadding="0" id="class_total" class="hidden">
           <tr>
-            <td>总学分</td><td><p th:text="${xueFenTotal}"></p></td>
-            <td>优秀率</td><td><p th:text="${youxiulv}"></p></td>
+            <td class="title">总学分</td><td><p th:text="${xueFenTotal}"></p></td>
+            <td class="title">优秀率</td><td><p th:text="${youxiulv}"></p></td>
+          </tr>
+          <tr>
+            <td class="title">不及格科目数量</td><td th:text="${bujigeNumber}"></td>
+            <td class="title">不及格科目占比</td><td th:text="${bujuigelv}"></td>
+          </tr>
+          <tr>
+            <td class="title">绩点</td><td></td>
           </tr>
         </table>
         <table border="1" cellspacing="0" cellpadding="0" id="xue_j" class="hidden" th:object="${student}">
@@ -274,20 +281,20 @@
             <td class="title">学生类别</td>
             <td th:text="*{st_type}"></td>
             <td class="title">考区</td>
-            <td id="st_kaoqu"></td>
+            <td th:text="${enter.enter_kaoqu}"></td>
           </tr>
           <!--以上没有问题-->
           <tr>
             <td class="title">入学准考证号</td>
-            <td id="enter_idnumber"></td>
+            <td th:text="${enter.enter_idnumber}"></td>
             <td class="title">毕业学校</td>
-            <td id="enter_from"></td>
+            <td th:text="${enter.enter_from}"></td>
           </tr>
           <tr>
             <td class="title">外语语种</td>
-            <td id="enter_speak"></td>
+            <td th:text="${enter.enter_speak}"></td>
             <td class="title">入学录取单号</td>
-            <td id=""></td>
+            <td th:text="${enter.enter_luquid}"></td>
           </tr>
           <tr>
             <td class="title">入学日期</td>
@@ -297,21 +304,21 @@
           </tr>
           <tr>
             <td class="title">入学方式</td>
-            <td id="enter_type"></td>
+            <td th:text="${enter.enter_type}"></td>
             <td class="title">培养方式</td>
             <td th:text="*{st_peiyangfangshi}"></td>
           </tr>
           <tr>
             <td class="title">学生来源</td>
-            <td id="enter_source"></td>
+            <td th:text="${enter.enter_source}"></td>
             <td class="title">毕业去向</td>
             <td th:text="*{st_leave_to}"></td>
           </tr>
         </table>
-        <table border="1" cellspacing="0" cellpadding="0" id="activity_information" class="hidden">
-        </table>
-        <table border="1" cellspacing="0" cellpadding="0" id="activity_add" class="hidden">
-        </table>
+        <div border="1" cellspacing="0" cellpadding="0" id="activity_information" class="hidden">
+          
+        </div>
+        
         <table cellspacing="0" cellpadding="0" id="account" class="hidden" style="width:80%">
           <tr>
             <td style="width:30%">新密码</td>
