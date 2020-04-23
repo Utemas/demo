@@ -334,6 +334,7 @@
                 <td th:text="*{award_time}"></td>
                 <td th:text="*{award_condition}" span th:style="'color:'+*{condition_css}"></td>
                 <td>
+                  <button class="btn btn-primary">浏览</button>
                   <button th:if="*{award_condition} eq '未审阅'" class="btn btn-primary">更改</button>
                 </td>
               </tr>
