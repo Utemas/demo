@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.demo.demo.Mapper.CustomerMapper;
+import com.demo.demo.po.Award;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Enter;
 import com.demo.demo.po.Loginer;
@@ -35,7 +36,6 @@ public class HomeController {
     // 初始界面
     @RequestMapping("/login")
     public String login(HashMap<String, Object> map) {
-        map.put("programeName", Contant.ProgrameName);
         return "login";
     }
 
@@ -150,15 +150,29 @@ public class HomeController {
         bujigelv = Double.toString(bujigebi) + "%";
         map.put("bujuigelv",bujigelv);
 
-
-
-
         //查询学生的入学信息
         Enter enterInfo = customerMapper.getEnterInfo(customer.getId_number());
         map.put("enter",enterInfo);
-        return "student/total";
-    }
 
+        //查询学生获奖情况的数量
+        int awardCount = customerMapper.getAwardCount(customer.getSt_id());
+        map.put("awardCount",awardCount);
+        
+        //查询学生惩罚情况的数量
+        int punishCount = 0;
+        map.put("punishCount",punishCount);
+        //查询学生获奖情况
+        List<Award> awlist = customerMapper.getAward(customer.getSt_id());
+        map.put("awlist",awlist);
+
+
+
+
+
+        return "student/total";
+        
+      
+    }
     @RequestMapping("/trouble")
     public String writing(@RequestParam(value = "type", required = false, defaultValue = "1") int type,HashMap<String, Object> map){
         map.put("programeName",Contant.ProgrameName);

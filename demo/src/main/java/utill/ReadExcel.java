@@ -135,9 +135,7 @@ public class ReadExcel {
         XSSFSheet sheet = null;
         try{
             sheet = this.getExcel(filePath).getSheetAt(0);
-            //先将获取的单元格设置为String类型，下面使用getStringCellValue获取单元格内容
-            //如果不设置为String类型，如果单元格是数字，则报如下异常
-            //java.lang.IllegalStateException: Cannot get a STRING value from a NUMERIC cell
+            
             int rowNum = sheet.getLastRowNum();
             for(int i = 1; i <= rowNum; i++){
                 Enter enterInfo = new Enter();

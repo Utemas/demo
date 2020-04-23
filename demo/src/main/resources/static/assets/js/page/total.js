@@ -12,7 +12,7 @@ $(function () {
         $("#studentTable").addClass("hidden");
         $("#class_info").addClass("hidden");
         $("#xue_j").addClass("hidden");
-
+        $("#award_table").addClass("hidden");
         $("#account").addClass("hidden");
     });
     $("#studentinformation").click(function(){
@@ -28,8 +28,8 @@ $(function () {
         $("#class_total").addClass("hidden");
         $("#class_info").addClass("hidden");
         $("#xue_j").addClass("hidden");
-
         $("#account").addClass("hidden");
+        $("#award_table").addClass("hidden");
         $.ajax({
             url: "/selectContextInfo",
             type: "post",
@@ -66,10 +66,11 @@ $(function () {
 
     $("#classinformation").click(function(){
         hed("成绩信息","该信息为在校期间的各科成绩");
-
         $("#classTotal").removeClass("active");
         $("#updateAccount").removeClass("active");
+
         $("#account").addClass("hidden");
+
         var chaxunYear = $("#selectYear option:selected").val();
         $("#classes").html("");
         $.ajax({
@@ -85,7 +86,7 @@ $(function () {
                 $("#informationTable").addClass("hidden");
                 $("#studentTable").addClass("hidden");
                 $("#classinformation").addClass("active");
-
+                $("#award_table").addClass("hidden");
                 $("#class_total").addClass("hidden");
                 if($.isEmptyObject(clist) ){
                     $("#classes").html("");
@@ -110,7 +111,8 @@ $(function () {
         $("#class_info").addClass("hidden");
         $("#informationTable").addClass("hidden");
         $("#studentTable").addClass("hidden");
-        $("#account").addClass("hidden")
+        $("#account").addClass("hidden");
+        $("#award_table").addClass("hidden");
     });
 
     $("#changeTheContact").click(function(){
@@ -153,10 +155,12 @@ $(function () {
         $("#class_info").addClass("hidden");
         $("#xue_j").addClass("hidden");
         $("#account").addClass("hidden");
+        $("#award_table").addClass("hidden");
+        $("#ClassInfo").removeClass("hidden");
     });
 
     $("#updateAccount").click(function(){
-        
+        hed("账户维护","在这里你可以更改你的登录密码");
         $("#account").removeClass("hidden");
         $("#informationTable").addClass("hidden");
         $("#informationTable").addClass("hidden");
@@ -164,12 +168,14 @@ $(function () {
         $("#class_info").addClass("hidden");
         $("#xue_j").addClass("hidden");
         $("#class_total").addClass("hidden");
+        $("#award_table").addClass("hidden");
         
         $("#xue_jiSearch").removeClass("active");
         $("#classinformation").removeClass("active");
         $("#classTotal").removeClass("active");
         $("#baseinformation").removeClass("active");
         $("#studentinformation").removeClass("active");
+        
     });
     //更新个人联系名片
     $("#updateContext").click(function(){
@@ -227,20 +233,31 @@ $(function () {
     });
 
     $("#AwardInfo").click(function(){
+        hed("奖励信息","该信息为在校期间获得的奖励信息");
         $("#AwardInfo").addClass("active");
         $("#PunishInfo").removeClass("active");
-        $.ajax({
-            url: "/selectAwardInfo",
-            type: "POST",
-            success:function(data){
-                
-            }
-        });
+
+        $("#award_table").removeClass("hidden");
+        $("#informationTable").addClass("hidden");
+        $("#studentTable").addClass("hidden");
+        $("#class_total").addClass("hidden");
+        $("#class_info").addClass("hidden");
+        $("#xue_j").addClass("hidden");
+        $("#account").addClass("hidden");
         
     });
 
     $("#PunishInfo").click(function(){
         $("#PunishInfo").addClass("active");
         $("#AwardInfo").removeClass("active");
+    });
+
+    $('#AwardTable').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
     });
 })

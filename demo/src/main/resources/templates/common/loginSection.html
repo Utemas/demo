@@ -6,12 +6,15 @@
 </head>
     <div th:fragment="loginTips" class="container login-information">
             <p class="title">登录介绍</p>
+            <p class="article" translate="false">这里是学籍管理系统。<b>新入学的学生请注意：入学一周后可以登录此系统！</b></p>
+            <p class="article" translate="false">因为此系统需要由管理人员导入您的个人以及学籍信息</p>
+            <p class="article" translate="false"><b>以下是登录规则：</b></p>
             <p class="article" translate="false">用户账号:</p>
             <p class="article" translate="false">您的身份代称(两个字母)和您的学号/工号(10位)</p>
             <p class="article" translate="false">例如: st1620010518。</p>
             <p class="article" translate="false">密码:</p>
             <p class="article" translate="false">输入您的密码即可，默认密码为身份证的后六位</p>
-            <p class="article" translate="false">注意:如果登录遇到什么问题可以联系学校管理人员.请用以下链接发送信息。</p>
+            <p class="article" translate="false">注意:如果登录遇到什么问题可以联系学校管理人员.请用下面链接发送信息。</p>
             <a th:text="登录问题请点击这里" href="/trouble?type=1"></a>
     </div>
 </html>

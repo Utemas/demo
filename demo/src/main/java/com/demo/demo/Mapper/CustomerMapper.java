@@ -2,6 +2,7 @@ package com.demo.demo.Mapper;
 
 import java.util.List;
 
+import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.ContextInfo;
 import com.demo.demo.po.Customer;
@@ -80,6 +81,15 @@ public interface CustomerMapper {
     //
     @Select("select * from project1_trouble")
     public List<Trouble> getTrouble();
+
+    //查询学生的获奖信息
+    @Select("select * from project1_award where st_id = #{st_id}")
+    public List<Award> getAward(@Param("st_id") String st_id);
+    
+    //查询学生的获奖信息的数量
+    @Select("select count(*) from project1_award where st_id=#{st_id}")
+    public int getAwardCount(@Param("st_id") String st_id);
+
     //删除Section
     //删除这个学生上过的课程
     @Delete("delete from project1_class where st_id=#{st_id}")

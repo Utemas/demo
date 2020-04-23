@@ -118,7 +118,8 @@
               <i class="fa fa-files-o"></i>
               <span>奖惩情况</span>
               <span class="pull-right-container">
-                <span class="label label-primary pull-right">4</span>
+                <span class="label pull-right bg-green" th:text="${awardCount}"></span>
+                <span class="label pull-right bg-red" th:text="${punishCount}"></span>
               </span>
             </a>
             <ul class="treeview-menu">
@@ -258,7 +259,7 @@
             <td class="title">不及格科目占比</td><td th:text="${bujuigelv}"></td>
           </tr>
           <tr>
-            <td class="title">绩点</td><td></td>
+            <td class="title">平均绩点(GPA)</td><td></td>
           </tr>
         </table>
         <table border="1" cellspacing="0" cellpadding="0" id="xue_j" class="hidden" th:object="${student}">
@@ -283,7 +284,6 @@
             <td class="title">考区</td>
             <td th:text="${enter.enter_kaoqu}"></td>
           </tr>
-          <!--以上没有问题-->
           <tr>
             <td class="title">入学准考证号</td>
             <td th:text="${enter.enter_idnumber}"></td>
@@ -315,8 +315,30 @@
             <td th:text="*{st_leave_to}"></td>
           </tr>
         </table>
-        <div border="1" cellspacing="0" cellpadding="0" id="activity_information" class="hidden">
-          
+        <div id="award_table" class="hidden">
+          <button class="btn btn-primary">添加奖励</button>
+          <table id="AwardTable" class="table table-bordered table-hover">
+            <thead>
+            <tr></tr>
+              <th>奖励名称</th>
+              <th>奖励性质</th>
+              <th>获奖时间</th>
+              <th>奖励审阅情况</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr th:each="award:${awlist}" th:object="${award}">
+                <td th:text="*{award_name}"></td>
+                <td th:text="*{award_type}"></td>
+                <td th:text="*{award_time}"></td>
+                <td th:text="*{award_condition}" span th:style="'color:'+*{condition_css}"></td>
+                <td>
+                  <button th:if="*{award_condition} eq '未审阅'" class="btn btn-primary">更改</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         
         <table cellspacing="0" cellpadding="0" id="account" class="hidden" style="width:80%">
@@ -325,8 +347,11 @@
             <td>
               <input type="password" class="form-control" id="newPassword"/>
             </td>
-            <td style="text-align: left;">
-              <span style="color:red;margin-left: 5px;" class="hidden">密码位数在六位和十八位(含十八位)之间</span>
+          </tr>
+          <tr>
+            <td></td>
+            <td style="height: 10px; text-align:left;">
+              <span style="color:red;margin-left: 5px;">请认真核对您的密码</span>
             </td>
           </tr>
           <tr>
@@ -334,8 +359,11 @@
             <td>
               <input type="password" class="form-control" id="surePassword"/>
             </td>
-            <td style="text-align: left;" class="hidden">
-              <span style="color:red;margin-left: 5px;" class="hidden">请认真确认您的密码</span>
+          </tr>
+          <tr>
+            <td></td>
+            <td style="height: 10px; text-align:left;">
+              <span style="color:red;margin-left: 5px;">请认真核对您的密码</span>
             </td>
           </tr>
           <tr>
@@ -409,14 +437,16 @@
       <!-- /.modal-content -->
   </div>
 </div>
-<script src="../assets/js/form/jquery-2.2.3.min.js"></script>
-<script src="../assets/js/form/bootstrap.min.js"></script>
-<script src="../assets/js/form/Chart.min.js"></script>
-<script src="../assets/js/form/jquery.slimscroll.min.js"></script>
-<script src="../assets/js/form/app.min.js"></script>
-<script src="../assets/js/form/demo.js"></script>
-<script src="../assets/js/common.js"></script>
-<script src="../assets/js/page/total.js"></script>
-<script src="../assets/js/form/chaos.js"></script>
+  <script src="../assets/js/form/jquery-2.2.3.min.js"></script>
+  <script src="../assets/js/form/bootstrap.min.js"></script>
+  <script src="../assets/js/form/Chart.min.js"></script>
+  <script src="../assets/js/form/jquery.slimscroll.min.js"></script>
+  <script src="../assets/js/form/app.min.js"></script>
+  <script src="../assets/js/form/demo.js"></script>
+  <script src="../assets/js/form/datatables/jquery.dataTables.min.js"></script>
+  <script src="../assets/js/form/datatables/dataTables.bootstrap.min.js"></script>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/page/total.js"></script>
+  <script src="../assets/js/form/chaos.js"></script>
 </body>
 </html>

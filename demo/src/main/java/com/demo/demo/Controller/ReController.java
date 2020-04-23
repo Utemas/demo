@@ -107,12 +107,4 @@ import org.springframework.web.bind.annotation.RestController;
         return msg;
     }
     
-    @RequestMapping("/selectAwardInfo")
-    public List<Award> selectAwardInfo() {
-        List<Award> awlist = new ArrayList<Award>();
-        
-        return awlist;
-    }
-    
-    
  }
