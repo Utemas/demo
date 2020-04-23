@@ -341,7 +341,30 @@
             </tbody>
           </table>
         </div>
-        
+        <div class="hidden" id="punishTable">
+          <table id="PunishTable">
+            <thead>
+              <tr></tr>
+                <th>惩罚名称</th>
+                <th>惩罚结果</th>
+                <th>惩罚时间</th>
+                <th>惩罚时长</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr th:each="award:${awlist}" th:object="${award}">
+                  <td th:text="*{award_name}"></td>
+                  <td th:text="*{award_type}"></td>
+                  <td th:text="*{award_time}"></td>
+                  <td>adff年</td>
+                  <td>
+                    <button class="btn btn-primary">浏览</button>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
         <table cellspacing="0" cellpadding="0" id="account" class="hidden" style="width:80%">
           <tr>
             <td style="width:30%">新密码</td>

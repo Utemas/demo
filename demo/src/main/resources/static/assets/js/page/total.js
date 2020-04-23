@@ -14,6 +14,7 @@ $(function () {
         $("#xue_j").addClass("hidden");
         $("#award_table").addClass("hidden");
         $("#account").addClass("hidden");
+        $("#punishTable").addClass("hidden");
     });
     $("#studentinformation").click(function(){
         hed("个人联系信息","此信息做为学校联系的重要参照");
@@ -30,6 +31,7 @@ $(function () {
         $("#xue_j").addClass("hidden");
         $("#account").addClass("hidden");
         $("#award_table").addClass("hidden");
+        $("#punishTable").addClass("hidden");
         $.ajax({
             url: "/selectContextInfo",
             type: "post",
@@ -88,6 +90,7 @@ $(function () {
                 $("#classinformation").addClass("active");
                 $("#award_table").addClass("hidden");
                 $("#class_total").addClass("hidden");
+                $("#punishTable").addClass("hidden");
                 if($.isEmptyObject(clist) ){
                     $("#classes").html("");
                     return false;
@@ -113,6 +116,7 @@ $(function () {
         $("#studentTable").addClass("hidden");
         $("#account").addClass("hidden");
         $("#award_table").addClass("hidden");
+        $("#punishTable").addClass("hidden");
     });
 
     $("#changeTheContact").click(function(){
@@ -157,6 +161,7 @@ $(function () {
         $("#account").addClass("hidden");
         $("#award_table").addClass("hidden");
         $("#ClassInfo").removeClass("hidden");
+        $("#punishTable").addClass("hidden");
     });
 
     $("#updateAccount").click(function(){
@@ -169,6 +174,7 @@ $(function () {
         $("#xue_j").addClass("hidden");
         $("#class_total").addClass("hidden");
         $("#award_table").addClass("hidden");
+        $("#punishTable").addClass("hidden");
         
         $("#xue_jiSearch").removeClass("active");
         $("#classinformation").removeClass("active");
@@ -244,12 +250,23 @@ $(function () {
         $("#class_info").addClass("hidden");
         $("#xue_j").addClass("hidden");
         $("#account").addClass("hidden");
+        $("#punishTable").addClass("hidden");
         
     });
 
     $("#PunishInfo").click(function(){
+        hed("惩罚信息","该信息为在校期间获得的惩罚信息");
         $("#PunishInfo").addClass("active");
         $("#AwardInfo").removeClass("active");
+
+        $("#punishTable").removeClass("hidden");
+        $("#award_table").addClass("hidden");
+        $("#informationTable").addClass("hidden");
+        $("#studentTable").addClass("hidden");
+        $("#class_total").addClass("hidden");
+        $("#class_info").addClass("hidden");
+        $("#xue_j").addClass("hidden");
+        $("#account").addClass("hidden");
     });
 
     $('#AwardTable').DataTable({
@@ -260,4 +277,13 @@ $(function () {
       "info": true,
       "autoWidth": false
     });
+
+    $('#PunishTable').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false
+      });
 })
