@@ -1,38 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>用AJAX以JSON方式提交数据</title>
-</head>
-<body>
-    <form >
-       id：<input type="text" id="id" value="123" /><br/>
-       名称：<input type="text" id="name" value="category xxx"/><br/>
-        <input type="button" value="提交" id="sender"> 
-    </form>
-    <div id="messageDiv"></div>
-    <script src="assets/js/form/jquery-2.2.3.min.js"></script>
-    <script>
-    $('#sender').click(function(){
-        var id=document.getElementById('id').value;
-        var name=document.getElementById('name').value;
-        var category={"name":name,"id":id};
-        var jsonData = JSON.stringify(category);
-        var page="category";
-          
-        $.ajax({
-               type:"put",
-               url: page,
-               data:jsonData,
-               dataType:"json",
-               contentType : "application/json;charset=UTF-8",
-               success: function(result){
-               }
-            });
-           alert("提交成功，请在springboot控制台查看服务端接收到的数据");
-  
-    });
-    </script>
-</body>
-     
-</html>
+<button class="btn btn-primary" id="AddAward">添加奖励</button>
+<table id="AwardTable" class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>奖励名称</th>
+      <th>奖励性质</th>
+      <th>获奖时间</th>
+      <th>奖励审阅情况</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="award:${awlist}" th:object="${award}">
+      <td th:text="*{award_name}"></td>
+      <td th:text="*{award_type}"></td>
+      <td th:text="*{award_time}"></td>
+      <td th:text="*{award_condition}" span th:style="'color:'+*{condition_css}"></td>
+      <td>
+        <button class="btn btn-primary">浏览</button>
+        <button th:if="*{award_condition} eq '未审阅'" class="btn btn-primary">更改</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

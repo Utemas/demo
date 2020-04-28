@@ -269,6 +269,32 @@ $(function () {
         $("#account").addClass("hidden");
     });
 
+    $("#AddAward").click(function(){
+        $("#AwardAddFormal").modal("show");
+    });
+
+    $("#AddAwardSure").click(function(){
+        var award_name = $("#award_name").val();
+        var award_time = $("#award_time").val();
+        var award_type = $("#award_type").val();
+        $.ajax({
+            url: "/addAwardInfo",
+            type: "POST",
+            data:{
+                award_name : award_name,
+                award_time : award_time,
+                award_type : award_type
+            },
+            success : function(msg){
+                $('#AwardAddFormal').modal("hide");
+                window.location.reload();
+            }
+        })
+    });
+
+    $("#PDFOutput").click(function(){
+        
+    });
     $('#AwardTable').DataTable({
       "paging": true,
       "lengthChange": false,

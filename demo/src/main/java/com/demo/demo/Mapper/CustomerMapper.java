@@ -9,6 +9,7 @@ import com.demo.demo.po.Customer;
 import com.demo.demo.po.Enter;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
+import com.demo.demo.po.Punish;
 import com.demo.demo.po.Student;
 import com.demo.demo.po.Trouble;
 import com.demo.demo.po.Urgent;
@@ -90,6 +91,16 @@ public interface CustomerMapper {
     @Select("select count(*) from project1_award where st_id=#{st_id}")
     public int getAwardCount(@Param("st_id") String st_id);
 
+
+    @Select("select count(*) from project1_punish where st_id=#{st_id}")
+    public int getPunishCount(@Param("st_id")String st_id);
+
+    //查询学生的惩罚信息
+    @Select("select * from project1_punish where st_id=#{st_id}")
+    public List<Punish> getPunish(@Param("st_id") String st_id);
+
+    @Select("select * from project1_punish where id=#{id}")
+    public Punish getPunishById(@Param("id")int id);
     //删除Section
     //删除这个学生上过的课程
     @Delete("delete from project1_class where st_id=#{st_id}")

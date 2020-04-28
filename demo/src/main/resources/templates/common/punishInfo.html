@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>处罚详细</title> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../assets/css/form/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../assets/css/form/AdminLTE.min.css">
+    <link rel="stylesheet" href="../assets/css/form/_all-skins.min.css">
+    <link rel="stylesheet" href="../assets/css/form/blue.css">
+    <link rel="stylesheet" href="../assets/css/page/total.css">
+    <link rel="stylesheet" href="../assets/css/comon.css">
+</head>
+<body class="hold-transition layout-boxed sidebar-mini" th:object="${punish}" style="background-color: blanchedalmond;">
+    <div class="wrapper" style="margin-top: 100px;width:50%;background-color: white;">
+      <div style="padding: 5px;" class="rightleft">
+        <p></p>
+        <a class="btn btn-primary" href="javascript:history.go(-1);">返回</a>
+      </div>
+      <p style="color:red;text-align: center;font-size: 50px;font-weight: bolder;"><u>处罚通知</u></p>
+      <hr style=" height:2px;border:none;border-top:2px dotted #185598;"/>
+      <p style="text-indent:2em;font-weight: bolder;font-size: 20px;">
+        <span th:text="${person.name}">王XX</span>同学,您好：
+      </p>
+      <p style="text-indent:4em;font-weight: bolder;font-size: 20px; padding-left: 10px; padding-right: 10px;">
+        由于，您<span th:text="*{punish_name}" style="color: red;"></span>,由学校领导决定给予您<span th:text="*{punish_result}" style="color:red"></span>的处罚决定。
+        <span th:if="*{punish_result} ne '开除学籍'" th:text="'处罚持续时间'+*{punish_sc}"></span><span th:if="*{punish_result} eq '开除学籍'">您的账号将会在一周内被学校管理人员注销。</span>
+        <div class="rightleft" style="margin-top: 100px;">
+          <div></div>
+          <div style="text-align: center;margin-right: 50px;">
+            <p style="font-weight: bolder;font-size: 20px;">
+              学校教务处
+            </p>
+            <p th:text="*{punish_time}" style="font-weight: bolder;font-size: 20px;"></p>
+          </div>
+        </div>
+      </p>
+    </div>
+  </body>
+</html>

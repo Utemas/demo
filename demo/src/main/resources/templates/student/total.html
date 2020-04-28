@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +15,7 @@
   <link rel="stylesheet" href="../assets/css/page/total.css">
   <link rel="stylesheet" href="../assets/css/comon.css">
 </head>
+
 <body class="hold-transition skin-blue layout-boxed sidebar-mini" onload="hed('个人信息','此信息为身份证件上的信息')">
   <div class="wrapper">
     <header class="main-header">
@@ -34,13 +36,15 @@
           <ul class="nav navbar-nav">
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img th:src="@{../assets/img/customer/{filename}.jpg(filename=${student.st_id})}" class="user-image" alt="User Image">
+                <img th:src="@{../assets/img/customer/{filename}.jpg(filename=${student.st_id})}" class="user-image"
+                  alt="User Image">
                 <span class="hidden-xs" th:text="'您好！'+${person.name}"></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <img th:src="@{../assets/img/customer/{filename}.jpg(filename=${student.st_id})}" class="img-circle" alt="User Image">
+                  <img th:src="@{../assets/img/customer/{filename}.jpg(filename=${student.st_id})}" class="img-circle"
+                    alt="User Image">
                   <p th:text="${person.name}">
                     Alexander Pierce
                   </p>
@@ -66,7 +70,8 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img th:src="@{../assets/img/customer/{filename}.jpg(filename=${student.st_id})}" class="img-circle" alt="User Image">
+            <img th:src="@{../assets/img/customer/{filename}.jpg(filename=${student.st_id})}" class="img-circle"
+              alt="User Image">
           </div>
           <div class="pull-left info">
             <p th:text="${person.name}">Alexander Pierce</p>
@@ -77,10 +82,10 @@
         <div class="sidebar-form">
           <div class="input-group">
             <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                  <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                  </button>
-                </span>
+            <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
           </div>
         </div>
         <!-- /.search form -->
@@ -95,7 +100,8 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="active" id="baseinformation"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>个人基本信息</a></li>
+              <li class="active" id="baseinformation"><a href="javascript:void(0);"><i
+                    class="fa fa-circle-o"></i>个人基本信息</a></li>
               <li id="studentinformation"><a href="javascript:void(0)"><i class="fa fa-circle-o"></i>个人名片</a></li>
               <li id="xue_jiSearch"><a href="javascript:void(0)"><i class="fa fa-circle-o"></i>个人学籍信息</a></li>
             </ul>
@@ -109,7 +115,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li id="classinformation"><a href="javascript:void(0);" ><i class="fa fa-circle-o"></i>成绩信息</a></li>
+              <li id="classinformation"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>成绩信息</a></li>
               <li id="classTotal"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>成绩统计</a></li>
             </ul>
           </li>
@@ -139,7 +145,7 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header" id="sec">
-        
+
       </section>
       <div class="content">
         <!--     往这里添加 主要内容-->
@@ -149,65 +155,98 @@
           </tr>
           <!-- row  1-->
           <tr>
-            <td class="title"><p>姓名</p></td>
+            <td class="title">
+              <p>姓名</p>
+            </td>
             <td th:text="*{name}"></td>
-            <td class="title"><p>国籍</p></td>
+            <td class="title">
+              <p>国籍</p>
+            </td>
             <td th:text="*{country}"></td>
           </tr>
           <!--row 2-->
           <tr>
-            <td class="title"><p>性别</p></td>
+            <td class="title">
+              <p>性别</p>
+            </td>
             <td th:text="*{sex}"></td>
-            <td class="title"><p>民族</p></td>
+            <td class="title">
+              <p>民族</p>
+            </td>
             <td th:text="*{nation}"></td>
           </tr>
           <!--row 3-->
           <tr>
-            <td class="title"><p>英文名</p></td>
+            <td class="title">
+              <p>英文名</p>
+            </td>
             <td th:text="${english_name}"></td>
-            <td class="title"><p>政治面貌</p></td>
-            <td><p></p></td>
+            <td class="title">
+              <p>政治面貌</p>
+            </td>
+            <td>
+              <p></p>
+            </td>
           </tr>
           <!-- row 4-->
           <tr>
-            <td class="title"><p>证件类型</p></td>
+            <td class="title">
+              <p>证件类型</p>
+            </td>
             <td th:text="*{card_type}"></td>
-            <td class="title"><p>证件号码</p></td>
+            <td class="title">
+              <p>证件号码</p>
+            </td>
             <td th:text="*{id_number}"></td>
           </tr>
           <tr>
-            <td class="title"><p>出生日期</p></td>
+            <td class="title">
+              <p>出生日期</p>
+            </td>
             <td th:text="${birthday}"></td>
             <td class="title"></td>
             <td></td>
           </tr>
           <!--row 5-->
           <tr style="height:40px">
-            <td class="title"><p>家庭住址</p></td>
+            <td class="title">
+              <p>家庭住址</p>
+            </td>
             <td colspan="3" th:text="${address}"></td>
           </tr>
         </table>
         <div id="studentTable" class="hidden">
           <table border="1" cellspacing="0" cellpadding="0">
             <tr style="color:white;background-color: #3c8dbc; height: 10px;">
-              <td colspan="4">个人联系信息表<button style="margin-left: 20px;" id="changeTheContact" class="btn btn-warning">更改</button></td>
+              <td colspan="4">个人联系信息表<button style="margin-left: 20px;" id="changeTheContact"
+                  class="btn btn-warning">更改</button></td>
             </tr>
             <!-- row  1-->
             <tr id="contextInfo">
-              <td class="title"><p>籍贯</p></td>
+              <td class="title">
+                <p>籍贯</p>
+              </td>
               <td id="jg"></td>
-              <td class="title"><p>联系电话</p></td>
+              <td class="title">
+                <p>联系电话</p>
+              </td>
               <td id="ct"></td>
             </tr>
             <tr>
-              <td class="title"><p>电子邮箱</p></td>
+              <td class="title">
+                <p>电子邮箱</p>
+              </td>
               <td id="el"></td>
-              <td class="title"><p>邮政编码</p></td>
+              <td class="title">
+                <p>邮政编码</p>
+              </td>
               <td id="yb"></td>
             </tr>
             <!--row 5-->
             <tr style="height:40px">
-              <td class="title"><p>乘车区间</p></td>
+              <td class="title">
+                <p>乘车区间</p>
+              </td>
               <td colspan="3" id="sst"></td>
             </tr>
           </table>
@@ -216,10 +255,15 @@
               <td colspan="4" th:text="监护人紧急联系表"></td>
             </tr>
             <tr>
-              <td>姓名</td><td>与本人关系</td><td>联系电话</td><td>操作</td>
+              <td>姓名</td>
+              <td>与本人关系</td>
+              <td>联系电话</td>
+              <td>操作</td>
             </tr>
             <tr th:each="urgent:${ulist}">
-              <td th:text="${urgent.urgent_name}"></td><td th:text="${urgent.urgent_guanxi}"></td><td th:text="${urgent.urgent_tel}"></td>
+              <td th:text="${urgent.urgent_name}"></td>
+              <td th:text="${urgent.urgent_guanxi}"></td>
+              <td th:text="${urgent.urgent_tel}"></td>
               <td>
                 <button class="btn btn-primary">更新</button>
                 <button class="btn btn-danger">删除</button>
@@ -233,7 +277,7 @@
         </div>
         <div id="class_info" class="hidden">
           <div class="rightleft">
-            <div></div>
+            <div><button class="btn btn-warning" style="width:100px" id="PDFOutput">导出PDF</button></div>
             <div>年份:
               <select style="width: 100px;margin-left: 10px;" id="selectYear">
                 <option th:each="year:${enterYears}" th:text="${year}" th:value="${year}"></option>
@@ -243,7 +287,11 @@
           <table border="1" cellspacing="0" cellpadding="0" id="ClassInfo">
             <thead>
               <tr>
-                <th>课程号</th><th>课程名称</th><th>讲授教师</th><th>成绩</th><th>学分</th>
+                <th>课程号</th>
+                <th>课程名称</th>
+                <th>讲授教师</th>
+                <th>成绩</th>
+                <th>学分</th>
               </tr>
             </thead>
             <tbody id="classes"></tbody>
@@ -251,15 +299,24 @@
         </div>
         <table border="1" cellspacing="0" cellpadding="0" id="class_total" class="hidden">
           <tr>
-            <td class="title">总学分</td><td><p th:text="${xueFenTotal}"></p></td>
-            <td class="title">优秀率</td><td><p th:text="${youxiulv}"></p></td>
+            <td class="title">总学分</td>
+            <td>
+              <p th:text="${xueFenTotal}"></p>
+            </td>
+            <td class="title">优秀率</td>
+            <td>
+              <p th:text="${youxiulv}"></p>
+            </td>
           </tr>
           <tr>
-            <td class="title">不及格科目数量</td><td th:text="${bujigeNumber}"></td>
-            <td class="title">不及格科目占比</td><td th:text="${bujuigelv}"></td>
+            <td class="title">不及格科目数量</td>
+            <td th:text="${bujigeNumber}"></td>
+            <td class="title">不及格科目占比</td>
+            <td th:text="${bujuigelv}"></td>
           </tr>
           <tr>
-            <td class="title">平均绩点(GPA)</td><td></td>
+            <td class="title">平均绩点(GPA)</td>
+            <td></td>
           </tr>
         </table>
         <table border="1" cellspacing="0" cellpadding="0" id="xue_j" class="hidden" th:object="${student}">
@@ -316,16 +373,15 @@
           </tr>
         </table>
         <div id="award_table" class="hidden">
-          <button class="btn btn-primary">添加奖励</button>
+          <button class="btn btn-primary" id="AddAward">添加奖励</button>
           <table id="AwardTable" class="table table-bordered table-hover">
             <thead>
-            <tr></tr>
               <th>奖励名称</th>
               <th>奖励性质</th>
               <th>获奖时间</th>
               <th>奖励审阅情况</th>
               <th>操作</th>
-            </tr>
+              </tr>
             </thead>
             <tbody>
               <tr th:each="award:${awlist}" th:object="${award}">
@@ -345,31 +401,31 @@
           <table id="PunishTable">
             <thead>
               <tr></tr>
-                <th>惩罚名称</th>
-                <th>惩罚结果</th>
-                <th>惩罚时间</th>
-                <th>惩罚时长</th>
-                <th>操作</th>
+              <th>惩罚名称</th>
+              <th>惩罚结果</th>
+              <th>惩罚时间</th>
+              <th>惩罚时长</th>
+              <th>操作</th>
               </tr>
-              </thead>
-              <tbody>
-                <tr th:each="award:${awlist}" th:object="${award}">
-                  <td th:text="*{award_name}"></td>
-                  <td th:text="*{award_type}"></td>
-                  <td th:text="*{award_time}"></td>
-                  <td>adff年</td>
-                  <td>
-                    <button class="btn btn-primary">浏览</button>
-                  </td>
-                </tr>
-              </tbody>
+            </thead>
+            <tbody>
+              <tr th:each="punish:${pulist}" th:object="${punish}">
+                <td th:text="*{punish_name}"></td>
+                <td th:text="*{punish_result}"></td>
+                <td th:text="*{punish_time}"></td>
+                <td th:text="*{punish_sc}"></td>
+                <td>
+                  <a th:href="@{/punishtextInfo(punish_id=*{id})}" class="btn btn-primary">浏览</a>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <table cellspacing="0" cellpadding="0" id="account" class="hidden" style="width:80%">
           <tr>
             <td style="width:30%">新密码</td>
             <td>
-              <input type="password" class="form-control" id="newPassword"/>
+              <input type="password" class="form-control" id="newPassword" />
             </td>
           </tr>
           <tr>
@@ -381,7 +437,7 @@
           <tr>
             <td style="width:30%">确认密码</td>
             <td>
-              <input type="password" class="form-control" id="surePassword"/>
+              <input type="password" class="form-control" id="surePassword" />
             </td>
           </tr>
           <tr>
@@ -391,76 +447,116 @@
             </td>
           </tr>
           <tr>
-            <td colspan="3" class="center" style="text-align:center"><button class="btn btn-primary" id="submit" style="width:550px">更改</button></td>
+            <td colspan="3" class="center" style="text-align:center"><button class="btn btn-primary" id="submit"
+                style="width:550px">更改</button></td>
           </tr>
         </table>
       </div>
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-  
+
     <footer class="main-footer">
-      <strong>若"个人信息"有问题，可以通过<a style="margin-left: 3px;"th:href="@{/trouble?type=2}">联系管理人员</a>进行修改</strong>
+      <strong>若"个人信息"有问题，可以通过<a style="margin-left: 3px;" th:href="@{/trouble?type=2}">联系管理人员</a>进行修改</strong>
     </footer>
   </div>
-<!-- ./wrapper -->
-<div class="modal fade" id="ContactFormModal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
-  <div class="modal-dialog">
+  <!-- ./wrapper -->
+  <div class="modal fade" id="ContactFormModal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
       <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-              <h4 class="modal-title">更改联系方式</h4>
-          </div>
-          <div id="form1" class="form-horizontal">
-              <div class="modal-body">
-                  <div class="form-group">
-                      <label for="newJiguan" class="col-sm-2 control-label">籍贯</label>
-                      <div class="col-sm-9">
-                          <input type="text" class="form-control" id="customer_jiguan"/>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="newTel" class="col-sm-2 control-label">联系电话</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="customer_tel"/>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="newEmail" class="col-sm-2 control-label">电子邮箱</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="customer_email"/>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="newYouzheng" class="col-sm-2 control-label">邮政编码</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="customer_youzheng"/>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="start_station" class="col-sm-2 control-label">乘车区间<br/>(初始地)</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="customer_start_station"/>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="end_station" class="col-sm-2 control-label">乘车区间<br/>(终点地)</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" id="customer_end_station"/>
-                      </div>
-                  </div>
-              </div>
-              <div class="modal-footer">
-                  <button class="btn btn-primary" id="updateContext">更改</a>
-                  <button type="button" class="btn btn-default" data-dismiss="modal">完成</button>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">更改联系方式</h4>
+        </div>
+        <div id="form1" class="form-horizontal">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="newJiguan" class="col-sm-2 control-label">籍贯</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="customer_jiguan" />
               </div>
             </div>
+            <div class="form-group">
+              <label for="newTel" class="col-sm-2 control-label">联系电话</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="customer_tel" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="newEmail" class="col-sm-2 control-label">电子邮箱</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="customer_email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="newYouzheng" class="col-sm-2 control-label">邮政编码</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="customer_youzheng" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="start_station" class="col-sm-2 control-label">乘车区间<br />(初始地)</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="customer_start_station" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="end_station" class="col-sm-2 control-label">乘车区间<br />(终点地)</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="customer_end_station" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="updateContext">更改</a>
+              <button type="button" class="btn btn-default" data-dismiss="modal">完成</button>
+          </div>
+        </div>
       </div>
       <!-- /.modal-content -->
+    </div>
   </div>
-</div>
+  <div class="modal fade" id="AwardAddFormal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">奖励添加</h4>
+        </div>
+        <div id="form2" class="form-horizontal">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="newJiguan" class="col-sm-2 control-label">奖励名称</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="award_name" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="newTel" class="col-sm-2 control-label">获奖时间</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="award_time" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="newEmail" class="col-sm-2 control-label">获奖类型</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="award_type" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="AddAwardSure">添加</a>
+              <button type="button" class="btn btn-default" data-dismiss="modal">完成</button>
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+  </div>
   <script src="../assets/js/form/jquery-2.2.3.min.js"></script>
   <script src="../assets/js/form/bootstrap.min.js"></script>
   <script src="../assets/js/form/Chart.min.js"></script>
@@ -473,4 +569,5 @@
   <script src="../assets/js/page/total.js"></script>
   <script src="../assets/js/form/chaos.js"></script>
 </body>
+
 </html>

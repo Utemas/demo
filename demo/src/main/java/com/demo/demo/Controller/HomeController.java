@@ -9,6 +9,7 @@ import com.demo.demo.po.Customer;
 import com.demo.demo.po.Enter;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
+import com.demo.demo.po.Punish;
 import com.demo.demo.po.Student;
 import com.demo.demo.po.Urgent;
 
@@ -158,14 +159,17 @@ public class HomeController {
         int awardCount = customerMapper.getAwardCount(customer.getSt_id());
         map.put("awardCount",awardCount);
         
-        //查询学生惩罚情况的数量
-        int punishCount = 0;
-        map.put("punishCount",punishCount);
         //查询学生获奖情况
         List<Award> awlist = customerMapper.getAward(customer.getSt_id());
         map.put("awlist",awlist);
 
+        //查询学生惩罚情况的数量
+        int punishCount = customerMapper.getPunishCount(customer.getSt_id());
+        map.put("punishCount",punishCount);
 
+        //查询学生惩罚情况
+        List<Punish> pulist = customerMapper.getPunish(customer.getSt_id());
+        map.put("pulist",pulist);
 
 
 
@@ -186,4 +190,35 @@ public class HomeController {
         return "/trouble";
     }
 
+    @RequestMapping("/punishtextInfo")
+    public String punishtextInfo(@RequestParam(value = "punish_id", required = false, defaultValue = "0") int punish_id, HashMap<String,Object> map){
+
+        if(punish_id == 0){
+            return "/500";
+        }
+        Punish punish = customerMapper.getPunishById(punish_id);
+        Customer customer = customerMapper.getCustomerByStid(punish.getSt_id());
+        Person person = customerMapper.getStudentPeronInformation(customer.getId_number());
+        map.put("person",person);
+        map.put("punish",punish);
+        return "common/punishInfo";
+    }
+
+    @RequestMapping("/awardRefresh")
+    public String ddd(HashMap<String,Object> map){
+        Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
+        List<Award> awlist = customerMapper.getAward(loginer.getSt_id());
+        map.put("awlist",awlist);
+        return "/student";
+    }
+
+    @RequestMapping("/tologin")
+    public String tologin(HashMap<String,Object> map){
+        String a = "不要回答！不要回答！不要回答！";
+		Person person = new Person();
+		person.setName("张三");
+		map.put("firstMessage",a);
+		map.put("person",person);
+		return "tologin";
+    }
 }

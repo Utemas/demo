@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+	<head><!--这一块省略掉，不关注--></head>
+	<body>
+		<p th:text="${firstMessage}"></p>
+		<div th:object="${person}">
+			<p th:text="*{name}"></p>
+		</div>
+	</body>
+</html>
