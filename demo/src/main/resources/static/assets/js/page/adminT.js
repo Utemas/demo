@@ -36,7 +36,7 @@ $(function () {
             return false;
         }
     });
-
+    
     $("#uploadFile").click(function(){
         var file = $("#file")[0].files[0];
         var formData = new FormData();
@@ -70,6 +70,14 @@ $(function () {
         })
     });
 
+    $('#AllStudent').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false
+      });
 
     
 });

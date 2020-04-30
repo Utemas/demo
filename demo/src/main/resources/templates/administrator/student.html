@@ -36,13 +36,13 @@
           <ul class="nav navbar-nav">
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../assets/img/customer/1620010518.jpg" class="user-image" alt="User Image">
+                <img src="../assets/img/customer/0000000002.jpg" class="user-image" alt="User Image">
                 <span class="hidden-xs">Alexander Pierce</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <img src="../assets/img/customer/1620010518.jpg" class="img-circle" alt="User Image">
+                  <img src="../assets/img/customer/0000000002.jpg" class="img-circle" alt="User Image">
                   <p>
                     Alexander Pierce
                   </p>
@@ -84,7 +84,21 @@
       </section>
       <div class="content">
         <div id="xuejiSearch">
-          
+          <button class="btn btn-primary">修改信息</button>
+          <table th:object="${student}">
+            <tr>
+              <td>姓名</td>
+              <td>hhh</td>
+              <td>所属学院</td>
+              <td th:text="*{st_xueYuan}"></td>
+            </tr>
+            <tr>
+              <td>年级</td>
+              <td th:text="*{st_nianji}"></td>
+              <td>班级</td>
+              <td th:text="*{st_class}"></td>
+            </tr>
+          </table>
         </div>
       </div>
       <!-- /.content -->
@@ -105,18 +119,5 @@
 <script src="../assets/js/form/fastclick/fastclick.js"></script>
 <script src="../assets/js/form/demo.js"></script>
 <script src="../assets/js/form/chaos.js"></script>
-<script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
-</script>
 </body>
 </html>

@@ -277,7 +277,7 @@
         </div>
         <div id="class_info" class="hidden">
           <div class="rightleft">
-            <div><button class="btn btn-warning" style="width:100px" id="PDFOutput">导出PDF</button></div>
+            <div><a class="btn btn-warning" style="width:100px" href="/pdfOutput">导出PDF</a></div>
             <div>年份:
               <select style="width: 100px;margin-left: 10px;" id="selectYear">
                 <option th:each="year:${enterYears}" th:text="${year}" th:value="${year}"></option>

@@ -141,11 +141,12 @@
           <li class="treeview">
             <a href="javascript:void(0);">
               <i class="fa fa-files-o"></i>
-              <span>奖励信息审核</span>
-              <span class="pull-right-container">
-                <span class="label label-primary pull-right">4</span>
-              </span>
+              <span>奖惩操作</span>
             </a>
+            <ul class="treeview-menu">
+              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>奖励信息审核</a></li>
+              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>惩罚信息添加</a></li>
+            </ul>
           </li>
           <li class="treeview" id="updateAccount">
             <a href="javascript:void(0);">
@@ -182,13 +183,13 @@
         <!--     往这里添加 主要内容-->
         <div id="xuejiSearch">
           <form class="input-group" action="/findStudentById">
-            <input type="text" name="st_id" class="form-control" placeholder="请输入学生学号，点击搜索按钮" id="Search_student">
+            <input type="text" class="form-control" placeholder="请输入学生学号，点击搜索按钮" id="st_id" name="st_id">
             <span class="input-group-btn">
-              <button id="search_btn2" class="btn btn-flat"/><i class="fa fa-search"></i></button>
+              <button id="search_btn2" class="btn btn-flat"><i class="fa fa-search"></i></button>
             </span>
           </form>
           <div class="box-body" id="main1">
-            <table id="example2" class="table table-bordered table-hover">
+            <table id="AllStudent" class="table table-bordered table-hover">
               <thead>
               <tr>
                 <th>学生学号</th>
@@ -199,14 +200,14 @@
               </tr>
               </thead>
               <tbody>
-                <tr th:each="student:${clist}">
-                  <td th:text="${student.st_id}" class="center"></td>
-                  <td th:text="${student.st_id}"></td>
-                  <td th:text="${student.st_id}"></td>
-                  <td th:text="${student.st_id}"></td>
+                <tr th:each="student:${slist}" th:object="${student}">
+                  <td th:text="*{st_id}" class="center"></td>
+                  <td th:text="*{st_xueYuan}"></td>
+                  <td th:text="*{st_xueYuan}"></td>
+                  <td th:text="*{st_xueYuan}"></td>
                   <td>
-                    <a th:href="@{'/update?st_id='+${student.st_id}}" class="btn btn-primary">更改</a>
-                    <button class="btn btn-danger" id="deleteStudent" th:value="${student.st_id}">删除</button>
+                    <a th:href="@{'/update?st_id='+*{st_id}}" class="btn btn-primary">更改</a>
+                    <button class="btn btn-danger" id="deleteStudent" th:value="*{st_id}">删除</button>
                   </td>
                 </tr>
               </tbody>
@@ -238,12 +239,12 @@
 <!-- ./wrapper -->
 <script src="../assets/js/form/jquery-2.2.3.min.js"></script>
 <script src="../assets/js/form/bootstrap.min.js"></script>
-<script src="../assets/js/page/adminT.js"></script>
 <script src="../assets/js/form/jquery.slimscroll.min.js"></script>
 <script src="../assets/js/form/app.min.js"></script>
 <script src="../assets/js/form/datatables/jquery.dataTables.min.js"></script>
 <script src="../assets/js/form/datatables/dataTables.bootstrap.min.js"></script>
 <script src="../assets/js/form/fastclick/fastclick.js"></script>
+<script src="../assets/js/page/adminT.js"></script>
 <script src="../assets/js/form/demo.js"></script>
 <script src="../assets/js/form/chaos.js"></script>
 <script>

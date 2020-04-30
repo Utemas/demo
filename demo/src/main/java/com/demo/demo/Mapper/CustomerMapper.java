@@ -55,12 +55,16 @@ public interface CustomerMapper {
     public int getBujigeNumber(@Param("st_id") String st_id);
 
     //查询所有学籍学生
-    @Select("select * from project1_login where login_identify = 'st'")
-    public List<Loginer> findAllStudent();
+    @Select("select * from project1_st")
+    public List<Student> findAllStudent();
 
     //按照学号查询学生
-    @Select("select * from project1_login where login_identify='st' and st_id=#{st_id}")
-    public List<Loginer> finStudentById(@Param("st_id") String st_id);
+    @Select("select * from project1_st where st_id=#{st_id}")
+    public List<Student> finStudentById(@Param("st_id") String st_id);
+
+    @Select("select * from project1_st where st_id=#{st_id}")
+    public Student findStudentById(@Param("st_id") String st_id);
+
 
     //查询这个学生的紧急联系人
     @Select("select * from project1_urgent where st_id=#{st_id}")
@@ -101,24 +105,22 @@ public interface CustomerMapper {
 
     @Select("select * from project1_punish where id=#{id}")
     public Punish getPunishById(@Param("id")int id);
+    
+    
+    
     //删除Section
     //删除这个学生上过的课程
     @Delete("delete from project1_class where st_id=#{st_id}")
     public int deleteClassById(@Param("st_id")String st_id);
 
+    @Delete("delete from project1_class where id=#{id}")
+    public int deleteClassByClassId(@Param("id")int id);
+
     //删除这个学生在系统中的个人信息
     @Delete("delete from project1_person where id_number=#{id_number}")
     public int deletePersonById(@Param("id_number")String id_number);
 
-    //删除这个学生的毕业信息
-    @Delete("delete from project1_from where id_number=#{id_number}")
-    public int deleteFromById(@Param("id_number") String id_number);
-
-    //删除这个学生的活动信息
-    @Delete("delete from project1_from where st_id=#{st_id}")
-    public int deleteActivityById(@Param("st_id") String st_id);
-
-    //删除掉这个生的customer表
+    //删除掉这个生的customer表st_id
     @Delete("delete from project1_customer where id_number=#{id_number}")
     public int deleteCustomerById(@Param("id_number") String id_numbere);
 

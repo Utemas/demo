@@ -291,10 +291,6 @@ $(function () {
             }
         })
     });
-
-    $("#PDFOutput").click(function(){
-        
-    });
     $('#AwardTable').DataTable({
       "paging": true,
       "lengthChange": false,

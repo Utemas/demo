@@ -6,6 +6,7 @@ import lombok.ToString;
 
 @Getter@Setter@ToString
 public class Student {
+    private String id_number;
     private String st_id;
     private String st_xueYuan;
     private String st_zhuanye;
