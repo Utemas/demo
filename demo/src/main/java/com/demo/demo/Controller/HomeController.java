@@ -225,9 +225,6 @@ public class HomeController {
     @RequestMapping("/pdfOutput")
     public String test() {
         
-        // String filename = "D:/Program Files/pdfTest/testTable3.pdf";
-        // pdf.createPDF(filename);
-        // System.out.println("打印完成");
         return null;
     }
 }

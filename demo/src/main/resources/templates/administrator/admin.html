@@ -134,8 +134,8 @@
               <span>成绩信息管理</span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>成绩信息导入</a></li>
-              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>成绩信息管理</a></li>
+              <li id="classUpload"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>成绩信息导入</a></li>
+              <li id="classManage"><a href="/classinfoOpretion"><i class="fa fa-circle-o"></i>成绩信息管理</a></li>
             </ul>
           </li>
           <li class="treeview">
@@ -144,7 +144,7 @@
               <span>奖惩操作</span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>奖励信息审核</a></li>
+              <li><a href="/awardinfo"><i class="fa fa-circle-o"></i>奖励信息审核</a></li>
               <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>惩罚信息添加</a></li>
             </ul>
           </li>
@@ -169,16 +169,6 @@
           <li><a href="#"><i class="fa fa-dashboard"></i>学籍信息管理</a></li>
         </ol>
       </section>
-      <section class="content-header hidden" id="xj">
-        <h1>
-          个人联系名片
-          <small>此信息主要为学校提供联系方式</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="/login">登录</a></li>
-          <li><a href="#"><i class="fa fa-dashboard"></i>个人联系名片</a></li>
-        </ol>
-      </section>
       <div class="content">
         <!--     往这里添加 主要内容-->
         <div id="xuejiSearch">
@@ -192,10 +182,10 @@
             <table id="AllStudent" class="table table-bordered table-hover">
               <thead>
               <tr>
-                <th>学生学号</th>
-                <th>学生姓名</th>
-                <th>学生入学时间</th>
-                <th>学籍状态</th>
+                <th>学号</th>
+                <th>学院</th>
+                <th>专业</th>
+                <th>班级</th>
                 <th>操作</th>
               </tr>
               </thead>
@@ -203,10 +193,10 @@
                 <tr th:each="student:${slist}" th:object="${student}">
                   <td th:text="*{st_id}" class="center"></td>
                   <td th:text="*{st_xueYuan}"></td>
-                  <td th:text="*{st_xueYuan}"></td>
-                  <td th:text="*{st_xueYuan}"></td>
+                  <td th:text="*{st_zhuanye}"></td>
+                  <td th:text="*{st_nianji}+'-'+*{st_class}"></td>
                   <td>
-                    <a th:href="@{'/update?st_id='+*{st_id}}" class="btn btn-primary">更改</a>
+                    <a th:href="@{'/look?st_id='+*{st_id}}" class="btn btn-primary" target="_blank">查看</a>
                     <button class="btn btn-danger" id="deleteStudent" th:value="*{st_id}">删除</button>
                   </td>
                 </tr>

@@ -8,16 +8,32 @@ $(function () {
         //页面切换
         $("#xuejiSearch").removeClass("hidden");
         $("#xuejiInputPage").addClass("hidden");
+        $("#classInfoPage").addClass("hidden");
 
     });
 
     $("#xuejiInput").click(function(){
         $("#initialPage").removeClass("active");
         $("#xuejiInput").addClass("active");
-
         //页面切换
         $("#xuejiInputPage").removeClass("hidden");
         $("#xuejiSearch").addClass("hidden");
+        $("#classInfoPage").addClass("hidden");
+    });
+
+    $("#classUpload").click(function(){
+        $("#classManage").removeClass("active");
+        $("#classUpload").addClass("active");
+        
+        $("#xuejiSearch").addClass("hidden");
+
+        $("#xuejiInputPage").addClass("hidden");
+        $("#classInfoPage").removeClass("hidden");
+    });
+
+    $("#classManage").click(function(){
+        $("#classUpload").removeClass("active");
+        $("#classManage").addClass("active");
     });
 
     $("#example2").on("click","#deleteStudent",function () {

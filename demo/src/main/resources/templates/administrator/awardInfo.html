@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>欢迎登录学籍管理系统</title>
+  <title>奖励管理</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../assets/css/form/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="../assets/css/page/admin.css">
   <script src="../assets/js/common.js"></script>
 </head>
-<body class="hold-transition skin-blue layout-boxed sidebar-mini" onload="hed('个人信息','大晒吧');">
+<body class="hold-transition skin-blue layout-boxed sidebar-mini" onload="hed2('奖励信息审阅','奖励信息审阅','主页');">
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
@@ -83,37 +83,28 @@
       <section class="content-header" id="sec">
       </section>
       <div class="content">
-        <div id="xuejiSearch">
-          <button class="btn btn-primary">修改信息</button>
-          <table th:object="${student}">
+        <div class="box-body" id="main1">
+          <table id="awardInfo" class="table table-bordered table-hover">
+            <thead>
             <tr>
-              <td>姓名</td>
-              <td th:text="${person.name}"></td>
-              <td>所属学院</td>
-              <td th:text="*{st_xueYuan}"></td>
+              <th>奖励名称</th>
+              <th>奖励性质</th>
+              <th>获奖时间</th>
+              <th>奖励审阅情况</th>
+              <th>操作</th>
             </tr>
-            <tr>
-              <td>年级</td>
-              <td th:text="*{st_nianji}"></td>
-              <td>班级</td>
-              <td th:text="*{st_class}"></td>
-            </tr>
-            <tr>
-              <td>学生类别</td>
-              <td th:text="*{st_type}"></td>
-              <td>培养方式</td>
-              <td th:text="*{st_peiyangfangshi}"></td>
-            </tr>
-            <tr>
-              <td>毕业去向</td>
-              <td th:text="*{st_leave_to}"></td>
-              <td>学籍状态</td>
-              <td th:text="*{st_status}" th:style="'color:'+*{st_status_stiker}"></td>
-            </tr>
-            <tr>
-              <td>学籍表单号</td>
-              <td th:text="*{st_xuejibiao_number}"></td>
-            </tr>
+            </thead>
+            <tbody>
+              <tr th:each="award:${awlist}" th:object="${award}">
+                <td th:text="*{award_name}"></td>
+                <td th:text="*{award_type}"></td>
+                <td th:text="*{award_time}"></td>
+                <td th:text="*{award_condition}" span th:style="'color:'+*{condition_css}"></td>
+                <td>
+                  <a class="btn btn-primary" th:if="*{award_condition} eq '未审阅'" th:href="@{/judgeAward(id=*{id})}">审阅</a>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -127,7 +118,6 @@
 <!-- ./wrapper -->
 <script src="../assets/js/form/jquery-2.2.3.min.js"></script>
 <script src="../assets/js/form/bootstrap.min.js"></script>
-<script src="../assets/js/page/adminT.js"></script>
 <script src="../assets/js/form/jquery.slimscroll.min.js"></script>
 <script src="../assets/js/form/app.min.js"></script>
 <script src="../assets/js/form/datatables/jquery.dataTables.min.js"></script>
@@ -135,5 +125,17 @@
 <script src="../assets/js/form/fastclick/fastclick.js"></script>
 <script src="../assets/js/form/demo.js"></script>
 <script src="../assets/js/form/chaos.js"></script>
+<script>
+  $(function () {
+    $('#awardInfo').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
 </body>
 </html>

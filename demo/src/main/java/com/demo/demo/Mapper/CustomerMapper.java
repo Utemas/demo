@@ -106,7 +106,11 @@ public interface CustomerMapper {
     @Select("select * from project1_punish where id=#{id}")
     public Punish getPunishById(@Param("id")int id);
     
-    
+    @Select("select * from project1_award")
+    public List<Award> getAllAward();
+
+    @Select("select * from project1_award where id=#{id}")
+    public Award getAwardById(@Param("id") int id);
     
     //删除Section
     //删除这个学生上过的课程

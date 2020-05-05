@@ -5,8 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.demo.demo.Mapper.CustomerMapper;
+import com.demo.demo.Mapper.UpdateMapper;
 import com.demo.demo.Service.AdminService;
+import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
+import com.demo.demo.po.Customer;
+import com.demo.demo.po.Person;
 import com.demo.demo.po.Student;
 import com.demo.demo.po.Trouble;
 
@@ -26,6 +30,9 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
+    @Autowired
+    UpdateMapper updateMapper;
+
     @RequestMapping("/admin")
     public String adminLog(Map<String,Object> map){
 
@@ -42,17 +49,19 @@ public class AdminController {
 
     }
 
-    @RequestMapping("/update")
+    @RequestMapping("/look")
     public String updateStudentPage(@RequestParam(value = "st_id", required = false, defaultValue = "1") String st_id,HashMap<String, Object> map){
         //获取学生的学生信息
         Student student = adminService.getStudentById(st_id);
-
+        Customer customer = customerMapper.getCustomerByStid(st_id);
+        Person person = customerMapper.getStudentPeronInformation(customer.getId_number());
         //获取学生的课程信息
         List<ClassInfo> clist = adminService.getStudentClassById(st_id);
 
 
         map.put("clist",clist);
         map.put("student",student);
+        map.put("person",person);
         return "administrator/student";
     }
 
@@ -83,4 +92,32 @@ public class AdminController {
         return "administrator/admin";
     }
     
+    @RequestMapping("/classinfoOpretion")
+    public String classinfoOpretion(){
+        return "administrator/classInfo";
+    }
+
+    @RequestMapping("/awardinfo")
+    public String awardInfo(HashMap<String,Object> map) {
+        List<Award> awlist = customerMapper.getAllAward();
+        map.put("awlist", awlist);
+        return "administrator/awardInfo";
+    }
+
+
+    @RequestMapping("/judgeAward")
+    public String punishtextInfo(@RequestParam(value = "id", required = false, defaultValue = "0") int id, HashMap<String,Object> map){
+        Award award = customerMapper.getAwardById(id);
+        System.out.println(award.getAward_condition());
+        if(award.getAward_condition().equals("未审阅")){
+            int result = updateMapper.updateAwardStatus("正在审阅", "green", id);
+            award.setAward_condition("正在审阅");
+            award.setCondition_css("#DAA520");
+            
+            System.out.println(result);
+        }
+        
+        map.put("award",award);
+        return "administrator/judgeAward";
+    }
 }

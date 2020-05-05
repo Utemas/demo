@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="../assets/css/page/admin.css">
   <script src="../assets/js/common.js"></script>
 </head>
-<body class="hold-transition skin-blue layout-boxed sidebar-mini" onload="hed('个人信息','大晒吧');">
+<body class="hold-transition skin-blue layout-boxed sidebar-mini" onload="hed2('成绩信息','成绩信息管理模块','主页');">
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
@@ -83,39 +83,7 @@
       <section class="content-header" id="sec">
       </section>
       <div class="content">
-        <div id="xuejiSearch">
-          <button class="btn btn-primary">修改信息</button>
-          <table th:object="${student}">
-            <tr>
-              <td>姓名</td>
-              <td th:text="${person.name}"></td>
-              <td>所属学院</td>
-              <td th:text="*{st_xueYuan}"></td>
-            </tr>
-            <tr>
-              <td>年级</td>
-              <td th:text="*{st_nianji}"></td>
-              <td>班级</td>
-              <td th:text="*{st_class}"></td>
-            </tr>
-            <tr>
-              <td>学生类别</td>
-              <td th:text="*{st_type}"></td>
-              <td>培养方式</td>
-              <td th:text="*{st_peiyangfangshi}"></td>
-            </tr>
-            <tr>
-              <td>毕业去向</td>
-              <td th:text="*{st_leave_to}"></td>
-              <td>学籍状态</td>
-              <td th:text="*{st_status}" th:style="'color:'+*{st_status_stiker}"></td>
-            </tr>
-            <tr>
-              <td>学籍表单号</td>
-              <td th:text="*{st_xuejibiao_number}"></td>
-            </tr>
-          </table>
-        </div>
+        
       </div>
       <!-- /.content -->
     </div>

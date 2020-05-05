@@ -31,5 +31,8 @@ public interface UpdateMapper {
     
     @Update("update project1_login set password = #{password} where st_id = #{st_id}")
     public int updatePassword(@Param("password") String newPassword, @Param("st_id") String st_id);
+
+    @Update("update project1_award set award_condition =#{condition}, condition_css=#{css} where id=#{id}")
+    public int updateAwardStatus(@Param("condition") String award_condition, @Param("css") String condition_css, @Param("id")int id);
     
 }
