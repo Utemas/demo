@@ -3,6 +3,7 @@ package com.demo.demo.Service;
 
 import java.util.List;
 
+import com.demo.demo.Mapper.AddMapper;
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Student;
@@ -15,6 +16,9 @@ public class AdminService {
 
     @Autowired
     CustomerMapper customerMapper;
+
+    @Autowired
+    AddMapper addMapper;
 
 
     public Student getStudentById(String st_id) {
@@ -39,5 +43,10 @@ public class AdminService {
         return id;
     }
 
+    public int addPunish(String punish_name, String punish_result, String punish_time, String punish_sc, String st_id)
+    {
+        int result = addMapper.addPunish(punish_name, punish_result, punish_time, punish_sc, st_id);
 
+        return result;
+    }
 }

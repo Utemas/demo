@@ -83,25 +83,25 @@
       <section class="content-header" id="sec">
       </section>
       <div class="content">
-        <div class="box-body" id="main1">
-          <table id="awardInfo">
-            <thead>
+        <div>
+          <table border="1px" style="margin: 50px; width: 80%;">
             <tr>
-              <th>奖励名称</th>
-              <th>奖励性质</th>
-              <th>获奖时间</th>
-              <th>奖励审阅情况</th>
+              <th>获奖名称</th><td th:text="${award.award_name}"></td>
             </tr>
-            </thead>
-            <tbody>
-              <tr th:object="${award}">
-                <td th:text="*{award_name}"></td>
-                <td th:text="*{award_type}"></td>
-                <td th:text="*{award_time}"></td>
-                <td th:text="*{award_condition}" span th:style="'color:'+*{condition_css}"></td>
-              </tr>
-            </tbody>
+            <tr >
+              <th>获奖时间</th><td th:text="${award.award_time}"></td>
+            </tr>
+            <tr>
+              <th>奖项类型</th><td th:text="${award.award_type}"></td>
+            </tr>            
+            <tr>
+              <th>附件</th><td><img src="../assets/img/customer/0000000002.jpg"/></td>
+            </tr>
           </table>
+          <div style="text-align: center;">
+            <a class="btn btn-primary" style="margin: 0px 10px 0px 10px;" th:href="@{/awardOk(id=${award.id})}">审阅通过</a>
+            <a class="btn btn-default" style="margin: 0px 10px 0px 10px;" th:href="@{/awardWrong(id=${award.id})}">审阅不通过</a>
+          </div>
         </div>
       </div>
       <!-- /.content -->

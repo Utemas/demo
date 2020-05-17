@@ -62,13 +62,13 @@
             </li>
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="../assets/img/customer/1620010518.jpg" class="user-image" alt="User Image">
+                <img src="../assets/img/customer/00000000002.jpg" class="user-image" alt="User Image">
                 <span class="hidden-xs">Alexander Pierce</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <img src="../assets/img/customer/1620010518.jpg" class="img-circle" alt="User Image">
+                  <img src="../assets/img/customer/00000000002.jpg" class="img-circle" alt="User Image">
                   <p>
                     Alexander Pierce
                   </p>
@@ -94,7 +94,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="../assets/img/customer/1620010518.jpg" class="img-circle" alt="User Image">
+            <img src="../assets/img/customer/00000000002.jpg" class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
             <p>Alexander Pierce</p>
@@ -124,7 +124,7 @@
               <ul class="treeview-menu">
                 <li id="initialPage" class="active"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>学籍信息查询</a></li>
                 <li id="xuejiInput"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>学籍信息导入</a></li>
-                <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>学籍信息统计</a></li>
+                <li><a href="/statistics"><i class="fa fa-circle-o"></i>学籍信息统计</a></li>
               </ul>
             </a>
           </li>
@@ -145,10 +145,10 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="/awardinfo"><i class="fa fa-circle-o"></i>奖励信息审核</a></li>
-              <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>惩罚信息添加</a></li>
+              <li id="Addpunish"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>惩罚信息添加</a></li>
             </ul>
           </li>
-          <li class="treeview" id="updateAccount">
+          <li class="treeview" id="accountDefault">
             <a href="javascript:void(0);">
               <i class="fa fa-files-o"></i>
               <span>账号信息维护</span>
@@ -197,7 +197,7 @@
                   <td th:text="*{st_nianji}+'-'+*{st_class}"></td>
                   <td>
                     <a th:href="@{'/look?st_id='+*{st_id}}" class="btn btn-primary" target="_blank">查看</a>
-                    <button class="btn btn-danger" id="deleteStudent" th:value="*{st_id}">删除</button>
+                    <a class="btn btn-danger" th:href="@{'/look?st_id='+*{st_id}}">删除</a>
                   </td>
                 </tr>
               </tbody>
@@ -227,6 +227,93 @@
     </footer>
   </div>
 <!-- ./wrapper -->
+
+
+<div class="modal fade" id="PunishAddFormal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">惩罚添加</h4>
+      </div>
+      <div id="form2" class="form-horizontal">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="newJiguan" class="col-sm-2 control-label">惩罚名称</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="addpunish_name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newEmail" class="col-sm-2 control-label">惩罚措施</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="addpunish_result" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newTel" class="col-sm-2 control-label">惩罚对象（学号）</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="addpunish_st_id" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newTel" class="col-sm-2 control-label">惩罚下达<br/>时间</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="addpunish_time" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newEmail" class="col-sm-2 control-label">惩罚持续<br/>时间</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="addpunish_sc" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="AddPunishSure">添加</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+</div>
+
+<div class="modal fade" id="PasswordDefault" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">用户密码重置</h4>
+      </div>
+      <div id="form2" class="form-horizontal">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="newJiguan" class="col-sm-2 control-label">学号（账号）</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="account_st_id" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newEmail" class="col-sm-2 control-label">管理员登录密码</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" id="account_password" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="accountDe">添加</a>
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+</div>
 <script src="../assets/js/form/jquery-2.2.3.min.js"></script>
 <script src="../assets/js/form/bootstrap.min.js"></script>
 <script src="../assets/js/form/jquery.slimscroll.min.js"></script>
@@ -247,7 +334,57 @@
       "info": true,
       "autoWidth": false
     });
+
+    $("#Addpunish").click(function(){
+      $("#PunishAddFormal").modal("show");
+    });
+    $("#accountDefault").click(function(){
+      $("#PasswordDefault").modal("show");
+    })
+
+
+    $("#AddPunishSure").click(function(){
+      var punish_name = $("#addpunish_name").val();
+      var punish_result = $("#addpunish_result").val();
+      var st_id = $("#addpunish_st_id").val();
+      var punish_time = $("#addpunish_time").val();
+      var punish_sc = $("#addpunish_sc").val();
+      $.ajax({
+        url: "/addPunish",
+        type: "POST",
+        data:{
+            punish_name : punish_name,
+            punish_result : punish_result,
+            st_id : st_id,
+            punish_time : punish_time,
+            punish_sc : punish_sc,
+            },
+        success : function(msg){
+          $('#PunishAddFormal').modal("hide");
+          alert(msg);
+        }
+      })
+    });
+
+    $("#accountDe").click(function(){
+      var st_id = $("#account_st_id").val();
+      var account_password = $("#account_password").val();
+      $.ajax({
+        url: "/accountDefault",
+        type: "POST",
+        data:{
+            st_id : st_id,
+            account_password : account_password,
+            },
+        success : function(msg){
+          $('#PunishAddFormal').modal("hide");
+          alert(msg);
+        }
+      })
+    });
   });
+
+
 </script>
 </body>
 </html>

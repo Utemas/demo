@@ -20,4 +20,8 @@ public interface AddMapper {
     
     @Insert("insert into project1_award(award_name,award_time,award_condition,condition_css,st_id,award_type) values(#{award_name},#{award_time},#{award_condition},#{condition_css},#{st_id},#{award_type})")
     public int addAwardInfo(@Param("award_name") String award_name,@Param("award_time") String time,@Param("award_condition") String award_condition, @Param("condition_css") String award_css,@Param("st_id") String st_id,@Param("award_type")String award_type);
+
+
+    @Insert("insert into project1_punish(punish_name,punish_result,punish_time,punish_sc,st_id) values(#{punish_name},#{punish_result},#{punish_time},#{punish_sc},#{st_id})")
+    public int addPunish(@Param("punish_name") String punish_name, @Param("punish_result") String punish_result, @Param("punish_time") String punish_time, @Param("punish_sc") String punish_sc, @Param("st_id") String st_id);
 }

@@ -68,7 +68,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="../assets/img/customer/1620010518.jpg" class="img-circle" alt="User Image">
+            <img src="../assets/img/customer/0000000002.jpg" class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
             <p>Alexander Pierce</p>
@@ -83,6 +83,9 @@
       <section class="content-header" id="sec">
       </section>
       <div class="content">
+        <div id="stduentPie" stlye="margin-top:100px">
+          <canvas id="student" style="height:100px;"></canvas>
+        </div>
         
       </div>
       <!-- /.content -->
@@ -101,7 +104,53 @@
 <script src="../assets/js/form/datatables/jquery.dataTables.min.js"></script>
 <script src="../assets/js/form/datatables/dataTables.bootstrap.min.js"></script>
 <script src="../assets/js/form/fastclick/fastclick.js"></script>
+<script src="../assets/js/form/Chart.min.js"></script>
 <script src="../assets/js/form/demo.js"></script>
 <script src="../assets/js/form/chaos.js"></script>
+<script>
+  var pieChartCanvas = $("#student").get(0).getContext("2d");
+    var pieChart = new Chart(pieChartCanvas);
+    var PieData = [
+      {
+        value: 700,
+        color: "#f56954",
+        highlight: "#f56954",
+        label: "男"
+      },
+      {
+        value: 500,
+        color: "#00a65a",
+        highlight: "#00a65a",
+        label: "女"
+      }
+    ];
+    var pieOptions = {
+      //Boolean - Whether we should show a stroke on each segment
+      segmentShowStroke: true,
+      //String - The colour of each segment stroke
+      segmentStrokeColor: "#fff",
+      //Number - The width of each segment stroke
+      segmentStrokeWidth: 2,
+      //Number - The percentage of the chart that we cut out of the middle
+      percentageInnerCutout: 50, // This is 0 for Pie charts
+      //Number - Amount of animation steps
+      animationSteps: 100,
+      //String - Animation easing effect
+      animationEasing: "easeOutBounce",
+      //Boolean - Whether we animate the rotation of the Doughnut
+      animateRotate: true,
+      //Boolean - Whether we animate scaling the Doughnut from the centre
+      animateScale: false,
+      //Boolean - whether to make the chart responsive to window resizing
+      responsive: true,
+      // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+      maintainAspectRatio: true,
+      //String - A legend template
+      legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+    };
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    pieChart.Doughnut(PieData, pieOptions);
+</script>
 </body>
 </html>

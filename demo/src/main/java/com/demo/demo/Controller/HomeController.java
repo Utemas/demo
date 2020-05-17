@@ -222,9 +222,9 @@ public class HomeController {
 		return "tologin";
     }
 
-    @RequestMapping("/pdfOutput")
-    public String test() {
+    @RequestMapping("/statistics")
+    public String statistics() {
         
-        return null;
+        return "administrator/statistics";
     }
 }

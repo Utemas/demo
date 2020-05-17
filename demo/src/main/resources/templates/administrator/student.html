@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="../assets/css/page/admin.css">
   <script src="../assets/js/common.js"></script>
 </head>
-<body class="hold-transition skin-blue layout-boxed sidebar-mini" onload="hed('个人信息','大晒吧');">
+<body class="hold-transition skin-blue layout-boxed sidebar-mini" onload="hed2('学生学籍信息','学生的学籍信息','返回');">
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
@@ -84,7 +84,7 @@
       </section>
       <div class="content">
         <div id="xuejiSearch">
-          <button class="btn btn-primary">修改信息</button>
+          <button class="btn btn-primary" id="updateStudent">修改信息</button>
           <table th:object="${student}">
             <tr>
               <td>姓名</td>
@@ -124,10 +124,55 @@
       <strong>哈哈哈哈</strong>
     </footer>
   </div>
+
+  <div class="modal fade" id="StudentUpdateFormal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">学籍信息修改</h4>
+        </div>
+        <div id="form2" class="form-horizontal">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="newEmail" class="col-sm-2 control-label">所属学院</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" id="" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="newJiguan" class="col-sm-2 control-label">班级</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="newEmail" class="col-sm-2 control-label">毕业去向</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" id="account_password" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="newEmail" class="col-sm-2 control-label">学籍状态</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" id="account_password" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="accountDe">更改</a>
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+  </div>
 <!-- ./wrapper -->
 <script src="../assets/js/form/jquery-2.2.3.min.js"></script>
 <script src="../assets/js/form/bootstrap.min.js"></script>
-<script src="../assets/js/page/adminT.js"></script>
 <script src="../assets/js/form/jquery.slimscroll.min.js"></script>
 <script src="../assets/js/form/app.min.js"></script>
 <script src="../assets/js/form/datatables/jquery.dataTables.min.js"></script>
@@ -135,5 +180,13 @@
 <script src="../assets/js/form/fastclick/fastclick.js"></script>
 <script src="../assets/js/form/demo.js"></script>
 <script src="../assets/js/form/chaos.js"></script>
+<script>
+   $(function () {
+    $("#updateStudent").click(function(){
+      $("#StudentUpdateFormal").modal("show");
+    })
+   })
+  
+</script>
 </body>
 </html>

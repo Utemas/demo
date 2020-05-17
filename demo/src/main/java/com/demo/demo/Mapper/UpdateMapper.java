@@ -34,5 +34,7 @@ public interface UpdateMapper {
 
     @Update("update project1_award set award_condition =#{condition}, condition_css=#{css} where id=#{id}")
     public int updateAwardStatus(@Param("condition") String award_condition, @Param("css") String condition_css, @Param("id")int id);
+
+    
     
 }

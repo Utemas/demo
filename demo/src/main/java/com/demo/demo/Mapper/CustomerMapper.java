@@ -111,6 +111,9 @@ public interface CustomerMapper {
 
     @Select("select * from project1_award where id=#{id}")
     public Award getAwardById(@Param("id") int id);
+
+    @Select("select * from project1_class")
+    public List<ClassInfo>findAllClassInfo();
     
     //删除Section
     //删除这个学生上过的课程

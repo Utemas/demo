@@ -10,10 +10,12 @@ import com.demo.demo.Service.AdminService;
 import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
+import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
 import com.demo.demo.po.Student;
 import com.demo.demo.po.Trouble;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,7 +87,7 @@ public class AdminController {
 
 
     @RequestMapping("/findStudentById")
-    public String findStudentById(String st_id,HashMap<String,Object> map){
+    public String findStudentById(String st_id, HashMap<String,Object> map){
         List<Student> slist = customerMapper.finStudentById(st_id);
         map.put("slist",slist);
         map.put("footerinformation","高级搜索可以更精确地搜索到学生");
@@ -93,7 +95,9 @@ public class AdminController {
     }
     
     @RequestMapping("/classinfoOpretion")
-    public String classinfoOpretion(){
+    public String classinfoOpretion(HashMap<String,Object> map){
+        List<ClassInfo> clist = customerMapper.findAllClassInfo();
+        map.put("clist",clist);
         return "administrator/classInfo";
     }
 
@@ -108,16 +112,80 @@ public class AdminController {
     @RequestMapping("/judgeAward")
     public String punishtextInfo(@RequestParam(value = "id", required = false, defaultValue = "0") int id, HashMap<String,Object> map){
         Award award = customerMapper.getAwardById(id);
-        System.out.println(award.getAward_condition());
         if(award.getAward_condition().equals("未审阅")){
-            int result = updateMapper.updateAwardStatus("正在审阅", "green", id);
+            int result = updateMapper.updateAwardStatus("正在审阅", "#DAA520", id);
             award.setAward_condition("正在审阅");
             award.setCondition_css("#DAA520");
-            
-            System.out.println(result);
         }
         
         map.put("award",award);
         return "administrator/judgeAward";
+    }
+
+    @ResponseBody
+    @RequestMapping("/deleteClassInfo")
+    public String name(@RequestParam(value = "id", required = false, defaultValue = "0") int id) {
+        int result = customerMapper.deleteClassByClassId(id);
+        if(result == 0){
+            return "删除失败";
+        }
+        return "删除成功";
+    }
+
+    @RequestMapping("/awardOk")
+    public String awardOk(@RequestParam(value = "id", required = false, defaultValue = "0") int id) {
+        updateMapper.updateAwardStatus("已通过审阅", "green", id);
+        return "redirect:/awardinfo";
+    }
+
+    @RequestMapping("/awardWrong")
+    public String awardWrong(@RequestParam(value = "id", required = false, defaultValue = "0") int id) {
+        updateMapper.updateAwardStatus("未审阅", "red", id);
+        return "redirect:/awardinfo";
+    }
+
+    @ResponseBody
+    @RequestMapping("/addPunish")
+    public String addPunish(String punish_name, String punish_result, String punish_time, String punish_sc, String st_id) {
+        int result = adminService.addPunish(punish_name, punish_result, punish_time, punish_sc, st_id);
+        if(result == 0){
+            return "添加失败";
+        }
+
+        return "添加成功";
+        
+    }
+
+    @ResponseBody
+    @RequestMapping("/accountDefault")
+    public String account_password(String st_id, String account_password){
+        int result = 0;
+
+        Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
+        if(!loginer.getPassword().equals(account_password)){
+            return "管理员密码错误";
+        }
+
+        Student st = customerMapper.findStudentById(st_id);
+        
+        if(st == null){
+            return "该学生不存在";
+        }
+
+        Customer cus = customerMapper.getCustomerByStid(st_id);
+
+        String idNumber =cus.getId_number();
+
+
+        String newPassword = idNumber.substring(12);
+
+        
+
+        result = updateMapper.updatePassword(newPassword,st_id);
+        
+        if(result == 0){
+            return "恢复默认密码失败";
+        }
+        return "恢复默认密码成功";
     }
 }
