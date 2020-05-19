@@ -140,7 +140,7 @@ public class AdminController {
 
     @RequestMapping("/awardWrong")
     public String awardWrong(@RequestParam(value = "id", required = false, defaultValue = "0") int id) {
-        updateMapper.updateAwardStatus("未审阅", "red", id);
+        updateMapper.updateAwardStatus("未通过审阅", "red", id);
         return "redirect:/awardinfo";
     }
 
@@ -188,4 +188,7 @@ public class AdminController {
         }
         return "恢复默认密码成功";
     }
+
+
+    
 }

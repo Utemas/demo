@@ -1,10 +1,12 @@
 package com.demo.demo.Controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.Award;
+import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Enter;
 import com.demo.demo.po.Loginer;
@@ -12,6 +14,7 @@ import com.demo.demo.po.Person;
 import com.demo.demo.po.Punish;
 import com.demo.demo.po.Student;
 import com.demo.demo.po.Urgent;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -23,10 +26,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import utill.Contant;
+import utill.PDFUtill;
 import utill.Utill;
-
 
 @Controller
 public class HomeController {
@@ -81,150 +85,163 @@ public class HomeController {
     // 调转到学生的总页面
     @RequestMapping("/student")
     public String student(HashMap<String, Object> map) {
-        //获取登录对象
+        // 获取登录对象
         Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
-        //获取中间连接类
+        // 获取中间连接类
         Customer customer = customerMapper.getCustomerByStid(loginer.getSt_id());
-        //获取学生学籍信息
+        // 获取学生学籍信息
         Student student = customerMapper.getStudentInfo(loginer.getSt_id());
 
         Person person = customerMapper.getStudentPeronInformation(customer.getId_number());
-        map.put("person",person);
+        map.put("person", person);
 
         // 查询学生成绩数量
         int class_count = customerMapper.theNumberOfClass(loginer.getSt_id());
-        map.put("class_count",class_count);
+        map.put("class_count", class_count);
         map.put("english_name", customer.getCustomer_english_name());
         //
         map.put("student", student);
 
-        //生成生日
+        // 生成生日
         String[] birthday = Utill.getBirth(customer.getId_number());
         String birth = birthday[0] + "-" + birthday[1] + "-" + birthday[2];
         map.put("birthday", birth);
         map.put("address", Utill.getAddress(person));
-        
 
-        //获取学生的在学校的年份
+        // 获取学生的在学校的年份
         student.setSt_entertime(Utill.formatTime(student.getSt_entertime()));
         int enterYear = Integer.parseInt(student.getSt_entertime().substring(0, 4));
         List<String> enterYears = Utill.yearsInSchool(enterYear);
-        map.put("enterYears",enterYears);
+        map.put("enterYears", enterYears);
         //
-    
-        //查询学生的紧急联系人
+
+        // 查询学生的紧急联系人
         List<Urgent> uList = customerMapper.getUrgents(customer.getSt_id());
         map.put("ulist", uList);
         //
-        //计算这个同学的总学分是多少
+        // 计算这个同学的总学分是多少
         int xueFenTotal = customerMapper.getTotalXueFen(loginer.getSt_id());
-        
-        map.put("xueFenTotal",xueFenTotal);
+
+        map.put("xueFenTotal", xueFenTotal);
         //
 
-        //计算优秀率85分以上占比
+        // 计算优秀率85分以上占比
         String youxiulv;
         double youxiubi;
 
         int youxiuNumber = customerMapper.youxiuNumber(customer.getSt_id());
-        if(class_count == 0){
-            map.put("youxiulv","0.0%");
+        if (class_count == 0) {
+            map.put("youxiulv", "0.0%");
             return "student/total";
         }
-        youxiubi = (double)youxiuNumber/(double)class_count;
+        youxiubi = (double) youxiuNumber / (double) class_count;
         youxiubi = youxiubi * 100;
-        youxiulv =Double.toString(youxiubi) + "%";
-        map.put("youxiulv",youxiulv);
+        youxiulv = Double.toString(youxiubi) + "%";
+        map.put("youxiulv", youxiulv);
 
-        //计算学生不及格的科目数量
+        // 计算学生不及格的科目数量
         String bujigelv;
         double bujigebi;
 
         int bujigeNumber = customerMapper.getBujigeNumber(customer.getSt_id());
         map.put("bujigeNumber", bujigeNumber);
-        if(class_count == 0){
-            map.put("bujuigelv","0-.0%");
+        if (class_count == 0) {
+            map.put("bujuigelv", "0-.0%");
             return "student/total";
         }
-        bujigebi = (double)bujigeNumber/(double)class_count;
+        bujigebi = (double) bujigeNumber / (double) class_count;
         bujigebi = bujigebi * 100;
         bujigelv = Double.toString(bujigebi) + "%";
-        map.put("bujuigelv",bujigelv);
+        map.put("bujuigelv", bujigelv);
 
-        //查询学生的入学信息
+        // 查询学生的入学信息
         Enter enterInfo = customerMapper.getEnterInfo(customer.getId_number());
-        map.put("enter",enterInfo);
+        map.put("enter", enterInfo);
 
-        //查询学生获奖情况的数量
+        // 查询学生获奖情况的数量
         int awardCount = customerMapper.getAwardCount(customer.getSt_id());
-        map.put("awardCount",awardCount);
-        
-        //查询学生获奖情况
+        map.put("awardCount", awardCount);
+
+        // 查询学生获奖情况
         List<Award> awlist = customerMapper.getAward(customer.getSt_id());
-        map.put("awlist",awlist);
+        map.put("awlist", awlist);
 
-        //查询学生惩罚情况的数量
+        // 查询学生惩罚情况的数量
         int punishCount = customerMapper.getPunishCount(customer.getSt_id());
-        map.put("punishCount",punishCount);
+        map.put("punishCount", punishCount);
 
-        //查询学生惩罚情况
+        // 查询学生惩罚情况
         List<Punish> pulist = customerMapper.getPunish(customer.getSt_id());
-        map.put("pulist",pulist);
-
-
+        map.put("pulist", pulist);
 
         return "student/total";
-        
-      
+
     }
+
     @RequestMapping("/trouble")
-    public String writing(@RequestParam(value = "type", required = false, defaultValue = "1") int type,HashMap<String, Object> map){
-        map.put("programeName",Contant.ProgrameName);
-        if(type == 1){
-            map.put("reason","登录问题");
-            map.put("lastPage","登录");
-        }else if(type == 2){
-            map.put("reason","个人基本信息问题");
-            map.put("lastPage","个人详情页");
+    public String writing(@RequestParam(value = "type", required = false, defaultValue = "1") int type,
+            HashMap<String, Object> map) {
+        map.put("programeName", Contant.ProgrameName);
+        if (type == 1) {
+            map.put("reason", "登录问题");
+            map.put("lastPage", "登录");
+        } else if (type == 2) {
+            map.put("reason", "个人基本信息问题");
+            map.put("lastPage", "个人详情页");
         }
         return "/trouble";
     }
 
     @RequestMapping("/punishtextInfo")
-    public String punishtextInfo(@RequestParam(value = "punish_id", required = false, defaultValue = "0") int punish_id, HashMap<String,Object> map){
+    public String punishtextInfo(@RequestParam(value = "punish_id", required = false, defaultValue = "0") int punish_id,
+            HashMap<String, Object> map) {
 
-        if(punish_id == 0){
+        if (punish_id == 0) {
             return "/500";
         }
         Punish punish = customerMapper.getPunishById(punish_id);
         Customer customer = customerMapper.getCustomerByStid(punish.getSt_id());
         Person person = customerMapper.getStudentPeronInformation(customer.getId_number());
-        map.put("person",person);
-        map.put("punish",punish);
+        map.put("person", person);
+        map.put("punish", punish);
         return "common/punishInfo";
     }
 
     @RequestMapping("/awardRefresh")
-    public String ddd(HashMap<String,Object> map){
+    public String ddd(HashMap<String, Object> map) {
         Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
         List<Award> awlist = customerMapper.getAward(loginer.getSt_id());
-        map.put("awlist",awlist);
+        map.put("awlist", awlist);
         return "/student";
     }
 
     @RequestMapping("/tologin")
-    public String tologin(HashMap<String,Object> map){
+    public String tologin(HashMap<String, Object> map) {
         String a = "不要回答！不要回答！不要回答！";
-		Person person = new Person();
-		person.setName("张三");
-		map.put("firstMessage",a);
-		map.put("person",person);
-		return "tologin";
+        Person person = new Person();
+        person.setName("张三");
+        map.put("firstMessage", a);
+        map.put("person", person);
+        return "tologin";
     }
 
     @RequestMapping("/statistics")
     public String statistics() {
-        
+
         return "administrator/statistics";
     }
+
+    @ResponseBody
+    @RequestMapping("/pdfMake")
+    public String name(PdfWriter writer) {
+        Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
+        List<ClassInfo> clist = customerMapper.getALLClass(loginer.getSt_id());
+        try {
+            PDFUtill.createPDFtext("D:/testTable3.pdf", writer,clist);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "导出成功";
+    }
+
 }

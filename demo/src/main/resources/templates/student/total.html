@@ -277,7 +277,7 @@
         </div>
         <div id="class_info" class="hidden">
           <div class="rightleft">
-            <div><a class="btn btn-warning" style="width:100px" href="/pdfOutput">导出PDF</a></div>
+            <div><button class="btn btn-warning" style="width:100px" id="daochuPDF">导出PDF</button></div>
             <div>年份:
               <select style="width: 100px;margin-left: 10px;" id="selectYear">
                 <option th:each="year:${enterYears}" th:text="${year}" th:value="${year}"></option>
@@ -431,7 +431,7 @@
           <tr>
             <td></td>
             <td style="height: 10px; text-align:left;">
-              <span style="color:red;margin-left: 5px;">请认真核对您的密码</span>
+              <span style="color:red;margin-left: 5px;" id="tip1"></span>
             </td>
           </tr>
           <tr>
@@ -443,7 +443,7 @@
           <tr>
             <td></td>
             <td style="height: 10px; text-align:left;">
-              <span style="color:red;margin-left: 5px;">请认真核对您的密码</span>
+              <span style="color:red;margin-left: 5px;" id="tip2"></span>
             </td>
           </tr>
           <tr>
@@ -568,6 +568,20 @@
   <script src="../assets/js/common.js"></script>
   <script src="../assets/js/page/total.js"></script>
   <script src="../assets/js/form/chaos.js"></script>
+  <script>
+    $(function(){
+      $("#daochuPDF").click(function(){
+        $.ajax({
+            url: "/pdfMake",
+            type: "POST",
+            success : function(msg){
+                      alert(msg);
+              }
+        })
+      })
+    })
+    
+  </script>
 </body>
 
 </html>

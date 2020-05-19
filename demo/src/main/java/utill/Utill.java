@@ -1,19 +1,12 @@
 package utill;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
 import com.demo.demo.po.Person;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 
 public final class Utill {
 
@@ -119,21 +112,6 @@ public final class Utill {
         }
         return false;
     }
-    public void createPDF(String filename) throws IOException {
-        Document document = new Document(PageSize.A4);
-        try {
-            PdfWriter.getInstance(document, new FileOutputStream(filename));
-            document.addTitle("example of PDF");
-            document.open();
-            document.add(new Paragraph("Hello World!"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } finally {
-            document.close();
-        }
-    }
 
     //获取学生在学校的年份
     public static List<String> yearsInSchool(int enterYear){
@@ -156,4 +134,7 @@ public final class Utill {
         String result = date.substring(0, 11);
         return result;
     }
+
+
+   
 }

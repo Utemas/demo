@@ -225,17 +225,24 @@ $(function () {
     $("#submit").click(function(){
         var newPassword = $("#newPassword").val();
         var surePassword = $("#surePassword").val();
-        $.ajax({
-            url: "/updatePassword",
-            type: "POST",
-            data:{
-                newPassword : newPassword,
-                surePassword : surePassword
-            },
-            success : function(msg){
-                alert(msg);
-            }
-        })
+        if(newPassword.length < 19 && newPassword.length > 5){
+            $.ajax({
+                url: "/updatePassword",
+                type: "POST",
+                data:{
+                    newPassword : newPassword,
+                    surePassword : surePassword
+                },
+                success : function(msg){
+                    alert(msg);
+                }
+            })
+        }else{
+            $("#tip1").html("密码位数在6位以及18位之间");
+        }
+        if(surePassword != newPassword){
+            $("#tip2").html("请认真核对您的密码");
+        }
     });
 
     $("#AwardInfo").click(function(){

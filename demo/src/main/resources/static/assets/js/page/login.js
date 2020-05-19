@@ -11,7 +11,7 @@ $(function(){
 			return false;
 		}
 		//对密码的初步验证
-		if(password.length > 18 || password < 5){
+		if(password.length > 18 || password.length < 5){
 			alert("密码错误");
 			$("#password").val("");
 			return false;
