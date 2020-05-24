@@ -551,12 +551,22 @@
             <div class="form-group">
               <label for="newEmail" class="col-sm-2 control-label">获奖类型</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="award_type" />
+                <select id="award_type" style="width:100%;height:30px">
+                  <option value="院级">院级</option>
+                  <option value="校级">校级</option>
+                  <option value="省级">省级</option>
+                  <option value="国家级">国家级</option>
+                </select>
               </div>
             </div>
           </div>
           <div>
-            <input type="file" accept="image/*" id="award_picture"/>
+            <div class="form-group">
+              <label for="newEmail" class="col-sm-2 control-label">附件<br/>（照片）</label>
+              <div class="col-sm-9">
+                <input type="file" accept="image/*" id="award_picture"/>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button class="btn btn-primary" id="AddAwardSure">添加</a>

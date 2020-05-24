@@ -283,7 +283,7 @@ $(function () {
     $("#AddAwardSure").click(function(){
         var award_name = $("#award_name").val();
         var award_time = $("#award_time").val();
-        var award_type = $("#award_type").val();
+        var award_type = $("#award_type option:selected").val();
         var award_picture = $("#award_picture")[0].files[0];
         
         var formDate = new FormData();
