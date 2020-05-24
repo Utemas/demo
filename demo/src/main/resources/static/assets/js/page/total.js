@@ -284,15 +284,22 @@ $(function () {
         var award_name = $("#award_name").val();
         var award_time = $("#award_time").val();
         var award_type = $("#award_type").val();
+        var award_picture = $("#award_picture")[0].files[0];
+        
+        var formDate = new FormData();
+
+        formDate.append("award_name",award_name);
+        formDate.append("award_time",award_time);
+        formDate.append("award_type",award_type);
+        formDate.append("award_picture",award_picture);
         $.ajax({
             url: "/addAwardInfo",
             type: "POST",
-            data:{
-                award_name : award_name,
-                award_time : award_time,
-                award_type : award_type
-            },
+            processData: false,
+            contentType:false,
+            data:formDate,
             success : function(msg){
+                alert(msg);
                 $('#AwardAddFormal').modal("hide");
                 window.location.reload();
             }
@@ -314,5 +321,30 @@ $(function () {
         "ordering": true,
         "info": true,
         "autoWidth": false
-      });
+    });
+
+    $("#addUrgent").click(function(){
+        $("#UrgentFormModal").modal("show");
+    });
+
+    $("#AddUrgentSure").click(function(){
+        var name = $("#addName").val();
+        var context = $("#addContext").val();
+        var tel = $("#addTel").val(); 
+        $.ajax({
+            url: "/addUgentInfo",
+            type: "POST",
+            data:{
+                urgent_name : name,
+                urgent_context : context,
+                urgent_tel : tel
+            },
+            success : function(msg){
+                $('#AwardAddFormal').modal("hide");
+                alert("添加成功")
+                window.location.reload();
+            }
+        })
+    })
+
 })

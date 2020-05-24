@@ -26,7 +26,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import utill.Contant;
 import utill.PDFUtill;
@@ -118,6 +117,9 @@ public class HomeController {
         // 查询学生的紧急联系人
         List<Urgent> uList = customerMapper.getUrgents(customer.getSt_id());
         map.put("ulist", uList);
+
+        int ulistCount = uList.size();
+        map.put("ulistCount",ulistCount);
         //
         // 计算这个同学的总学分是多少
         int xueFenTotal = customerMapper.getTotalXueFen(loginer.getSt_id());
@@ -237,7 +239,7 @@ public class HomeController {
         Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
         List<ClassInfo> clist = customerMapper.getALLClass(loginer.getSt_id());
         try {
-            PDFUtill.createPDFtext("D:/testTable3.pdf", writer,clist);
+            PDFUtill.createPDFtext("C:/Users/Servent/Desktop/testTable3.pdf", writer, clist);
         } catch (IOException e) {
             e.printStackTrace();
         }

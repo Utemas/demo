@@ -1,10 +1,15 @@
 package com.demo.demo.Controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.demo.demo.Mapper.AddMapper;
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.Mapper.UpdateMapper;
+import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.ContextInfo;
 import com.demo.demo.po.Customer;
@@ -14,6 +19,9 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import utill.Contant;
 
 @RestController
 public class ReController {
@@ -104,12 +112,24 @@ public class ReController {
     }
 
     @RequestMapping("/addAwardInfo")
-    public String addAwardInfo(String award_name, String award_time, String award_type){
+    public String addAwardInfo(Award award,HttpServletRequest request){
         Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
         String award_condition = "未审阅";
         String award_css = "red";
-        int result = addMapper.addAwardInfo(award_name, award_time, award_condition, award_css, loginer.getSt_id(), award_type);
+
+        String path=Contant.uploadPath;
+        
+        String oldName = award.getAward_picture().getOriginalFilename();
+        String newname = UUID.randomUUID().toString() + oldName.substring(oldName.lastIndexOf("."));
+        award.setPicture_path(newname);
+        int result = addMapper.addAwardInfo(award.getAward_name(), award.getAward_time(), award_condition, award_css, loginer.getSt_id(), award.getAward_type(),award.getPicture_path());
         return "添加成功";
     }
     
+    @RequestMapping("/addUgentInfo")
+    public String addUgentInfo(String urgent_name, String urgent_context ,String urgent_tel){
+        Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
+        addMapper.addUgent(urgent_name,urgent_context,urgent_tel,loginer.getSt_id());
+        return null;
+    }
  }
