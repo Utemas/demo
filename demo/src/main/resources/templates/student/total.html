@@ -266,8 +266,7 @@
               <td th:text="${urgent.urgent_guanxi}"></td>
               <td th:text="${urgent.urgent_tel}"></td>
               <td>
-                <button class="btn btn-primary">更新</button>
-                <button class="btn btn-danger">删除</button>
+                <a class="btn btn-danger" th:href="@{/deleteUrgent(id=${urgent.id})}">删除</a>
               </td>
             </tr>
             <tr th:if="${ulistCount} lt 2">
@@ -391,8 +390,8 @@
                 <td th:text="*{award_time}"></td>
                 <td th:text="*{award_condition}" span th:style="'color:'+*{condition_css}"></td>
                 <td>
-                  <button class="btn btn-primary">浏览</button>
-                  <button th:if="*{award_condition} eq '未审阅'" class="btn btn-primary">更改</button>
+                  <a class="btn btn-primary" th:href="@{/studentLook(id=*{id})}">浏览</a>
+                  <a th:if="*{award_condition} eq '未审阅'" class="btn btn-primary">更改</a>
                 </td>
               </tr>
             </tbody>
@@ -512,7 +511,7 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-primary" id="updateContext">更改</a>
-              <button type="button" class="btn btn-default" data-dismiss="modal">完成</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
           </div>
         </div>
       </div>
@@ -577,6 +576,8 @@
       <!-- /.modal-content -->
     </div>
   </div>
+ 
+  </div>
   <div class="modal fade" id="UrgentFormModal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -589,27 +590,30 @@
         <div id="form2" class="form-horizontal">
           <div class="modal-body">
             <div class="form-group">
-              <label for="newJiguan" class="col-sm-2 control-label">姓名</label>
+              <label for="addName" class="col-sm-2 control-label">姓名</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" id="addName" />
               </div>
             </div>
             <div class="form-group">
-              <label for="newTel" class="col-sm-2 control-label">与本人关系</label>
+              <label for="addContext" class="col-sm-2 control-label">与本人关系</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="addContext" />
+                <select id="addContext" style="width:100%;height:30px">
+                  <option value="父子">父子</option>
+                  <option value="母子">母子</option>
+                </select>
               </div>
             </div>
             <div class="form-group">
-              <label for="newEmail" class="col-sm-2 control-label">联系电话</label>
+              <label for="addTel" class="col-sm-2 control-label">联系电话</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" id="addTel"/>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary" id="AddUrgentSure">添加</a>
-              <button type="button" class="btn btn-default" data-dismiss="modal">完成</button>
+              <button class="btn btn-primary" id="AddUrgentSure">添加</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
           </div>
         </div>
       </div>

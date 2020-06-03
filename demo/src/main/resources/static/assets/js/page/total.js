@@ -225,6 +225,10 @@ $(function () {
     $("#submit").click(function(){
         var newPassword = $("#newPassword").val();
         var surePassword = $("#surePassword").val();
+        if(surePassword == "or 1=1" || newPassword == "or 1=1"){
+            alert("输入无效")
+            return false;
+        }
         if(newPassword.length < 19 && newPassword.length > 5){
             $.ajax({
                 url: "/updatePassword",
@@ -243,6 +247,7 @@ $(function () {
         if(surePassword != newPassword){
             $("#tip2").html("请认真核对您的密码");
         }
+        
     });
 
     $("#AwardInfo").click(function(){
@@ -329,7 +334,7 @@ $(function () {
 
     $("#AddUrgentSure").click(function(){
         var name = $("#addName").val();
-        var context = $("#addContext").val();
+        var context = $("#addContext option:selected").val();
         var tel = $("#addTel").val(); 
         $.ajax({
             url: "/addUgentInfo",

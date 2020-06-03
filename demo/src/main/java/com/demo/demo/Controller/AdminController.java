@@ -122,14 +122,13 @@ public class AdminController {
         return "administrator/judgeAward";
     }
 
-    @ResponseBody
     @RequestMapping("/deleteClassInfo")
     public String name(@RequestParam(value = "id", required = false, defaultValue = "0") int id) {
         int result = customerMapper.deleteClassByClassId(id);
         if(result == 0){
-            return "删除失败";
+            return "redirect:/classinfoOpretion";
         }
-        return "删除成功";
+        return "redirect:/classinfoOpretion";
     }
 
     @RequestMapping("/awardOk")

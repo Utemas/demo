@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>欢迎登录学籍管理系统</title>
+  <title>奖励管理</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../assets/css/form/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="../assets/css/page/admin.css">
   <script src="../assets/js/common.js"></script>
 </head>
-<body class="hold-transition skin-blue layout-boxed sidebar-mini" onload="hed2('惩罚信息添加','惩罚信息添加','主页');">
+<body class="hold-transition skin-blue layout-boxed sidebar-mini" onload="hed3('奖励信息浏览','奖励信息审阅','主页');">
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
@@ -75,30 +75,6 @@
             <a href="javascript:void(0);"><i class="fa fa-circle text-success"></i> Online</a>
           </div>
         </div>
-        <!-- search form -->
-        <div class="sidebar-form">
-          <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                  <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                  </button>
-                </span>
-          </div>
-        </div>
-        <!-- /.search form -->
-        <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu">
-          <li class="header">MAIN NAVIGATION</li>
-          <li class="treeview active">
-            <a href="javascript:void(0);" >
-              <span>信息统计</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li  id="xueYuanStatistics"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>学院统计信息</a></li>
-            </ul>
       </section>
       <!-- /.sidebar -->
     </aside>
@@ -107,20 +83,28 @@
       <section class="content-header" id="sec">
       </section>
       <div class="content">
-        <div stlye="margin-top:100px">
-          <table id="xueYuanTotal">
-              <thead>
-                 <tr>
-                <th>学院</th>
-                <th>人数</th>
-                 </tr>
-              </thead>
-                 <tbody id="myTb">
-             
-                 </tbody>
+        <div>
+          <table border="1px" style="margin: 50px;">
+            <tr>
+              <th>获奖名称</th><td th:text="${award.award_name}"></td>
+            </tr>
+            <tr >
+              <th>获奖时间</th><td th:text="${award.award_time}"></td>
+            </tr>
+            <tr>
+              <th>奖项类型</th><td th:text="${award.award_type}"></td>
+            </tr>            
+            <tr>
+              <th>附件</th>
+              <td><img th:src="@{../assets/img/awardPicture/{filename}(filename=${award.picture_path})}" style="width:600px;"/></td>
+            </tr>
+            <tr>
+              <td>审阅状态</td><td th:text="${award.award_condition}" th:style="'color:'+${award.condition_css}"></td>
+            </tr>
           </table>
+          <div style="text-align: center;">
+          </div>
         </div>
-        
       </div>
       <!-- /.content -->
     </div>
@@ -132,15 +116,10 @@
 <!-- ./wrapper -->
 <script src="../assets/js/form/jquery-2.2.3.min.js"></script>
 <script src="../assets/js/form/bootstrap.min.js"></script>
-<script src="../assets/js/page/adminT.js"></script>
 <script src="../assets/js/form/jquery.slimscroll.min.js"></script>
 <script src="../assets/js/form/app.min.js"></script>
-<script src="../assets/js/form/datatables/jquery.dataTables.min.js"></script>
-<script src="../assets/js/form/datatables/dataTables.bootstrap.min.js"></script>
 <script src="../assets/js/form/fastclick/fastclick.js"></script>
-<script src="../assets/js/form/Chart.min.js"></script>
 <script src="../assets/js/form/demo.js"></script>
 <script src="../assets/js/form/chaos.js"></script>
-<script src="../assets/js/page/statistics.js"></script>
 </body>
 </html>

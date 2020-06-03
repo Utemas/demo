@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.demo.demo.Mapper.CustomerMapper;
+import com.demo.demo.Mapper.DeleteMapper;
 import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
@@ -36,6 +37,9 @@ public class HomeController {
 
     @Autowired
     private CustomerMapper customerMapper;
+
+    @Autowired
+    private DeleteMapper deleteMapper;
 
     // 初始界面
     @RequestMapping("/login")
@@ -244,6 +248,19 @@ public class HomeController {
             e.printStackTrace();
         }
         return "导出成功";
+    }
+
+    @RequestMapping("/studentLook")
+    public String studentLook(@RequestParam(value = "id", required = false, defaultValue = "0")int id,HashMap<String,Object> map){
+        Award award = customerMapper.getAwardById(id);
+        map.put("award",award);
+        return "student/awardInfo";
+    }
+
+    @RequestMapping("/deleteUrgent")
+    public String deleteUrgent(@RequestParam(value = "id", required = false, defaultValue = "0")int id){
+        int result = deleteMapper.deleteUrgent(id);
+        return "redirect:/student";
     }
 
 }

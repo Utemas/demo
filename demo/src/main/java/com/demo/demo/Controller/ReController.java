@@ -2,6 +2,8 @@ package com.demo.demo.Controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +17,7 @@ import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.ContextInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Loginer;
+import com.demo.demo.po.Static;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +40,7 @@ public class ReController {
 
     @RequestMapping("/updateContextInfo")
     public ContextInfo changeContextInfo(String ji_guan, String customer_tel, String customer_email,
-            String customer_youzheng, String customer_start_station, String customer_end_station) {
+    String customer_youzheng, String customer_start_station, String customer_end_station) {
         Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
 
         Customer customer = customerMapper.getCustomerByStid(loginer.getSt_id());
@@ -134,5 +137,10 @@ public class ReController {
         Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
         addMapper.addUgent(urgent_name,urgent_context,urgent_tel,loginer.getSt_id());
         return null;
+    }
+
+    @RequestMapping("/statisticsxuYuan")
+    public void statisticsxuYuan(){
+       
     }
  }
