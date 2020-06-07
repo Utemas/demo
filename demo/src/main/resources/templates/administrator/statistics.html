@@ -97,7 +97,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li  id="xueYuanStatistics"><a href="javascript:void(0);"><i class="fa fa-circle-o"></i>学院统计信息</a></li>
+              <li class="active"><a href="/statistics"><i class="fa fa-circle-o"></i>学院统计信息</a></li>
             </ul>
       </section>
       <!-- /.sidebar -->
@@ -111,12 +111,15 @@
           <table id="xueYuanTotal">
               <thead>
                  <tr>
-                <th>学院</th>
-                <th>人数</th>
+                  <th>学院名称</th>
+                  <th>人数</th>
+                  <th>百分占比</th>
                  </tr>
               </thead>
                  <tbody id="myTb">
-             
+                   <tr th:each="static:${slist}" th:object="${static}">
+                    <td th:text="*{label}"></td><td th:text="*{countNumber}"></td><td th:text="*{percent}"></td>
+                   </tr>
                  </tbody>
           </table>
         </div>

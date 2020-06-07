@@ -88,7 +88,7 @@ public class FileUploadController {
             file.transferTo(new File(folder, fileName));
             elist = re.ReadEnterInfo(path+"\\"+fileName);
             for(Enter enterInfo : elist){
-                
+                addMapper.addEnterInfo(enterInfo.getEnter_idnumber(), enterInfo.getEnter_speak(), enterInfo.getEnter_luquid(), enterInfo.getEnter_type(), enterInfo.getEnter_score(), enterInfo.getEnter_kaoqu(), enterInfo.getId_number(), enterInfo.getEnter_source(), enterInfo.getEnter_from());
             }
             
         } catch (IOException e) {

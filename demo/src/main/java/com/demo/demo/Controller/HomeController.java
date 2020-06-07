@@ -221,21 +221,6 @@ public class HomeController {
         return "/student";
     }
 
-    @RequestMapping("/tologin")
-    public String tologin(HashMap<String, Object> map) {
-        String a = "不要回答！不要回答！不要回答！";
-        Person person = new Person();
-        person.setName("张三");
-        map.put("firstMessage", a);
-        map.put("person", person);
-        return "tologin";
-    }
-
-    @RequestMapping("/statistics")
-    public String statistics() {
-
-        return "administrator/statistics";
-    }
 
     @ResponseBody
     @RequestMapping("/pdfMake")

@@ -9,6 +9,7 @@ $(function () {
         $("#xuejiSearch").removeClass("hidden");
         $("#xuejiInputPage").addClass("hidden");
         $("#classInfoPage").addClass("hidden");
+        $("#XuInputPage").addClass("hidden");
 
     });
 
@@ -17,6 +18,7 @@ $(function () {
         $("#xuejiInput").addClass("active");
         //页面切换
         $("#xuejiInputPage").removeClass("hidden");
+        $("#XuInputPage").removeClass("hidden");
         $("#xuejiSearch").addClass("hidden");
         $("#classInfoPage").addClass("hidden");
     });
@@ -27,6 +29,7 @@ $(function () {
         
         $("#xuejiSearch").addClass("hidden");
 
+        $("#XuInputPage").addClass("hidden");
         $("#xuejiInputPage").addClass("hidden");
         $("#classInfoPage").removeClass("hidden");
     });
@@ -67,7 +70,24 @@ $(function () {
                 alert(msg);
             }
         })
+        
     });
+
+    $("#uploadXueJiInfo").click(function(){
+        var file = $("#Xuejifile")[0].files[0];
+        var formData = new FormData();
+        formData.append("file",file);
+        $.ajax({
+            type:'post',
+            url:'/uploadXueJiInfo',
+            processData: false,
+            contentType:false,
+            data:formData,
+            success:function (msg) {
+                alert(msg);
+            }
+        })
+    })
 
 
     $("#uploadClassFile").click(function(){

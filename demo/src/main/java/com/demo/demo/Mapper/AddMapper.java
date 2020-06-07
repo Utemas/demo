@@ -27,4 +27,7 @@ public interface AddMapper {
 
     @Insert("insert into project1_urgent(st_id,urgent_name,urgent_guanxi,urgent_tel) values (#{st_id},#{urgent_name},#{urgent_guanxi},#{urgent_tel})")
 	public void addUgent(@Param("urgent_name") String urgent_name,@Param("urgent_guanxi") String urgent_context,@Param("urgent_tel") String urgent_tel,@Param("st_id") String st_id);
+
+    @Insert("insert into project1_from(enter_idnumber,enter_speak,enter_luquid,enter_type,enter_score,enter_kaoqu,id_number,enter_source,enter_from) values(#{enter_idnumber},#{enter_speak},#{enter_luquid},#{enter_type},#{enter_score},#{enter_kaoqu},#{id_number},#{enter_source},#{enter_from})")
+	public void addEnterInfo(@Param("enter_idnumber") String enter_idnumber,@Param("enter_speak") String enter_speak,@Param("enter_luquid") String enter_luquid,@Param("enter_type") String enter_type,@Param("enter_score") String enter_score,@Param("enter_kaoqu")String enter_kaoqu,@Param("id_number") String id_number,@Param("enter_source") String enter_source,@Param("enter_from") String enter_from);
 }

@@ -197,7 +197,7 @@
                   <td th:text="*{st_nianji}+'-'+*{st_class}"></td>
                   <td>
                     <a th:href="@{'/look?st_id='+*{st_id}}" class="btn btn-primary" target="_blank">查看</a>
-                    <a class="btn btn-danger" th:href="@{'/look?st_id='+*{st_id}}">删除</a>
+                    <a class="btn btn-danger" th:href="@{'/delete?st_id='+*{st_id}}">删除</a>
                   </td>
                 </tr>
               </tbody>
@@ -211,6 +211,15 @@
             <input type="button" value="导入" id="uploadFile" class="btn btn-primary" style="margin-top: 20px;"/>
           </div>
         </div>
+
+        <div id="XuInputPage" style="margin-top: 50px;" class="hidden" align="center">
+          <div style="background-color: white;width: 80%; height: 150px;">
+            <p class="upload">导入入学前学籍信息：</p>
+            <input type="file" name="Xuejifile" id="Xuejifile" style="margin-top: 20px;"/>
+            <input type="button" value="导入" id="uploadXueJiInfo" class="btn btn-primary" style="margin-top: 20px;"/>
+          </div>
+        </div>
+
         <div id="classInfoPage" style="margin-top: 50px;" class="hidden" align="center">
           <div style="background-color: white;width: 80%; height: 150px;">
             <p class="upload">导入成绩信息</p>

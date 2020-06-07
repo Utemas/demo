@@ -10,6 +10,7 @@ import com.demo.demo.po.Enter;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
 import com.demo.demo.po.Punish;
+import com.demo.demo.po.Static;
 import com.demo.demo.po.Student;
 import com.demo.demo.po.Trouble;
 import com.demo.demo.po.Urgent;
@@ -115,28 +116,15 @@ public interface CustomerMapper {
     @Select("select * from project1_class")
     public List<ClassInfo>findAllClassInfo();
     
-    //删除Section
-    //删除这个学生上过的课程
-    @Delete("delete from project1_class where st_id=#{st_id}")
-    public int deleteClassById(@Param("st_id")String st_id);
-
     @Delete("delete from project1_class where id=#{id}")
     public int deleteClassByClassId(@Param("id")int id);
 
-    //删除这个学生在系统中的个人信息
-    @Delete("delete from project1_person where id_number=#{id_number}")
-    public int deletePersonById(@Param("id_number")String id_number);
 
-    //删除掉这个生的customer表st_id
-    @Delete("delete from project1_customer where id_number=#{id_number}")
-    public int deleteCustomerById(@Param("id_number") String id_numbere);
-
-    @Delete("delete from project1_st where st_id = #{st_id}")
-	public int deleteStudentById(@Param("st_id") String st_id);
-
-    @Delete("delete from project1_trouble where st_id = #{st_id}")
-    public int delteeTrouble(String st_id);
+    @Select("select id_number from project1_customer where st_id = #{st_id}")
+    public String findStudentIdnumber(@Param("st_id") String st_id);
     
+    @Select("select distinct st_xueYuan as label,count(st_xueYuan) as countNumber from project1_st group by st_xueYuan")
+    public List<Static> findstaticInfo();
     
 
 }

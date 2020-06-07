@@ -2,8 +2,6 @@ package com.demo.demo.Controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +15,6 @@ import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.ContextInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Loginer;
-import com.demo.demo.po.Static;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;

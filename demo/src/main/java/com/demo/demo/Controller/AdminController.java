@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.demo.demo.Mapper.CustomerMapper;
+import com.demo.demo.Mapper.DeleteMapper;
 import com.demo.demo.Mapper.UpdateMapper;
 import com.demo.demo.Service.AdminService;
 import com.demo.demo.po.Award;
@@ -12,6 +13,7 @@ import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
+import com.demo.demo.po.Static;
 import com.demo.demo.po.Student;
 import com.demo.demo.po.Trouble;
 
@@ -35,6 +37,9 @@ public class AdminController {
     @Autowired
     UpdateMapper updateMapper;
 
+    @Autowired
+    DeleteMapper deleteMapper;
+
     @RequestMapping("/admin")
     public String adminLog(Map<String,Object> map){
 
@@ -52,7 +57,7 @@ public class AdminController {
     }
 
     @RequestMapping("/look")
-    public String updateStudentPage(@RequestParam(value = "st_id", required = false, defaultValue = "1") String st_id,HashMap<String, Object> map){
+    public String lookStudentPage(@RequestParam(value = "st_id", required = false, defaultValue = "1") String st_id,HashMap<String, Object> map){
         //获取学生的学生信息
         Student student = adminService.getStudentById(st_id);
         Customer customer = customerMapper.getCustomerByStid(st_id);
@@ -67,21 +72,10 @@ public class AdminController {
         return "administrator/student";
     }
 
-    @ResponseBody
     @RequestMapping("/delete")
-    public String deleteStudent(String st_id,HashMap<String, Object> map){
-        
-        String message = "删除失败";
-        List<Student> customer = customerMapper.finStudentById(st_id);
-        int result = customerMapper.deleteCustomerById(customer.get(0).getSt_id());
-        result = customerMapper.deleteClassById(st_id);
-        result = customerMapper.deletePersonById(customer.get(0).getSt_id());
-        result = customerMapper.deleteStudentById(st_id);
-        result = customerMapper.delteeTrouble(st_id);
-        if(result != 0 ){
-            System.out.println("删除成功!");
-        }
-        return message;
+    public String deleteStudent(@RequestParam(value = "st_id", required = false, defaultValue = "1") String st_id,HashMap<String, Object> map){
+        adminService.deleteStudent(st_id);
+        return "redirect:/admin";
     }
 
 
@@ -188,6 +182,19 @@ public class AdminController {
         return "恢复默认密码成功";
     }
 
+    @RequestMapping("/statistics")
+    public String statistics(HashMap<String, Object> map) {
+
+        List<Static> slist = customerMapper.findstaticInfo();
+        for(Static s : slist){
+            double count = slist.size();
+            double percent = ((1.0 * s.getCountNumber()) / count) * 100;
+            String result = Double.toString(percent) + "%";
+            s.setPercent(result);
+        }
+        map.put("slist",slist);
+        return "administrator/statistics";
+    }
 
     
 }

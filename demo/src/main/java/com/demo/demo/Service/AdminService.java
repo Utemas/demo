@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.demo.demo.Mapper.AddMapper;
 import com.demo.demo.Mapper.CustomerMapper;
+import com.demo.demo.Mapper.DeleteMapper;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Student;
 
@@ -20,6 +21,8 @@ public class AdminService {
     @Autowired
     AddMapper addMapper;
 
+    @Autowired
+    DeleteMapper deleteMapper;
 
     public Student getStudentById(String st_id) {
 
@@ -48,5 +51,32 @@ public class AdminService {
         int result = addMapper.addPunish(punish_name, punish_result, punish_time, punish_sc, st_id);
 
         return result;
+    }
+
+    public int deleteStudent(String st_id){
+        
+        String id_number = customerMapper.findStudentIdnumber(st_id);
+
+        int result = deleteMapper.deleteStudent(st_id);
+        
+        result = deleteMapper.deleteClassByStId(st_id);
+
+        result = deleteMapper.deleteAwardByStId(st_id);
+
+        result = deleteMapper.deleteLoginByStId(st_id);
+
+        result = deleteMapper.deleteUrgentByStId(st_id);
+
+        result = deleteMapper.deleteFromByStId(id_number);
+
+        result = deleteMapper.deletePersonByStId(id_number);
+
+        result = deleteMapper.deletePunishByStId(st_id);
+
+        result = deleteMapper.deleteCustomerByStId(st_id);
+
+
+        return result;
+
     }
 }

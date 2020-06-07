@@ -139,8 +139,27 @@ public class ReadExcel {
             int rowNum = sheet.getLastRowNum();
             for(int i = 1; i <= rowNum; i++){
                 Enter enterInfo = new Enter();
+                sheet.getRow(i).getCell(0).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(1).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(2).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(3).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(4).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(5).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(6).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(7).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(8).setCellType(HSSFCell.CELL_TYPE_STRING);
+               
+                enterInfo.setEnter_idnumber(sheet.getRow(i).getCell(0).getStringCellValue());
+                enterInfo.setEnter_speak(sheet.getRow(i).getCell(1).getStringCellValue());
+                enterInfo.setEnter_luquid(sheet.getRow(i).getCell(2).getStringCellValue());
+                enterInfo.setEnter_type(sheet.getRow(i).getCell(3).getStringCellValue());
+                enterInfo.setEnter_score(sheet.getRow(i).getCell(4).getStringCellValue());
+                enterInfo.setEnter_kaoqu(sheet.getRow(i).getCell(5).getStringCellValue());
+                enterInfo.setId_number(sheet.getRow(i).getCell(6).getStringCellValue());
+                enterInfo.setEnter_source(sheet.getRow(i).getCell(7).getStringCellValue());
+                enterInfo.setEnter_from(sheet.getRow(i).getCell(8).getStringCellValue());
                 
-                
+                elist.add(enterInfo);
             }
             return elist;
         }
