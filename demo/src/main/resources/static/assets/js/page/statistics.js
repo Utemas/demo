@@ -1,5 +1,14 @@
 $(function(){
-    $("#xueYuanStatistics").click(function(){
-        $("tbody").html("<tr><td>hhhh</td><td>35</td></tr>");
+    $("#addr_province").click(function(){
+        $("#xueYuanT").removeClass("active");
+        $("#addr_province").addClass("active");
+        $.ajax({
+            type:'post',
+            url:'/sP',
+            success: function(slist){
+                $("tbody").html("");
+                sprint(slist);
+            }
+        })
     })
 })

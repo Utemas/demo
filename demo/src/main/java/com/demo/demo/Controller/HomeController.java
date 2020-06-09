@@ -10,6 +10,7 @@ import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
 import com.demo.demo.po.Enter;
+import com.demo.demo.po.Link;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
 import com.demo.demo.po.Punish;
@@ -91,7 +92,7 @@ public class HomeController {
         // 获取登录对象
         Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
         // 获取中间连接类
-        Customer customer = customerMapper.getCustomerByStid(loginer.getSt_id());
+        Link customer = customerMapper.getCustomerByStid(loginer.getSt_id());
         // 获取学生学籍信息
         Student student = customerMapper.getStudentInfo(loginer.getSt_id());
 
@@ -101,7 +102,7 @@ public class HomeController {
         // 查询学生成绩数量
         int class_count = customerMapper.theNumberOfClass(loginer.getSt_id());
         map.put("class_count", class_count);
-        map.put("english_name", customer.getCustomer_english_name());
+        map.put("english_name", "徐更改");
         //
         map.put("student", student);
 
@@ -111,6 +112,10 @@ public class HomeController {
         map.put("birthday", birth);
         map.put("address", Utill.getAddress(person));
 
+        // 查询学生的入学信息
+        Enter enterInfo = customerMapper.getEnterInfo(customer.getId_number());
+        map.put("enter", enterInfo);
+        
         // 获取学生的在学校的年份
         student.setSt_entertime(Utill.formatTime(student.getSt_entertime()));
         int enterYear = Integer.parseInt(student.getSt_entertime().substring(0, 4));
@@ -126,9 +131,14 @@ public class HomeController {
         map.put("ulistCount",ulistCount);
         //
         // 计算这个同学的总学分是多少
-        int xueFenTotal = customerMapper.getTotalXueFen(loginer.getSt_id());
-
-        map.put("xueFenTotal", xueFenTotal);
+        Object xueFenTotal = customerMapper.getTotalXueFen(loginer.getSt_id());
+        if(xueFenTotal == null){
+            map.put("xueFenTotal", 0);
+        }else{
+            map.put("xueFenTotal", xueFenTotal);
+        }
+        
+       
         //
 
         // 计算优秀率85分以上占比
@@ -152,7 +162,7 @@ public class HomeController {
         int bujigeNumber = customerMapper.getBujigeNumber(customer.getSt_id());
         map.put("bujigeNumber", bujigeNumber);
         if (class_count == 0) {
-            map.put("bujuigelv", "0-.0%");
+            map.put("bujuigelv", "0.0%");
             return "student/total";
         }
         bujigebi = (double) bujigeNumber / (double) class_count;
@@ -160,9 +170,7 @@ public class HomeController {
         bujigelv = Double.toString(bujigebi) + "%";
         map.put("bujuigelv", bujigelv);
 
-        // 查询学生的入学信息
-        Enter enterInfo = customerMapper.getEnterInfo(customer.getId_number());
-        map.put("enter", enterInfo);
+        
 
         // 查询学生获奖情况的数量
         int awardCount = customerMapper.getAwardCount(customer.getSt_id());
@@ -206,7 +214,7 @@ public class HomeController {
             return "/500";
         }
         Punish punish = customerMapper.getPunishById(punish_id);
-        Customer customer = customerMapper.getCustomerByStid(punish.getSt_id());
+        Link customer = customerMapper.getCustomerByStid(punish.getSt_id());
         Person person = customerMapper.getStudentPeronInformation(customer.getId_number());
         map.put("person", person);
         map.put("punish", punish);
@@ -245,6 +253,12 @@ public class HomeController {
     @RequestMapping("/deleteUrgent")
     public String deleteUrgent(@RequestParam(value = "id", required = false, defaultValue = "0")int id){
         int result = deleteMapper.deleteUrgent(id);
+        return "redirect:/student";
+    }
+
+    @RequestMapping("/deleteAward")
+    public String deleteAward(@RequestParam(value = "id", required = false, defaultValue = "0")int id){
+        int result = deleteMapper.deleteAwardById(id);
         return "redirect:/student";
     }
 

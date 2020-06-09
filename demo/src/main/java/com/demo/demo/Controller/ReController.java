@@ -13,7 +13,7 @@ import com.demo.demo.Mapper.UpdateMapper;
 import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.ContextInfo;
-import com.demo.demo.po.Customer;
+import com.demo.demo.po.Link;
 import com.demo.demo.po.Loginer;
 
 import org.apache.shiro.SecurityUtils;
@@ -40,7 +40,7 @@ public class ReController {
     String customer_youzheng, String customer_start_station, String customer_end_station) {
         Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
 
-        Customer customer = customerMapper.getCustomerByStid(loginer.getSt_id());
+        Link customer = customerMapper.getCustomerByStid(loginer.getSt_id());
 
         ContextInfo cinfo = new ContextInfo();
         cinfo.setCustomer_jiguan(ji_guan);
@@ -75,7 +75,7 @@ public class ReController {
     public ContextInfo seleContextInfo() {
         Loginer Loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
 
-        Customer customer = customerMapper.getCustomerByStid(Loginer.getSt_id());
+        Link customer = customerMapper.getCustomerByStid(Loginer.getSt_id());
 
         ContextInfo contextInfo = customerMapper.selectContextInfo(customer.getId_number());
         return contextInfo;

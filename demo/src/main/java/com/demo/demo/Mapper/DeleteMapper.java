@@ -37,4 +37,7 @@ public interface DeleteMapper {
 
     @Delete("delete from project1_urgent where st_id=#{st_id}")
     public int deleteUrgentByStId(@Param("st_id") String st_id);
+
+    @Delete("delete from project1_award where id=#{id}")
+    public int deleteAwardById(@Param("id") int id);
 }

@@ -29,5 +29,11 @@ public interface AddMapper {
 	public void addUgent(@Param("urgent_name") String urgent_name,@Param("urgent_guanxi") String urgent_context,@Param("urgent_tel") String urgent_tel,@Param("st_id") String st_id);
 
     @Insert("insert into project1_from(enter_idnumber,enter_speak,enter_luquid,enter_type,enter_score,enter_kaoqu,id_number,enter_source,enter_from) values(#{enter_idnumber},#{enter_speak},#{enter_luquid},#{enter_type},#{enter_score},#{enter_kaoqu},#{id_number},#{enter_source},#{enter_from})")
-	public void addEnterInfo(@Param("enter_idnumber") String enter_idnumber,@Param("enter_speak") String enter_speak,@Param("enter_luquid") String enter_luquid,@Param("enter_type") String enter_type,@Param("enter_score") String enter_score,@Param("enter_kaoqu")String enter_kaoqu,@Param("id_number") String id_number,@Param("enter_source") String enter_source,@Param("enter_from") String enter_from);
+    public void addEnterInfo(@Param("enter_idnumber") String enter_idnumber,@Param("enter_speak") String enter_speak,@Param("enter_luquid") String enter_luquid,@Param("enter_type") String enter_type,@Param("enter_score") String enter_score,@Param("enter_kaoqu")String enter_kaoqu,@Param("id_number") String id_number,@Param("enter_source") String enter_source,@Param("enter_from") String enter_from);
+    
+    @Insert("insert into project1_login(st_id,password,login_identify) values(#{st_id},#{password},'st')")
+    public int addLogin(@Param("st_id")String st_id, @Param("password")String password);
+
+    @Insert("insert into project1_st(id_number,st_id,st_xueYuan,st_zhuanye,st_nianji,st_class,st_type,st_leave_date,st_peiyangfangshi,st_leave_to,st_entertime,st_xuejibiao_number,st_status,st_status_stiker) values(#{id_number},#{st_id},#{st_xueYuan},#{st_zhuanye},#{st_nianji},#{st_class},#{st_type},#{st_leave_date},#{st_peiyangfangshi},#{st_leave_to},#{st_entertime},#{st_xuejibiao_number},#{st_status},#{st_status_stiker})")
+    public int addStInfo(@Param("id_number")String id_number,@Param("st_id")String st_id,@Param("st_xueYuan")String st_xueYuan,@Param("st_zhuanye")String st_zhuanye,@Param("st_nianji")String st_nianji,@Param("st_class")String st_class,@Param("st_type")String st_type,@Param("st_leave_date") String st_leave_date,@Param("st_peiyangfangshi")String st_peiyangfangshi,@Param("st_leave_to")String st_leave_to,@Param("st_entertime")String st_entertime,@Param("st_xuejibiao_number")String st_xuejibiao_number,@Param("st_status")String st_status,@Param("st_status_stiker")String st_status_stiker);
 }

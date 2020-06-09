@@ -12,6 +12,7 @@ import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Enter;
 import com.demo.demo.po.Person;
+import com.demo.demo.po.Student;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -123,6 +124,49 @@ public class ReadExcel {
                 clist.add(classInfo);
             }
             return clist;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Student> ReadStInfo(String filePath){
+        List<Student> slist = new ArrayList<>();
+        XSSFSheet sheet = null;
+        try{
+            sheet = this.getExcel(filePath).getSheetAt(0);
+            
+            int rowNum = sheet.getLastRowNum();
+            for(int i = 1; i <= rowNum; i++){
+                Student studentInfo = new Student();
+                sheet.getRow(i).getCell(0).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(1).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(3).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(4).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(5).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(6).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(8).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(9).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(11).setCellType(HSSFCell.CELL_TYPE_STRING);
+                sheet.getRow(i).getCell(12).setCellType(HSSFCell.CELL_TYPE_STRING);
+
+                studentInfo.setId_number(sheet.getRow(i).getCell(0).getStringCellValue());
+                studentInfo.setSt_id(sheet.getRow(i).getCell(1).getStringCellValue());
+                studentInfo.setSt_xueYuan(sheet.getRow(i).getCell(2).getStringCellValue());
+                studentInfo.setSt_zhuanye(sheet.getRow(i).getCell(3).getStringCellValue());
+                studentInfo.setSt_nianji(sheet.getRow(i).getCell(4).getStringCellValue());
+                studentInfo.setSt_class(sheet.getRow(i).getCell(5).getStringCellValue());
+                studentInfo.setSt_type(sheet.getRow(i).getCell(6).getStringCellValue());
+                studentInfo.setSt_leave_date(Utill.getNowDateShort(sheet.getRow(i).getCell(7).getDateCellValue()));
+                studentInfo.setSt_peiyangfangshi(sheet.getRow(i).getCell(8).getStringCellValue());
+                studentInfo.setSt_leave_to(sheet.getRow(i).getCell(9).getStringCellValue());
+                studentInfo.setSt_entertime(Utill.getNowDateShort(sheet.getRow(i).getCell(10).getDateCellValue()));
+                studentInfo.setSt_xuejibiao_number(sheet.getRow(i).getCell(11).getStringCellValue());
+                studentInfo.setSt_status(sheet.getRow(i).getCell(12).getStringCellValue());
+                slist.add(studentInfo);
+            }
+            return slist;
         }
         catch (Exception e){
             e.printStackTrace();

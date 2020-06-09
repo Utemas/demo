@@ -15,4 +15,5 @@ public class ClassInfo{
     private String st_id;
     private String class_year;
     private String class_xueqi;
+    private String class_jidian;
 }

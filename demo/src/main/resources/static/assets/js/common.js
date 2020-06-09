@@ -9,6 +9,12 @@ function print(result){
     })
 }
 
+function sprint(result){
+    $.each(result,function(index,obj){
+        $("tbody").append("<tr><td>"+obj['label']+"</td><td>"+obj['countNumber']+"</td><td>"+obj['percent']+"</td>");
+    })
+}
+
 function hed(str1,str2){
     $("#sec").html("");
     $("#sec").html("<h1>"+str1+"<small>"+str2+"</small></h1><ol class='breadcrumb'><li><a href='/login'>登录</a></li><li><a href='#'><i class='fa fa-dashboard'></i>"+str1+"</a></li></ol>");

@@ -14,6 +14,7 @@ import com.demo.demo.Mapper.AddMapper;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Enter;
 import com.demo.demo.po.Person;
+import com.demo.demo.po.Student;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +51,45 @@ public class FileUploadController {
         }
         return "导入成功";
     }
+
+    @PostMapping("/uploadStudentInfo")
+    public String uploadStudentInfo(MultipartFile file, HttpServletRequest request) throws Exception {
+        List<Student> slist = new ArrayList<>();
+        //1.定义上传文件目录
+        //上传文件的路径，可以在 Contat类 里进行修改
+        ReadExcel re = new ReadExcel();
+        String path = Contant.uploadPath;
+        File folder = new File(path);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+        String fileName = file.getOriginalFilename();
+        try {
+            
+            file.transferTo(new File(folder, fileName));
+            slist = re.ReadStInfo(path+"\\"+fileName);
+            for(Student s : slist){
+                System.out.println(s);
+                switch (s.getSt_status()) {
+                    case "正常":
+                        s.setSt_status_stiker("green");
+                        break;
+                    case "转入":
+                        s.setSt_status_stiker("yellow");
+                        break;
+                    default:
+                        break;
+                }
+                int result = addMapper.addLogin(s.getSt_id(), s.getId_number().substring(12));
+                result = addMapper.addStInfo(s.getId_number(), s.getSt_id(), s.getSt_xueYuan(), s.getSt_zhuanye(), s.getSt_nianji(), s.getSt_class(), s.getSt_type(), s.getSt_leave_date(), s.getSt_peiyangfangshi(), s.getSt_leave_to(), s.getSt_entertime(), s.getSt_xuejibiao_number(), s.getSt_status(), s.getSt_status_stiker());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "导入成功";
+    }
+    
 
     @PostMapping("/uploadScore")
     public String uploadScore(MultipartFile file, HttpServletRequest request) throws Exception{
@@ -96,4 +136,6 @@ public class FileUploadController {
         }
         return "导入成功";
     }
+
+    
 }

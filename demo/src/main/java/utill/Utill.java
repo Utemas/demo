@@ -1,11 +1,14 @@
 package utill;
 
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
+import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Person;
 
 public final class Utill {
@@ -135,6 +138,48 @@ public final class Utill {
         return result;
     }
 
+    public static String getNowDateShort(Date currentTime) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(currentTime);
+       return dateString;
+    }
 
+    public static boolean isInteger(String str) {  
+        try {
+            Double num2 = Double.valueOf(str);    
+            return true;
+        } catch (Exception e) {  
+            return false;
+        }  
+    }
+
+
+    public static List<ClassInfo> seeScore(List<ClassInfo> clist){
+        for(ClassInfo c : clist){
+            boolean q = isInteger(c.getClass_score());
+            if(q){
+                //是数字，百分算绩点
+            }else{
+                //不是数字用五分制
+                switch (c.getClass_score()) {
+                    case "优秀":
+                        c.setClass_jidian("");
+                        break;
+                    case "良":
+                        break;
+                    case "中":
+                        break;
+                    case "及格":
+                        break;
+                    case "不及格":
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        
+        return null;
+    }
    
 }

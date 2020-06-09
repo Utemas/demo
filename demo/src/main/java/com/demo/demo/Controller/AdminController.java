@@ -11,6 +11,7 @@ import com.demo.demo.Service.AdminService;
 import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Customer;
+import com.demo.demo.po.Link;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
 import com.demo.demo.po.Static;
@@ -60,7 +61,7 @@ public class AdminController {
     public String lookStudentPage(@RequestParam(value = "st_id", required = false, defaultValue = "1") String st_id,HashMap<String, Object> map){
         //获取学生的学生信息
         Student student = adminService.getStudentById(st_id);
-        Customer customer = customerMapper.getCustomerByStid(st_id);
+        Link customer = customerMapper.getCustomerByStid(st_id);
         Person person = customerMapper.getStudentPeronInformation(customer.getId_number());
         //获取学生的课程信息
         List<ClassInfo> clist = adminService.getStudentClassById(st_id);
@@ -165,7 +166,7 @@ public class AdminController {
             return "该学生不存在";
         }
 
-        Customer cus = customerMapper.getCustomerByStid(st_id);
+        Link cus = customerMapper.getCustomerByStid(st_id);
 
         String idNumber =cus.getId_number();
 
@@ -187,7 +188,7 @@ public class AdminController {
 
         List<Static> slist = customerMapper.findstaticInfo();
         for(Static s : slist){
-            double count = slist.size();
+            double count = customerMapper.countSt();
             double percent = ((1.0 * s.getCountNumber()) / count) * 100;
             String result = Double.toString(percent) + "%";
             s.setPercent(result);
@@ -196,5 +197,16 @@ public class AdminController {
         return "administrator/statistics";
     }
 
+    @ResponseBody
+    @RequestMapping("/sP")
+    public List<Static> statisticsP() {
+        List<Static> slist = customerMapper.findstaticPInfo();
+        for(Static s : slist){
+            double count = customerMapper.countPerson();
+            double percent = ((1.0 * s.getCountNumber()) / count) * 100;
+            String result = Double.toString(percent) + "%";
+        }
+        return slist;
+    }
     
 }

@@ -172,7 +172,7 @@
       <div class="content">
         <!--     往这里添加 主要内容-->
         <div id="xuejiSearch">
-          <form class="input-group" action="/findStudentById">
+          <form class="input-group" action="/findStudentById" method="POST">
             <input type="text" class="form-control" placeholder="请输入学生学号，点击搜索按钮" id="st_id" name="st_id">
             <span class="input-group-btn">
               <button id="search_btn2" class="btn btn-flat"><i class="fa fa-search"></i></button>
@@ -220,6 +220,14 @@
           </div>
         </div>
 
+        <div id="st_info" style="margin-top: 50px;" class="hidden" align="center">
+          <div style="background-color: white;width: 80%; height: 150px;">
+            <p class="upload">导入在校基本信息</p>
+            <input type="file" name="STFile" id="STFile" style="margin-top: 20px;"/>
+            <input type="button" id="uploadSt" style="margin-top: 20px;" class="btn btn-primary" value="导入"/>
+          </div>
+        </div>
+
         <div id="classInfoPage" style="margin-top: 50px;" class="hidden" align="center">
           <div style="background-color: white;width: 80%; height: 150px;">
             <p class="upload">导入成绩信息</p>
@@ -227,6 +235,8 @@
             <input type="button" value="导入" id="uploadClassFile" style="margin-top: 20px;" class="btn btn-primary"/>
           </div>
         </div>
+
+        
       </div>
       <!-- /.content -->
     </div>

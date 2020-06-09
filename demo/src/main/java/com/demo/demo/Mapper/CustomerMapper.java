@@ -5,8 +5,8 @@ import java.util.List;
 import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.ContextInfo;
-import com.demo.demo.po.Customer;
 import com.demo.demo.po.Enter;
+import com.demo.demo.po.Link;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
 import com.demo.demo.po.Punish;
@@ -28,8 +28,8 @@ public interface CustomerMapper {
     @Select("select * from project1_login where st_id=#{id} and login_identify=#{identify}")
     public Loginer toLogin(@Param("identify") String identfy, @Param("id") String st_id);
     //查找用户个人信息
-    @Select("select * from v_cu where st_id=#{id}")
-    public Customer getCustomerByStid(@Param("id") String st_id);
+    @Select("select * from project1_link where st_id=#{id}")
+    public Link getCustomerByStid(@Param("id") String st_id);
 
     @Select("select * from project1_st where st_id = #{st_id}")
     public Student getStudentInfo(@Param("st_id")String st_id);
@@ -76,7 +76,7 @@ public interface CustomerMapper {
     public List<ClassInfo> getALLClass(@Param("st_id")String st_id);
 
     @Select("select sum(class_xuefen) from project1_class where st_id=#{st_id}")
-    public int getTotalXueFen(@Param("st_id") String st_id);
+    public Object getTotalXueFen(@Param("st_id") String st_id);
     //查询学生的个人名片
     @Select("select customer_jiguan, customer_tel,customer_email,customer_youzheng,customer_start_station,customer_end_station from project1_customer where id_number=#{id_number}")
     public ContextInfo selectContextInfo(@Param("id_number")String id_number);
@@ -125,6 +125,16 @@ public interface CustomerMapper {
     
     @Select("select distinct st_xueYuan as label,count(st_xueYuan) as countNumber from project1_st group by st_xueYuan")
     public List<Static> findstaticInfo();
+    
+    @Select("select distinct addr_province as label,count(addr_province) as countNumber from project1_person group by addr_province")
+    public List<Static> findstaticPInfo();
+
+    @Select("select count(*) from project1_st")
+    public int countSt();
+
+    @Select("select count(*) from project1_person")
+    public int countPerson();
+    
     
 
 }
