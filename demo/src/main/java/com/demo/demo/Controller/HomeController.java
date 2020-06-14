@@ -8,7 +8,6 @@ import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.Mapper.DeleteMapper;
 import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
-import com.demo.demo.po.Customer;
 import com.demo.demo.po.Enter;
 import com.demo.demo.po.Link;
 import com.demo.demo.po.Loginer;
@@ -140,7 +139,7 @@ public class HomeController {
         
        
         //
-
+        
         // 计算优秀率85分以上占比
         String youxiulv;
         double youxiubi;
@@ -170,6 +169,17 @@ public class HomeController {
         bujigelv = Double.toString(bujigebi) + "%";
         map.put("bujuigelv", bujigelv);
 
+        double gpa = 0.0;
+        
+        List<ClassInfo> classinfoList = Utill.tempGPA(customerMapper.getALLClass(loginer.getSt_id()));
+        if(classinfoList.equals(null) || classinfoList == null){
+            map.put("gpa", 0);
+        }else{
+            gpa = Utill.caluterGPA(classinfoList, (double)xueFenTotal);
+            map.put("gpa",gpa);
+        }
+        
+        
         
 
         // 查询学生获奖情况的数量
@@ -236,7 +246,7 @@ public class HomeController {
         Loginer loginer = (Loginer) SecurityUtils.getSubject().getPrincipal();
         List<ClassInfo> clist = customerMapper.getALLClass(loginer.getSt_id());
         try {
-            PDFUtill.createPDFtext("C:/Users/Servent/Desktop/testTable3.pdf", writer, clist);
+            PDFUtill.createPDFtext("C:/Users/Servent/Desktop/classInfomation.pdf", writer, clist);
         } catch (IOException e) {
             e.printStackTrace();
         }

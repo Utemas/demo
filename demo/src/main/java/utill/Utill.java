@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Person;
@@ -154,32 +153,69 @@ public final class Utill {
     }
 
 
-    public static List<ClassInfo> seeScore(List<ClassInfo> clist){
+    public static List<ClassInfo> tempGPA(List<ClassInfo> clist){
+        List<ClassInfo> new_clist = new ArrayList<>();
         for(ClassInfo c : clist){
             boolean q = isInteger(c.getClass_score());
             if(q){
-                //是数字，百分算绩点
+                double t = Double.valueOf(c.getClass_score());
+                if(t >= 95 && t <= 100){
+                    c.setClass_jidian(4.5);
+                }else if(t >= 90 && t <= 94){
+                    c.setClass_jidian(4.0);
+                }else if(t >= 85 && t <= 89){
+                    c.setClass_jidian(3.5);
+                }else if(t >= 80 && t <= 84){
+                    c.setClass_jidian(3.0);
+                }else if(t >= 75 && t <= 79){
+                    c.setClass_jidian(2.5);
+                }else if(t >= 70 && t <= 74){
+                    c.setClass_jidian(2.0);
+                }else if(t >= 65 && t <= 69){
+                    c.setClass_jidian(1.5);
+                }else if(t >= 60 && t <= 64){
+                    c.setClass_jidian(1.0);
+                }else if(t <= 59){
+                    c.setClass_jidian(0.0);
+                }
+                new_clist.add(c);
             }else{
                 //不是数字用五分制
                 switch (c.getClass_score()) {
                     case "优秀":
-                        c.setClass_jidian("");
+                        c.setClass_jidian(4.0);
                         break;
-                    case "良":
+                    case "良好":
+                        c.setClass_jidian(3.0);
                         break;
-                    case "中":
+                    case "中等":
+                        c.setClass_jidian(2.0);
                         break;
                     case "及格":
+                        c.setClass_jidian(1.0);
                         break;
                     case "不及格":
+                        c.setClass_jidian(0.0);
                         break;
                     default:
                         break;
                 }
+                new_clist.add(c);
             }
         }
         
-        return null;
+        return new_clist;
+    }
+
+    public static double caluterGPA(List<ClassInfo> cList,double xuefenTotal){
+        double result =0.0;
+        double xuefenji = 0.0;
+        for (ClassInfo c : cList) {
+            xuefenji += c.getClass_jidian() * c.getClass_xuefen();
+        }
+        result = xuefenji / xuefenTotal;
+
+        return result;
     }
    
 }

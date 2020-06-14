@@ -10,7 +10,6 @@ import com.demo.demo.Mapper.UpdateMapper;
 import com.demo.demo.Service.AdminService;
 import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
-import com.demo.demo.po.Customer;
 import com.demo.demo.po.Link;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
@@ -207,6 +206,25 @@ public class AdminController {
             String result = Double.toString(percent) + "%";
         }
         return slist;
+    }
+
+    @ResponseBody
+    @RequestMapping("/updateSinfo")
+    public String updateSinfo(String new_st_xueYuan, String new_st_zhuanye, String new_st_nianji, String new_st_class, String new_leave_to, String new_status, String st_id){
+        int result = 0;
+        if(new_status.equals("正常")){
+            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "green",st_id);
+        }else if(new_status.equals("转入")){
+            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "#984B4B",st_id);
+        }else if(new_status.equals("休学")){
+            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "#737300",st_id);
+        }else if(new_status.equals( "转出") || new_status.equals("退学")){
+            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "red",st_id);
+        }
+        if(result == 1){
+            return "修改成功";
+        }
+        return "修改失败";
     }
     
 }

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="../assets/css/form/AdminLTE.min.css">
   <link rel="stylesheet" href="../assets/css/form/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="../assets/css/form/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" href="../assets/css/form/_all-skins.min.css">
   <link rel="stylesheet" href="../assets/css/form/blue.css">
   <link rel="stylesheet" href="../assets/css/page/total.css">
@@ -280,7 +281,12 @@
           <div class="form-group">
             <label for="newTel" class="col-sm-2 control-label">惩罚下达<br/>时间</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="addpunish_time" />
+              <div class="input-group date form_date">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control pull-right" id="addpunish_time" readonly name="award_time" placeholder="获奖时间">
+            </div>
             </div>
           </div>
           <div class="form-group">
@@ -343,8 +349,24 @@
 <script src="../assets/js/page/adminT.js"></script>
 <script src="../assets/js/form/demo.js"></script>
 <script src="../assets/js/form/chaos.js"></script>
+<script src="../assets/js/form/bootstrap-datetimepicker.js"></script>
+<script src="../assets/js/form/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
   $(function () {
+    $('.form_date').datetimepicker({
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+    }).on("click", function () {
+      jQuery("#form_date").datetimepicker("setEndDate", jQuery("#form_date").val())
+    });
+
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
@@ -368,6 +390,20 @@
       var st_id = $("#addpunish_st_id").val();
       var punish_time = $("#addpunish_time").val();
       var punish_sc = $("#addpunish_sc").val();
+      if(punish_name == "" || punish_result == "" || st_id == "" || punish_time == "" || punish_sc == ""){
+        alert("各项不能为空");
+        return false;
+      }
+      if(punish_name.length > 20 || punish_sc.length > 20){
+        alert("请检查字数");
+        $("#addpunish_name").val("");
+        $("#addpunish_result").val("");
+        $("#addpunish_st_id").val("");
+        $("#addpunish_time").val("");
+        $("#addpunish_sc").val("");
+
+        return false;
+      }
       $.ajax({
         url: "/addPunish",
         type: "POST",

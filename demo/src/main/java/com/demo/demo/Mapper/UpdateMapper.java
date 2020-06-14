@@ -35,6 +35,7 @@ public interface UpdateMapper {
     @Update("update project1_award set award_condition =#{condition}, condition_css=#{css} where id=#{id}")
     public int updateAwardStatus(@Param("condition") String award_condition, @Param("css") String condition_css, @Param("id")int id);
 
-    
+    @Update("update project1_st set st_xueYuan = #{st_xueYuan}, st_zhuanye = #{st_zhuanye}, st_nianji = #{st_nianji}, st_class = #{st_class}, st_leave_to = #{st_leave_to}, st_status = #{st_status}, st_status_stiker = #{st_status_stiker} where st_id = #{st_id}")
+    public int updteSinfo(@Param("st_xueYuan")String new_st_xueYuan, @Param("st_zhuanye")String new_st_zhuanye, @Param("st_nianji")String new_st_nianji, @Param("st_class")String new_st_class, @Param("st_leave_to")String new_leave_to, @Param("st_status")String new_status,@Param("st_status_stiker")String st_status_stiker, @Param("st_id")String st_id);
     
 }

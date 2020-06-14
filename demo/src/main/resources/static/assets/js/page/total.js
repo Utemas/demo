@@ -297,6 +297,14 @@ $(function () {
         formDate.append("award_time",award_time);
         formDate.append("award_type",award_type);
         formDate.append("award_picture",award_picture);
+        if(award_name == '' || award_time == '' || award_type== "" || award_type== ""){
+            alert("所有项目不能为空");
+            return false;
+        }
+        if(award_picture == null){
+            alert("必须上传奖励证明附件");
+            return false;
+        }
         $.ajax({
             url: "/addAwardInfo",
             type: "POST",
@@ -336,6 +344,10 @@ $(function () {
         var name = $("#addName").val();
         var context = $("#addContext option:selected").val();
         var tel = $("#addTel").val(); 
+        if(name == "" || context == "" || tel == ""){
+            alert("各项不能为空");
+            return false;
+        }
         $.ajax({
             url: "/addUgentInfo",
             type: "POST",
