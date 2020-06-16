@@ -42,7 +42,6 @@ public class UserRealm extends AuthorizingRealm{
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
-		//假设数据库的用户和密码
 		
 		//编写shiro判断逻辑，判断用户名和密码。
 		//1.判断用户名

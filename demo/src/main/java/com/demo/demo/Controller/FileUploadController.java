@@ -82,6 +82,8 @@ public class FileUploadController {
                 }
                 int result = addMapper.addLogin(s.getSt_id(), s.getId_number().substring(12));
                 result = addMapper.addStInfo(s.getId_number(), s.getSt_id(), s.getSt_xueYuan(), s.getSt_zhuanye(), s.getSt_nianji(), s.getSt_class(), s.getSt_type(), s.getSt_leave_date(), s.getSt_peiyangfangshi(), s.getSt_leave_to(), s.getSt_entertime(), s.getSt_xuejibiao_number(), s.getSt_status(), s.getSt_status_stiker());
+                result = addMapper.addCustomer(s.getId_number(), s.getSt_id(), "中国共产主义共青团团员", "空", "空");
+                
             }
 
         } catch (IOException e) {

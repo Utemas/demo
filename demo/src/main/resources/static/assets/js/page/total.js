@@ -199,6 +199,19 @@ $(function () {
         var sst = $("#customer_start_station").val();
         
         var end = $("#customer_end_station").val();
+        
+        if(el.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) == 0){
+            
+        }else{
+            alert("邮箱格式错误");
+            return false;
+        }
+        if(ct.search(/^1(3|4|5|6|7|8|9)\d{9}$/) == 0){
+
+        }else{
+            alert("电话号码格式错误");
+            return false;
+        }
         $.ajax({
             url:"/updateContextInfo",
             type:"POST",
@@ -346,6 +359,10 @@ $(function () {
         var tel = $("#addTel").val(); 
         if(name == "" || context == "" || tel == ""){
             alert("各项不能为空");
+            return false;
+        }
+        if(tel.search(/^1(3|4|5|6|7|8|9)\d{9}$/)){
+            alert("电话号码格式不正确");
             return false;
         }
         $.ajax({

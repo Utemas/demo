@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 
 @Configuration
 public class ShiroConfig{
@@ -24,17 +23,13 @@ public class ShiroConfig{
         //添加Shiro内置过滤器
         // Shiro内置过滤器，可以实现权限相关的拦截器
         /*
-            常用过滤器
             anon: 无需认证（登录）可以访问
             authc: 必须认证才可以访问
-            user: 如果使用rememberMe的功能可以直接访问
             perms: 该资源必须得到资源权限才可以访问
-            role: 该资源必须得到角色权限才可以访问
 
         */
         Map<String, String> filterMap = new LinkedHashMap<String, String>();
-        // filterMap.put("/add","authc");
-        // filterMap.put("/update","authc");
+        
         filterMap.put("/index","anon");
         filterMap.put("/login","anon");
         filterMap.put("/introduction","anon");
@@ -51,7 +46,7 @@ public class ShiroConfig{
 
         //授权过滤器
         //注意：当前授权拦截后，shiro会自动跳转到未授权的页面
-        //filterMap.put("/writing","perms[st]");
+        
         //设置未授权提示页面
         shiroFilterFactoryBean.setUnauthorizedUrl("/NoAuth");
         //修改调整的登录页面
@@ -74,11 +69,5 @@ public class ShiroConfig{
         return new UserRealm();
     }
 
-    /**
-     * 配置ShiroDialect,用于thymeleaf和shiro标签配合使用
-     */
-    @Bean()
-    public ShiroDialect getShiroDialect(){
-        return new ShiroDialect();
-    }
+    
 }

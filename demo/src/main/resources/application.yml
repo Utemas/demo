@@ -3,6 +3,7 @@ spring:
         password: "711418aa"
         url: jdbc:mysql://localhost:3306/project?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
         username: "root"
+        driver-class-name: com.mysql.cj.jdbc.Driver
     thymeleaf:
         prefix: classpath:/templates/
         servlet:
@@ -24,8 +25,7 @@ spring:
             mail.smtp.socketFactory.port: 465
             mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
             mail.smtp.socketFactory.fallback: false
-springdatasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    
 mybatis:
     type-aliases-package: com.demo.demo
 springboot:

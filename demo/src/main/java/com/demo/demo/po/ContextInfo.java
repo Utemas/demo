@@ -2,8 +2,9 @@ package com.demo.demo.po;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter@Setter
+@Getter@Setter@ToString
 public class ContextInfo {
     private String customer_jiguan;
     private String customer_tel;

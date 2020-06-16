@@ -185,9 +185,7 @@
             <td class="title">
               <p>政治面貌</p>
             </td>
-            <td>
-              <p></p>
-            </td>
+            <td th:text="${customer.customer_face}"></td>
           </tr>
           <!-- row 4-->
           <tr>
@@ -357,7 +355,7 @@
             <td class="title">入学日期</td>
             <td th:text="*{st_entertime}"></td>
             <td class="title">毕业日期</td>
-            <td></td>
+            <td th:text="*{st_leave_date}"></td>
           </tr>
           <tr>
             <td class="title">入学方式</td>
@@ -457,7 +455,7 @@
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
-      <strong>若"个人信息"有问题，可以通过<a style="margin-left: 3px;" th:href="@{/trouble?type=2}">联系管理人员</a>进行修改</strong>
+      <strong>广告招租</strong>
     </footer>
   </div>
   <!-- ./wrapper -->

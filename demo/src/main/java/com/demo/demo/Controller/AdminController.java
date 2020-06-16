@@ -1,5 +1,6 @@
 package com.demo.demo.Controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +11,13 @@ import com.demo.demo.Mapper.UpdateMapper;
 import com.demo.demo.Service.AdminService;
 import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
+import com.demo.demo.po.ContextInfo;
+import com.demo.demo.po.Customer;
 import com.demo.demo.po.Link;
 import com.demo.demo.po.Loginer;
 import com.demo.demo.po.Person;
 import com.demo.demo.po.Static;
 import com.demo.demo.po.Student;
-import com.demo.demo.po.Trouble;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +51,9 @@ public class AdminController {
         //默认的底部信息:  
         map.put("footerinformation","高级搜索可以更精确地搜索到学生");
         
-        List<Trouble> tlist = customerMapper.getTrouble();
+        //List<Trouble> tlist = customerMapper.getTrouble();
         
-        map.put("tlist",tlist);
+        //map.put("tlist",tlist);
         return "administrator/admin";
 
     }
@@ -62,11 +64,20 @@ public class AdminController {
         Student student = adminService.getStudentById(st_id);
         Link customer = customerMapper.getCustomerByStid(st_id);
         Person person = customerMapper.getStudentPeronInformation(customer.getId_number());
-        //获取学生的课程信息
-        List<ClassInfo> clist = adminService.getStudentClassById(st_id);
+        Customer c = customerMapper.getSc(st_id);
+        
+        ContextInfo ci = customerMapper.selectContextInfo(customer.getId_number());
+        
+        if(ci.getCustomer_email().equals(null)){
+            ci.setCustomer_email("空");
+            
+        }
 
-
-        map.put("clist",clist);
+        if(ci.getCustomer_tel().equals(null)){
+            ci.setCustomer_tel("空");
+        }
+        map.put("contextInfo",ci);
+        map.put("customer",c);
         map.put("student",student);
         map.put("person",person);
         return "administrator/student";
@@ -199,28 +210,38 @@ public class AdminController {
     @ResponseBody
     @RequestMapping("/sP")
     public List<Static> statisticsP() {
-        List<Static> slist = customerMapper.findstaticPInfo();
+        List<Static> new_slist = customerMapper.findstaticPInfo();
+        List<Static> slist = new ArrayList<>();
+        for(Static s : new_slist){
+            double count = customerMapper.countPerson();
+            double percent = ((1.0 * s.getCountNumber()) / count) * 100;
+            String result = Double.toString(percent) + "%";
+            s.setPercent(result);
+            slist.add(s);
+        }
+        return slist;
+    }
+
+    @ResponseBody
+    @RequestMapping("/sexP")
+    public List<Static> sexP() {
+        List<Static> slist = customerMapper.findstaticSInfo();
         for(Static s : slist){
             double count = customerMapper.countPerson();
             double percent = ((1.0 * s.getCountNumber()) / count) * 100;
             String result = Double.toString(percent) + "%";
+            s.setPercent(result);
         }
         return slist;
     }
 
     @ResponseBody
     @RequestMapping("/updateSinfo")
-    public String updateSinfo(String new_st_xueYuan, String new_st_zhuanye, String new_st_nianji, String new_st_class, String new_leave_to, String new_status, String st_id){
+    public String updateSinfo(String new_st_xueYuan, String new_st_zhuanye, String new_st_nianji, String new_st_class, String new_leave_to, String new_status, String new_face,String st_id){
         int result = 0;
-        if(new_status.equals("正常")){
-            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "green",st_id);
-        }else if(new_status.equals("转入")){
-            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "#984B4B",st_id);
-        }else if(new_status.equals("休学")){
-            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "#737300",st_id);
-        }else if(new_status.equals( "转出") || new_status.equals("退学")){
-            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "red",st_id);
-        }
+
+        result = adminService.updateSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, new_face, st_id);
+
         if(result == 1){
             return "修改成功";
         }

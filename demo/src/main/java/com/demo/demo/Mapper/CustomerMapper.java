@@ -5,6 +5,7 @@ import java.util.List;
 import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.ContextInfo;
+import com.demo.demo.po.Customer;
 import com.demo.demo.po.Enter;
 import com.demo.demo.po.Link;
 import com.demo.demo.po.Loginer;
@@ -12,7 +13,7 @@ import com.demo.demo.po.Person;
 import com.demo.demo.po.Punish;
 import com.demo.demo.po.Static;
 import com.demo.demo.po.Student;
-import com.demo.demo.po.Trouble;
+// import com.demo.demo.po.Trouble;
 import com.demo.demo.po.Urgent;
 
 import org.apache.ibatis.annotations.Delete;
@@ -52,9 +53,10 @@ public interface CustomerMapper {
     public int youxiuNumber(@Param("st_id") String st_id);
 
     //查询小于60分的成绩数量
-    @Select("select count(*) from project1_class where class_score < 60 and st_id =#{st_id}")
+    @Select("select count(*) from project1_class where class_score < 60 or class_score = '不及格' and st_id =#{st_id}")
     public int getBujigeNumber(@Param("st_id") String st_id);
 
+    
     //查询所有学籍学生
     @Select("select * from project1_st")
     public List<Student> findAllStudent();
@@ -81,13 +83,9 @@ public interface CustomerMapper {
     @Select("select customer_jiguan, customer_tel,customer_email,customer_youzheng,customer_start_station,customer_end_station from project1_customer where id_number=#{id_number}")
     public ContextInfo selectContextInfo(@Param("id_number")String id_number);
 
-
     @Select("select * from project1_from where id_number = #{id_number}")
     public Enter getEnterInfo(@Param("id_number") String id_number);
-    //
-    @Select("select * from project1_trouble")
-    public List<Trouble> getTrouble();
-
+    
     //查询学生的获奖信息
     @Select("select * from project1_award where st_id = #{st_id}")
     public List<Award> getAward(@Param("st_id") String st_id);
@@ -135,6 +133,11 @@ public interface CustomerMapper {
     @Select("select count(*) from project1_person")
     public int countPerson();
     
+    @Select("select distinct sex as label,count(sex) as countNumber from project1_person group by sex")
+    public List<Static> findstaticSInfo();
+    
+    @Select("select * from project1_customer where st_id = #{st_id}")
+    public Customer getSc(@Param("st_id")String st_id);
     
 
 }

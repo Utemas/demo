@@ -8,6 +8,8 @@ import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.Mapper.DeleteMapper;
 import com.demo.demo.po.Award;
 import com.demo.demo.po.ClassInfo;
+import com.demo.demo.po.ContextInfo;
+import com.demo.demo.po.Customer;
 import com.demo.demo.po.Enter;
 import com.demo.demo.po.Link;
 import com.demo.demo.po.Loginer;
@@ -28,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import utill.Contant;
 import utill.PDFUtill;
 import utill.Utill;
 
@@ -94,15 +95,26 @@ public class HomeController {
         Link customer = customerMapper.getCustomerByStid(loginer.getSt_id());
         // 获取学生学籍信息
         Student student = customerMapper.getStudentInfo(loginer.getSt_id());
-
+        Customer c = customerMapper.getSc(loginer.getSt_id());
+        
         Person person = customerMapper.getStudentPeronInformation(customer.getId_number());
+        if(c == null){
+            c = new Customer();
+            c.setCustomer_face("中国共产主义共青团团员");
+            c.setCustomer_name(person.getName());
+            c.setId_number(student.getId_number());
+            c.setSt_id(loginer.getSt_id());
+        }
+        ContextInfo ci = customerMapper.selectContextInfo(customer.getId_number());
+        
         map.put("person", person);
-
+        map.put("customer",c);
         // 查询学生成绩数量
         int class_count = customerMapper.theNumberOfClass(loginer.getSt_id());
         map.put("class_count", class_count);
-        map.put("english_name", "徐更改");
+        map.put("english_name", c.getCustomer_english_name());
         //
+        student.setSt_leave_date(student.getSt_leave_date().substring(0,11));
         map.put("student", student);
 
         // 生成生日
@@ -121,7 +133,21 @@ public class HomeController {
         List<String> enterYears = Utill.yearsInSchool(enterYear);
         map.put("enterYears", enterYears);
         //
+        // 查询学生获奖情况的数量
+        int awardCount = customerMapper.getAwardCount(customer.getSt_id());
+        map.put("awardCount", awardCount);
 
+        // 查询学生获奖情况
+        List<Award> awlist = customerMapper.getAward(customer.getSt_id());
+        map.put("awlist", awlist);
+
+        // 查询学生惩罚情况的数量
+        int punishCount = customerMapper.getPunishCount(customer.getSt_id());
+        map.put("punishCount", punishCount);
+
+        // 查询学生惩罚情况
+        List<Punish> pulist = customerMapper.getPunish(customer.getSt_id());
+        map.put("pulist", pulist);
         // 查询学生的紧急联系人
         List<Urgent> uList = customerMapper.getUrgents(customer.getSt_id());
         map.put("ulist", uList);
@@ -179,42 +205,26 @@ public class HomeController {
             map.put("gpa",gpa);
         }
         
+
         
-        
-
-        // 查询学生获奖情况的数量
-        int awardCount = customerMapper.getAwardCount(customer.getSt_id());
-        map.put("awardCount", awardCount);
-
-        // 查询学生获奖情况
-        List<Award> awlist = customerMapper.getAward(customer.getSt_id());
-        map.put("awlist", awlist);
-
-        // 查询学生惩罚情况的数量
-        int punishCount = customerMapper.getPunishCount(customer.getSt_id());
-        map.put("punishCount", punishCount);
-
-        // 查询学生惩罚情况
-        List<Punish> pulist = customerMapper.getPunish(customer.getSt_id());
-        map.put("pulist", pulist);
 
         return "student/total";
 
     }
 
-    @RequestMapping("/trouble")
-    public String writing(@RequestParam(value = "type", required = false, defaultValue = "1") int type,
-            HashMap<String, Object> map) {
-        map.put("programeName", Contant.ProgrameName);
-        if (type == 1) {
-            map.put("reason", "登录问题");
-            map.put("lastPage", "登录");
-        } else if (type == 2) {
-            map.put("reason", "个人基本信息问题");
-            map.put("lastPage", "个人详情页");
-        }
-        return "/trouble";
-    }
+    // @RequestMapping("/trouble")
+    // public String writing(@RequestParam(value = "type", required = false, defaultValue = "1") int type,
+    //         HashMap<String, Object> map) {
+    //     map.put("programeName", Contant.ProgrameName);
+    //     if (type == 1) {
+    //         map.put("reason", "登录问题");
+    //         map.put("lastPage", "登录");
+    //     } else if (type == 2) {
+    //         map.put("reason", "个人基本信息问题");
+    //         map.put("lastPage", "个人详情页");
+    //     }
+    //     return "/trouble";
+    // }
 
     @RequestMapping("/punishtextInfo")
     public String punishtextInfo(@RequestParam(value = "punish_id", required = false, defaultValue = "0") int punish_id,

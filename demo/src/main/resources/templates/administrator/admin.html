@@ -34,37 +34,11 @@
         </a>
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-            <li class="dropdown messages-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-envelope-o"></i>
-                <span class="label label-success">4</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="header">You have 4 messages</li>
-                <li>
-                  <!-- inner menu: contains the actual data -->
-                  <ul class="menu">
-                    <li th:each="trouble,troubleStat:${tlist}" th:if="${troubleStat.index} lt 4" th:object="${trouble}">
-                      <a href="#">
-                        <div class="pull-left">
-                          <span th:text="${trouble.trouble_title}">hhhhh</span>
-                        </div>
-                        <h4>
-                          Reviewers
-                          <small><i class="fa fa-clock-o"></i> 2 days</small>
-                        </h4>
-                        <p>Why not buy a new awesome theme?</p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="footer"><a href="#">See All Messages</a></li>
-              </ul>
-            </li>
+            
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="../assets/img/customer/0000000002.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs">Alexander Pierce</span>
+                <span class="hidden-xs">您好，管理人员</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
@@ -243,7 +217,7 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-      <strong>哈哈哈哈</strong>
+      <strong>广告招租</strong>
     </footer>
   </div>
 <!-- ./wrapper -->

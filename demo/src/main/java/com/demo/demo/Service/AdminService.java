@@ -6,6 +6,7 @@ import java.util.List;
 import com.demo.demo.Mapper.AddMapper;
 import com.demo.demo.Mapper.CustomerMapper;
 import com.demo.demo.Mapper.DeleteMapper;
+import com.demo.demo.Mapper.UpdateMapper;
 import com.demo.demo.po.ClassInfo;
 import com.demo.demo.po.Student;
 
@@ -23,6 +24,9 @@ public class AdminService {
 
     @Autowired
     DeleteMapper deleteMapper;
+
+    @Autowired
+    UpdateMapper updateMapper;
 
     public Student getStudentById(String st_id) {
 
@@ -78,5 +82,24 @@ public class AdminService {
 
         return result;
 
+    }
+
+    public int updateSinfo(String new_st_xueYuan, String new_st_zhuanye, String new_st_nianji, String new_st_class, String new_leave_to, String new_status, String new_face,String st_id){
+        int result = 0;
+        result = updateMapper.updateFace(new_face,st_id);
+        if(new_status.equals("正常")){
+            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "green",st_id);
+            result = updateMapper.updateLoginStatus("st", st_id);
+        }else if(new_status.equals("转入")){
+            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "#984B4B",st_id);
+            result = updateMapper.updateLoginStatus("st", st_id);
+        }else if(new_status.equals("休学")){
+            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "#737300",st_id);
+            result = updateMapper.updateLoginStatus("st", st_id);
+        }else if(new_status.equals( "转出") || new_status.equals("退学")){
+            result = updateMapper.updteSinfo(new_st_xueYuan, new_st_zhuanye, new_st_nianji, new_st_class, new_leave_to, new_status, "red",st_id);
+            result = updateMapper.updateLoginStatus("bd",st_id);
+        }
+        return result;
     }
 }

@@ -37,5 +37,11 @@ public interface UpdateMapper {
 
     @Update("update project1_st set st_xueYuan = #{st_xueYuan}, st_zhuanye = #{st_zhuanye}, st_nianji = #{st_nianji}, st_class = #{st_class}, st_leave_to = #{st_leave_to}, st_status = #{st_status}, st_status_stiker = #{st_status_stiker} where st_id = #{st_id}")
     public int updteSinfo(@Param("st_xueYuan")String new_st_xueYuan, @Param("st_zhuanye")String new_st_zhuanye, @Param("st_nianji")String new_st_nianji, @Param("st_class")String new_st_class, @Param("st_leave_to")String new_leave_to, @Param("st_status")String new_status,@Param("st_status_stiker")String st_status_stiker, @Param("st_id")String st_id);
+
+    @Update("update project1_customer set customer_face=#{customer_face} where st_id=#{st_id}")
+	public int updateFace(@Param("customer_face") String new_face, @Param("st_id")String st_id);
+
+    @Update("update project1_login set login_identify=#{status} where st_id=#{st_id}")
+	public int updateLoginStatus(@Param("status") String status, @Param("st_id") String st_id);
     
 }

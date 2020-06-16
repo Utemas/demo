@@ -81,22 +81,22 @@ public class ReController {
         return contextInfo;
     }
 
-    @RequestMapping("/saveTrouble")
-    public String saveTrouble(String title, String text) {
-        Loginer customer = (Loginer) SecurityUtils.getSubject().getPrincipal();
-        String message = "反馈失败，请重新提交";
-        int result = 0;
-        if (customer == null) {
-            result = addMapper.addTrouble(title, text, "出现登录问题者");
-        } else {
-            result = addMapper.addTrouble(title, text, customer.getSt_id());
-        }
+    // @RequestMapping("/saveTrouble")
+    // public String saveTrouble(String title, String text) {
+    //     Loginer customer = (Loginer) SecurityUtils.getSubject().getPrincipal();
+    //     String message = "反馈失败，请重新提交";
+    //     int result = 0;
+    //     if (customer == null) {
+    //         result = addMapper.addTrouble(title, text, "出现登录问题者");
+    //     } else {
+    //         result = addMapper.addTrouble(title, text, customer.getSt_id());
+    //     }
 
-        if (result == 1) {
-            message = "反馈成功，反馈信息请等待管理员进行处理...";
-        }
-        return message;
-    }
+    //     if (result == 1) {
+    //         message = "反馈成功，反馈信息请等待管理员进行处理...";
+    //     }
+    //     return message;
+    // }
 
     @RequestMapping("/updatePassword")
     public String updatePassword(String newPassword, String surePassword) {
